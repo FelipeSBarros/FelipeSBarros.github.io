@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+# Felipe Sodré Mendes Barros  
+Neste apresento links para vários tutoriais e ferramentas de análises espaciais criados nos mais diversos contextos e linguagens de programação.
 
-You can use the [editor on GitHub](https://github.com/FelipeSBarros/FelipeSBarros.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Tutoriais  
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Repositório com materiais apresentados no **Congresso Brasileiro de Geotecnologias para o Meio Ambiente (CBGEO)**, como parte da apresentação Análise Espacial no sistema R com foco em Biodiversidade. **["Análise Espacial no sistema R com foco em Biodiversidade"](https://felipesbarros.github.io/CongressoGeoBiodiversidadeI)**  
 
-### Markdown
+## Sobre o autor:  
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* Material elaborado por: Felipe Sodré Mendes Barros
+* Contatos: felilpe.b4rros [at] gmail.com  
+* Github: [FelipeSBarros](https://github.com/FelipeSBarros/)
+* Facebook: [felipe.sodre1](https://www.facebook.com/felipe.sodre1)  
+* Twitter: [@FelipeSMBarros](https://twitter.com/FelipeSMBarros)  
+* YouTube: [GeoCastBrasil](https://www.youtube.com/channel/UCLAeX4dyujMoy4xqHvxSDpQ)  
+* Blog [GeoIndepenencia](https://geoind.wordpress.com/)  
 
-```markdown
-Syntax highlighted code block
+## Licensa:
+![http://creativecommons.org/licenses/by-sa/4.0/](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)  
 
-# Header 1
-## Header 2
-### Header 3
+#### Você:  
 
-- Bulleted
-- List
+* Deve fazer as devidas referências;  
+* Pode adaptar este materrial;  
+* Deve compartilhar sua alteração com a mesma licença;  
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/FelipeSBarros/FelipeSBarros.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/)
