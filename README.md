@@ -4,6 +4,7 @@ Nesta página apresento links para vários tutoriais e ferramentas de análises 
 ## Tutoriais  
 
 * Repositório com materiais apresentados no **Congresso Brasileiro de Geotecnologias para o Meio Ambiente (CBGEO)**, como parte da apresentação Análise Espacial no sistema R com foco em Biodiversidade. **["Análise Espacial no sistema R com foco em Biodiversidade"](https://felipesbarros.github.io/CongressoGeoBiodiversidadeI)**  
+* Análise espacial no R: Estimados Kernel - Nesse tutorial vamos não apenas realizar a análise de Kernel, como vamos ver como estimar a largura do raio de suavização da função Kernel de forma estatística e segundo diferentes abordagens. **[Link para tutorial](https://felipesbarros.github.io/BaresBH/)**
 
 ## Sobre o autor:  
 
