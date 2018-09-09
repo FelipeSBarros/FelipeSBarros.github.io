@@ -4,9 +4,18 @@ Nesta página apresento links para vários tutoriais e ferramentas de análises 
 ## Tutoriais  
 
 * Repositório com materiais apresentados no **Congresso Brasileiro de Geotecnologias para o Meio Ambiente (CBGEO)**, como parte da apresentação Análise Espacial no sistema R com foco em Biodiversidade. **["Análise Espacial no sistema R com foco em Biodiversidade"](https://felipesbarros.github.io/CongressoGeoBiodiversidadeI)**  
+
 * **Análise espacial no R: Estimador Kernel e raio de busca** - Nesse tutorial vamos não apenas realizar a análise de Kernel, como vamos ver como estimar a largura do raio de suavização da função Kernel de forma estatística e segundo diferentes abordagens.  
 **[Link para tutorial](https://felipesbarros.github.io/BaresBH/)**  
 **[Link para video youtube](https://youtu.be/uM9GKO100qg)**  
+
+* **Baixando dados do Open Street Map** - Aprenda a usar o Overpass Turbo, considerada uma interface gráfica que permite executar consultas no banco de dados do OSM, assim como visualizar o resultado em um *webmap* e, claro, baixar tais dados em vários formatos.  
+**[Link para tutorial](https://github.com/FelipeSBarros/Download-OSM-data)**  
+**[![Assista ao video Baixando dados do Open Street Map com Over Pass Turbo](https://img.youtube.com/vi/wDk_Q3iZ--E/0.jpg)](https://youtu.be/wDk_Q3iZ--E)**
+
+* **Python para Geo I: Primeiros passos** -Neste tutorial vamos usar geopandas para carregar layer espacial, fiona para identificar as layers existentes, matplotlib para 'plotar' a layer carregada (apresentação visual em forma de "mapa"). Os dados são provenientes do mapeamento sistemático do IBGE - "BCIM 2016 em formato geopackage"  
+**[Link para tutorial](https://github.com/FelipeSBarros/Python-para-Geo-I/blob/master/Intro_PyGIS.ipynb)**  
+**[![Assista ao video Python para Geo I: Primeiros passos](https://img.youtube.com/vi/UVKSYclbxbE/0.jpg)](https://youtu.be/UVKSYclbxbE)**
 
 ## Sobre o autor:  
 
