@@ -7,7 +7,8 @@ Nesta página apresento links para vários tutoriais e ferramentas de análises 
 
 * **Análise espacial no R: Estimador Kernel e raio de busca** - Nesse tutorial vamos não apenas realizar a análise de Kernel, como vamos ver como estimar a largura do raio de suavização da função Kernel de forma estatística e segundo diferentes abordagens.  
 **[Link para tutorial](https://felipesbarros.github.io/BaresBH/)**  
-**[Link para video youtube](https://youtu.be/uM9GKO100qg)**  
+**[![Assista ao video Baixando dados do Open Street Map com Over Pass Turbo](https://img.youtube.com/vi/uM9GKO100qg/0.jpg)](https://youtu.be/uM9GKO100qg)**
+
 
 * **Baixando dados do Open Street Map** - Aprenda a usar o Overpass Turbo, considerada uma interface gráfica que permite executar consultas no banco de dados do OSM, assim como visualizar o resultado em um *webmap* e, claro, baixar tais dados em vários formatos.  
 **[Link para tutorial](https://github.com/FelipeSBarros/Download-OSM-data)**  
