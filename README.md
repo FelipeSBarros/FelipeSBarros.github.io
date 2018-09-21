@@ -18,6 +18,10 @@ Nesta página apresento links para vários tutoriais e ferramentas de análises 
 **[Link para tutorial](https://github.com/FelipeSBarros/Python-para-Geo-I/blob/master/Intro_PyGIS.ipynb)**  
 **[![Assista ao video Python para Geo I: Primeiros passos](https://img.youtube.com/vi/UVKSYclbxbE/0.jpg)](https://youtu.be/UVKSYclbxbE)**
 
+* **Geocoding com Python** - Neste tutorial, vamos ver como realizar o geocode (obtenção dos pares de coordenadas a partir de endereços) para vários registros em uma tabela. Vamos usar o pandas para carregar a tabela com os endereços, Geopandas para acionar a biblioteca geopy que, por sua vez irá executar o geocode. Como exemplo usarei uma tabela com três registros de hoteis na cidade do Rio de Janeiro e, a partir de seus respectivos endereços obteremos suas localizações por pares de coordenadas.
+**[Link para tutorial](https://github.com/FelipeSBarros/Python-para-Geo-I/blob/master/GeoCoding.ipynb)**  
+**[![Assista ao video Python para Geo I: Primeiros passos](https://img.youtube.com/vi/l8tzW5jRiyw/0.jpg)](https://youtu.be/l8tzW5jRiyw)**
+
 ## Sobre o autor:  
 
 * Material elaborado por: Felipe Sodré Mendes Barros
