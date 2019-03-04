@@ -3,6 +3,10 @@ Nesta página apresento links para vários tutoriais e ferramentas de análises 
 
 ## Tutoriais  
 
+* **Classificação de imagem se satélite no R: randomForest** - Nesse tutorial apresento como usar um dos algoritmos mais famosos de **machine learning**, o **randomForest**; Se trata de uma implementação de algoritmo baseada em árvores de decisão. Comento um pouco sobre as métricas de validação e algumas outras dicas.  
+**[Link para tutorial](https://github.com/FelipeSBarros/randomForestClassification/)**  
+**[![Assista ao video Baixando dados do Open Street Map com Over Pass Turbo](https://img.youtube.com/vi/uM9GKO100qg/0.jpg)](https://youtu.be/uM9GKO100qg)**
+
 * Repositório com materiais apresentados no **Congresso Brasileiro de Geotecnologias para o Meio Ambiente (CBGEO)**, como parte da apresentação Análise Espacial no sistema R com foco em Biodiversidade. **["Análise Espacial no sistema R com foco em Biodiversidade"](https://felipesbarros.github.io/CongressoGeoBiodiversidadeI)**  
 
 * **Análise espacial no R: Estimador Kernel e raio de busca** - Nesse tutorial vamos não apenas realizar a análise de Kernel, como vamos ver como estimar a largura do raio de suavização da função Kernel de forma estatística e segundo diferentes abordagens.  
