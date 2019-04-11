@@ -3,7 +3,16 @@ Nesta página apresento links para vários tutoriais e ferramentas de análises 
 
 ## Tutoriais  
 
-* **Classificação de imagem se satélite no R: randomForest** - Nesse tutorial apresento como usar um dos algoritmos mais famosos de **machine learning**, o **randomForest**; Se trata de uma implementação de algoritmo baseada em árvores de decisão. Comento um pouco sobre as métricas de validação e algumas outras dicas.  
+* **Classificação de imagem de satelite no R: CART** - Seguindo a linha de tutoriais sobre classificação de imagens de satélite, apresento o uso do algoritmo CART (Classification and Regression Trees) como uma boa abordagem inicia e exploratória das amostras e imagens usadas na classificação;  
+**[Link para tutorial](https://github.com/FelipeSBarros/randomForestClassification/)**  
+**[![Classificação de imagem de satelite no R: CART](https://img.youtube.com/vi/Qulg2FttyhQ/0.jpg)](https://youtu.be/Qulg2FttyhQ)**  
+
+* **Classificação de imagem de satélite no R: randomForest com cross validation** - Nesse extendi a classificação de imagens com o **randomForest**, mas dessa vez usando **validação cruzada** (**cross validation**);  
+**[Link para tutorial](https://github.com/FelipeSBarros/randomForestClassification/)**  
+**[![Classificação com Random Forest e Cross Validation - R](https://img.youtube.com/vi/ysqjRIfYWU4/0.jpg)](https://youtu.be/ysqjRIfYWU4)**  
+
+
+* **Classificação de imagem de satélite no R: randomForest** - Nesse tutorial apresento como usar um dos algoritmos mais famosos de **machine learning**, o **randomForest**; Se trata de uma implementação de algoritmo baseada em árvores de decisão. Comento um pouco sobre as métricas de validação e algumas outras dicas.  
 **[Link para tutorial](https://github.com/FelipeSBarros/randomForestClassification/)**  
 **[![Classificação com Random Forest - R](https://img.youtube.com/vi/7jGcf6gzWqk/0.jpg)](https://youtu.be/7jGcf6gzWqk)**
 
