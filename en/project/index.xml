@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Felipe Sodré M. Barros</title>
+    <link>/en/project/</link>
+      <atom:link href="/en/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>/en/project/</link>
+    </image>
+    
+    <item>
+      <title>Domestic Economy chatbot</title>
+      <link>/en/project/domestic-economy/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/en/project/domestic-economy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spatial Restoration Priorization</title>
+      <link>/en/project/restoration-priorization/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/en/project/restoration-priorization/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

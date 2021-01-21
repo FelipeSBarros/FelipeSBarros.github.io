@@ -5,12 +5,25 @@
     <link>/en/authors/</link>
       <atom:link href="/en/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
-      <url>/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
       <title>Authors</title>
       <link>/en/authors/</link>
     </image>
+    
+    <item>
+      <title>Felipe Sodré Mendes Barros</title>
+      <link>/en/author/felipe-sodre-mendes-barros/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/en/author/felipe-sodre-mendes-barros/</guid>
+      <description>&lt;p&gt;I am a brazilian geographer looking foward to adress environmental challenges with geographical data science, taking the power of earth observation data, spatial statistics and software development.&lt;/p&gt;
+&lt;p&gt;How did I get here?
+While working with the assessment of the brazilian&amp;rsquo;s flora conservation status, I realized that, by that time, there was a lot to do and a few human resources. So, I decided to do a specialization in spatial statistics looking foward for tools that could help the assessment optimization. I ended with a statistical approach to estimated the exposure of floras&#39; species over fire, one of the most known proxy of environmental degradation. You can read more about this experience &lt;a href=&#34;&#34;&gt;&lt;del&gt;here&lt;/del&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In my master project I have worked with spatial priorization to make conservation and mineral exploration compatible on an Environmental Reserve in the Amazon forest. You can read more about this experience &lt;a href=&#34;https://geoind.wordpress.com/2019/06/04/projeto-carajas-base-de-dados-geograficos-e-interoperabilidade/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; or access the &lt;a href=&#34;https://drive.google.com/file/d/1KkbZ-zzKD-s9UrhrAALr_vzgstYznEh4/view?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;book with all project details&lt;/a&gt; - both in pt-br.&lt;/p&gt;
+&lt;p&gt;In the last few years I have been working with an international scientific group on reasearches developing algorithms and identifying priority areas for landscape restoration (more about this project, can be found &lt;a href=&#34;&#34;&gt;&lt;del&gt;here&lt;/del&gt;&lt;/a&gt;).&lt;/p&gt;
+</description>
+    </item>
     
   </channel>
 </rss>
