@@ -3,686 +3,686 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/en/courses/example/example1/</loc>
+    <loc>/courses/example/example1/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/courses/example/example1/"
+                href="/pt/courses/example/example1/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/courses/example/example1/"
+                href="/courses/example/example1/"
                 />
   </url>
   
   <url>
-    <loc>/en/courses/example/</loc>
+    <loc>/courses/example/</loc>
     <lastmod>2018-09-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/courses/example/"
+                href="/pt/courses/example/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/courses/example/"
+                href="/courses/example/"
                 />
   </url>
   
   <url>
-    <loc>/en/courses/example/example2/</loc>
+    <loc>/courses/example/example2/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/courses/example/example2/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/courses/example/example2/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/courses/example/example2/"
-                />
   </url>
   
   <url>
-    <loc>/en/authors/</loc>
+    <loc>/authors/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/authors/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/authors/"
-                />
   </url>
   
   <url>
-    <loc>/en/authors/</loc>
+    <loc>/authors/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/authors/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/authors/"
-                />
   </url>
   
   <url>
-    <loc>/en/talk/example-talk/</loc>
+    <loc>/talk/example-talk/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/talk/example-talk/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/talk/example-talk/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/talk/example-talk/"
-                />
   </url>
   
   <url>
-    <loc>/en/author/felipe/</loc>
+    <loc>/author/felipe/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/author/felipe/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/author/felipe/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/author/felipe/"
-                />
   </url>
   
   <url>
-    <loc>/en/</loc>
+    <loc>/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
   </url>
   
   <url>
-    <loc>/en/event/</loc>
+    <loc>/event/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/event/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/event/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/event/"
-                />
   </url>
   
   <url>
-    <loc>/en/post/hi-hugo/</loc>
+    <loc>/post/hi-hugo/</loc>
     <lastmod>2021-01-14T23:30:10-03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/post/hi-hugo/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/post/hi-hugo/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/hi-hugo/"
-                />
   </url>
   
   <url>
-    <loc>/en/post/</loc>
+    <loc>/post/</loc>
     <lastmod>2021-01-14T23:30:10-03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/post/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
   </url>
   
   <url>
-    <loc>/en/categories/</loc>
+    <loc>/categories/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/categories/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/categories/"
-                />
   </url>
   
   <url>
-    <loc>/en/post/2020-12-01-r-rmarkdown/</loc>
+    <loc>/post/2020-12-01-r-rmarkdown/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/en/tag/plot/</loc>
+    <loc>/tag/plot/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/en/category/r/</loc>
+    <loc>/category/r/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/en/tag/r-markdown/</loc>
+    <loc>/tag/r-markdown/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/en/tag/regression/</loc>
+    <loc>/tag/regression/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/en/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/tags/"
+                href="/pt/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tags/"
+                href="/tags/"
                 />
   </url>
   
   <url>
-    <loc>/en/post/writing-technical-content/</loc>
+    <loc>/post/writing-technical-content/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/post/writing-technical-content/"
+                href="/pt/post/writing-technical-content/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/post/writing-technical-content/"
+                href="/post/writing-technical-content/"
                 />
   </url>
   
   <url>
-    <loc>/en/courses/</loc>
+    <loc>/courses/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/courses/"
+                href="/pt/courses/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/courses/"
+                href="/courses/"
                 />
   </url>
   
   <url>
-    <loc>/en/publication-type/3/</loc>
+    <loc>/publication-type/3/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/publication-type/3/"
+                href="/pt/publication-type/3/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/publication-type/3/"
+                href="/publication-type/3/"
                 />
   </url>
   
   <url>
-    <loc>/en/author/admin/</loc>
+    <loc>/author/admin/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/author/admin/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/author/admin/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/author/admin/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication/preprint/</loc>
+    <loc>/publication/preprint/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/publication/preprint/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/publication/preprint/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/publication/preprint/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication_types/</loc>
+    <loc>/publication_types/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/publication_types/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/publication_types/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/publication_types/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication/</loc>
+    <loc>/publication/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/publication/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/publication/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/publication/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/source-themes/</loc>
+    <loc>/tag/source-themes/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/tag/source-themes/"
+                href="/pt/tag/source-themes/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tag/source-themes/"
+                href="/tag/source-themes/"
                 />
   </url>
   
   <url>
-    <loc>/en/post/jupyter/</loc>
+    <loc>/post/jupyter/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/post/jupyter/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/post/jupyter/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/jupyter/"
-                />
   </url>
   
   <url>
-    <loc>/en/slides/</loc>
+    <loc>/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/slides/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/slides/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/slides/"
-                />
   </url>
   
   <url>
-    <loc>/en/slides/example/</loc>
+    <loc>/slides/example/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/slides/example/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/slides/example/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/slides/example/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/chatbot/</loc>
+    <loc>/tag/chatbot/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/chatbot/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/chatbot/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/chatbot/"
-                />
   </url>
   
   <url>
-    <loc>/en/project/domestic-economy/</loc>
+    <loc>/project/domestic-economy/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/project/domestic-economy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/project/domestic-economy/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/project/domestic-economy/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/pet-project/</loc>
+    <loc>/tag/pet-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/pet-project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/pet-project/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/pet-project/"
-                />
   </url>
   
   <url>
-    <loc>/en/project/</loc>
+    <loc>/project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/project/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/project/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/python/</loc>
+    <loc>/tag/python/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/python/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/python/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/r/</loc>
+    <loc>/tag/r/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/r/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/r/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/scientific-project/</loc>
+    <loc>/tag/scientific-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/scientific-project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/scientific-project/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/scientific-project/"
-                />
   </url>
   
   <url>
-    <loc>/en/project/restoration-priorization/</loc>
+    <loc>/project/restoration-priorization/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/project/restoration-priorization/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/project/restoration-priorization/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/project/restoration-priorization/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/academic/</loc>
+    <loc>/tag/academic/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/academic/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/academic/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/academic/"
-                />
   </url>
   
   <url>
-    <loc>/en/category/demo/</loc>
+    <loc>/category/demo/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/category/demo/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/category/demo/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/category/demo/"
-                />
   </url>
   
   <url>
-    <loc>/en/post/getting-started/</loc>
+    <loc>/post/getting-started/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/post/getting-started/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/post/getting-started/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/getting-started/"
-                />
   </url>
   
   <url>
-    <loc>/en/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
+    <loc>/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/author/%E5%90%B3%E6%81%A9%E9%81%94/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/author/%E5%90%B3%E6%81%A9%E9%81%94/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/author/%E5%90%B3%E6%81%A9%E9%81%94/"
-                />
   </url>
   
   <url>
-    <loc>/en/tag/%E5%BC%80%E6%BA%90/</loc>
+    <loc>/tag/%E5%BC%80%E6%BA%90/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/tag/%E5%BC%80%E6%BA%90/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/tag/%E5%BC%80%E6%BA%90/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tag/%E5%BC%80%E6%BA%90/"
-                />
   </url>
   
   <url>
-    <loc>/en/category/%E6%95%99%E7%A8%8B/</loc>
+    <loc>/category/%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2020-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/category/%E6%95%99%E7%A8%8B/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/category/%E6%95%99%E7%A8%8B/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/category/%E6%95%99%E7%A8%8B/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication-type/2/</loc>
+    <loc>/publication-type/2/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/publication-type/2/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/publication-type/2/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/publication-type/2/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication/journal-article/</loc>
+    <loc>/publication/journal-article/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/publication/journal-article/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/publication/journal-article/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/publication/journal-article/"
-                />
   </url>
   
   <url>
-    <loc>/en/author/robert-ford/</loc>
+    <loc>/author/robert-ford/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/author/robert-ford/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/author/robert-ford/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/author/robert-ford/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication-type/1/</loc>
+    <loc>/publication-type/1/</loc>
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
+                href="/pt/publication-type/1/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
                 href="/publication-type/1/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/publication-type/1/"
-                />
   </url>
   
   <url>
-    <loc>/en/publication/conference-paper/</loc>
+    <loc>/publication/conference-paper/</loc>
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/publication/conference-paper/"
+                href="/pt/publication/conference-paper/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/publication/conference-paper/"
+                href="/publication/conference-paper/"
                 />
   </url>
   
   <url>
-    <loc>/en/author/felipe-sodre-mendes-barros/</loc>
+    <loc>/author/felipe-sodre-mendes-barros/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/author/felipe-sodre-mendes-barros/"
+                href="/pt/author/felipe-sodre-mendes-barros/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/author/felipe-sodre-mendes-barros/"
+                href="/author/felipe-sodre-mendes-barros/"
                 />
   </url>
   

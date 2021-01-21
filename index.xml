@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Felipe Sodré M. Barros</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
       <title>Felipe Sodré M. Barros</title>
@@ -102,6 +102,56 @@ fim&lt;/p&gt;
     </item>
     
     <item>
+      <title>Hello R Markdown</title>
+      <link>/post/2020-12-01-r-rmarkdown/</link>
+      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <guid>/post/2020-12-01-r-rmarkdown/</guid>
+      <description>
+
+
+&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R Markdown&lt;/h1&gt;
+&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+fit &amp;lt;- lm(dist ~ speed, data = cars)
+fit
+## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Coefficients:
+## (Intercept)        speed  
+##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Including Plots&lt;/h1&gt;
+&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
+  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
+  init.angle = -50, border = NA
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2020-12-01-r-rmarkdown/index.en_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: A fancy pie chart.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Writing technical content in Academic</title>
       <link>/post/writing-technical-content/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
@@ -129,7 +179,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-874156329&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-814326759&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -139,7 +189,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-874156329&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-814326759&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
@@ -705,11 +755,11 @@ Three
       <link>/author/felipe-sodre-mendes-barros/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/author/felipe-sodre-mendes-barros/</guid>
-      <description>&lt;p&gt;Sou um geógrafo que busca enfrentar os desafios ambientais com a ciência de dados geográficos, aproveitando o poder dos dados de observação da Terra, estatísticas espaciais e desenvolvimento de software.&lt;/p&gt;
-&lt;p&gt;Como eu cheguei aqui?
-Enquanto trabalhava na avaliação do estado de conservação da flora brasileira, percebi que, naquela época, havia muito o que fazer e poucos recursos humanos. Por isso, resolvi me especializar em estatística espacial em busca de ferramentas que pudessem auxiliar na otimização da avaliação. Concluí com uma abordagem estatística para estimar a exposição das espécies de floras ao fogo, um dos &lt;em&gt;proxys&lt;/em&gt; mais conhecidos de degradação ambiental. Você pode ler mais sobre esta experiência &lt;a href=&#34;&#34;&gt;&lt;del&gt;aqui&lt;/del&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Em meu projeto de mestrado trabalhei com priorização espacial para compatibilizar a conservação e a exploração mineral em uma Reserva Ambiental na Floresta Amazônica. Você pode ler mais sobre essa experiência &lt;a href=&#34;https://geoind.wordpress.com/2019/06/04/projeto-carajas-base-de-dados-geograficos-e-interoperabilidade/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aqui&lt;/a&gt; ou acessar o &lt;a href=&#34;https://drive.google.com/file/d/1KkbZ-zzKD-s9UrhrAALr_vzgstYznEh4/view?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;livro com todos os detalhes do projeto&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Nos últimos anos tenho trabalhado com um grupo internacional de pesquisadores em projetos desenvolvendo algoritmos e identificando áreas prioritárias para restauração de paisagens (mais sobre este projeto, pode ser encontrado &lt;a href=&#34;&#34;&gt;&lt;del&gt;aqui&lt;/del&gt;&lt;/a&gt;).&lt;/p&gt;
+      <description>&lt;p&gt;I am a brazilian geographer looking foward to adress environmental challenges with geographical data science, taking the power of earth observation data, spatial statistics and software development.&lt;/p&gt;
+&lt;p&gt;How did I get here?
+While working with the assessment of the brazilian&amp;rsquo;s flora conservation status, I realized that, by that time, there was a lot to do and a few human resources. So, I decided to do a specialization in spatial statistics looking foward for tools that could help the assessment optimization. I ended with a statistical approach to estimated the exposure of floras&#39; species over fire, one of the most known proxy of environmental degradation. You can read more about this experience &lt;a href=&#34;&#34;&gt;&lt;del&gt;here&lt;/del&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In my master project I have worked with spatial priorization to make conservation and mineral exploration compatible on an Environmental Reserve in the Amazon forest. You can read more about this experience &lt;a href=&#34;https://geoind.wordpress.com/2019/06/04/projeto-carajas-base-de-dados-geograficos-e-interoperabilidade/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; or access the &lt;a href=&#34;https://drive.google.com/file/d/1KkbZ-zzKD-s9UrhrAALr_vzgstYznEh4/view?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;book with all project details&lt;/a&gt; - both in pt-br.&lt;/p&gt;
+&lt;p&gt;In the last few years I have been working with an international scientific group on reasearches developing algorithms and identifying priority areas for landscape restoration (more about this project, can be found &lt;a href=&#34;&#34;&gt;&lt;del&gt;here&lt;/del&gt;&lt;/a&gt;).&lt;/p&gt;
 </description>
     </item>
     

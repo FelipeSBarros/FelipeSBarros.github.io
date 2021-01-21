@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Felipe Sodré M. Barros</title>
+    <link>/pt/authors/</link>
+      <atom:link href="/pt/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>/pt/authors/</link>
+    </image>
+    
+    <item>
+      <title>Felipe Sodré Mendes Barros</title>
+      <link>/pt/author/felipe-sodre-mendes-barros/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/pt/author/felipe-sodre-mendes-barros/</guid>
+      <description>&lt;p&gt;Sou um geógrafo que busca enfrentar os desafios ambientais com a ciência de dados geográficos, aproveitando o poder dos dados de observação da Terra, estatísticas espaciais e desenvolvimento de software.&lt;/p&gt;
+&lt;p&gt;Como eu cheguei aqui?
+Enquanto trabalhava na avaliação do estado de conservação da flora brasileira, percebi que, naquela época, havia muito o que fazer e poucos recursos humanos. Por isso, resolvi me especializar em estatística espacial em busca de ferramentas que pudessem auxiliar na otimização da avaliação. Concluí com uma abordagem estatística para estimar a exposição das espécies de floras ao fogo, um dos &lt;em&gt;proxys&lt;/em&gt; mais conhecidos de degradação ambiental. Você pode ler mais sobre esta experiência &lt;a href=&#34;&#34;&gt;&lt;del&gt;aqui&lt;/del&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Em meu projeto de mestrado trabalhei com priorização espacial para compatibilizar a conservação e a exploração mineral em uma Reserva Ambiental na Floresta Amazônica. Você pode ler mais sobre essa experiência &lt;a href=&#34;https://geoind.wordpress.com/2019/06/04/projeto-carajas-base-de-dados-geograficos-e-interoperabilidade/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aqui&lt;/a&gt; ou acessar o &lt;a href=&#34;https://drive.google.com/file/d/1KkbZ-zzKD-s9UrhrAALr_vzgstYznEh4/view?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;livro com todos os detalhes do projeto&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Nos últimos anos tenho trabalhado com um grupo internacional de pesquisadores em projetos desenvolvendo algoritmos e identificando áreas prioritárias para restauração de paisagens (mais sobre este projeto, pode ser encontrado &lt;a href=&#34;&#34;&gt;&lt;del&gt;aqui&lt;/del&gt;&lt;/a&gt;).&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
