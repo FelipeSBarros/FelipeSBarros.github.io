@@ -138,6 +138,81 @@
   </url>
   
   <url>
+    <loc>/pt/tag/autoconhecimento/</loc>
+    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/autoconhecimento/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/autoconhecimento/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/tag/autonomia/</loc>
+    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/autonomia/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/autonomia/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/post/cientista-dados-geograficos-como-cheguei-aqui/</loc>
+    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/cientista-dados-geograficos-como-cheguei-aqui/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/cientista-dados-geograficos-como-cheguei-aqui/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/post/</loc>
+    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/tags/</loc>
+    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tags/"
+                />
+  </url>
+  
+  <url>
     <loc>/pt/courses/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
     <xhtml:link
@@ -239,21 +314,6 @@
                 rel="alternate"
                 hreflang="pt"
                 href="/pt/tag/source-themes/"
-                />
-  </url>
-  
-  <url>
-    <loc>/pt/tags/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tags/"
                 />
   </url>
   
@@ -507,20 +567,6 @@
                 rel="alternate"
                 hreflang="pt"
                 href="/pt/author/felipe-sodre-mendes-barros/"
-                />
-  </url>
-  
-  <url>
-    <loc>/pt/post/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/"
                 />
   </url>
   

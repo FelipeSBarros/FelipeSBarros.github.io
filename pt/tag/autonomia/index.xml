@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts | Felipe Sodré M. Barros</title>
-    <link>/pt/post/</link>
-      <atom:link href="/pt/post/index.xml" rel="self" type="application/rss+xml" />
-    <description>Posts</description>
+    <title>Autonomia | Felipe Sodré M. Barros</title>
+    <link>/pt/tag/autonomia/</link>
+      <atom:link href="/pt/tag/autonomia/index.xml" rel="self" type="application/rss+xml" />
+    <description>Autonomia</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Mon, 25 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
-      <title>Posts</title>
-      <link>/pt/post/</link>
+      <title>Autonomia</title>
+      <link>/pt/tag/autonomia/</link>
     </image>
     
     <item>
