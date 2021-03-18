@@ -138,6 +138,141 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/netcdf/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/netcdf/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/netcdf/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/pt-br/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/pt-br/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/pt-br/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/r/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/category/r/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/category/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/category/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/inteligencia-artificial/</loc>
+    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/inteligencia-artificial/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/inteligencia-artificial/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/o-manifesto-nooscope/</loc>
+    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/o-manifesto-nooscope/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/o-manifesto-nooscope/"
+                />
+  </url>
+  
+  <url>
     <loc>/tag/autoconhecimento/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -179,36 +314,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/post/cientista-dados-geograficos-como-cheguei-aqui/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
                 />
   </url>
   
@@ -423,21 +528,6 @@
   </url>
   
   <url>
-    <loc>/tag/r/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/r/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/r/"
-                />
-  </url>
-  
-  <url>
     <loc>/tag/scientific-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -539,20 +629,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/publication/conference-paper/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/"
                 />
   </url>
   

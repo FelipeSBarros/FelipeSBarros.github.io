@@ -5,7 +5,7 @@
     <link>/category/r/</link>
       <atom:link href="/category/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Dec 2020 21:13:14 -0500</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
       <title>R</title>
@@ -13,51 +13,84 @@
     </image>
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2020-12-01-r-rmarkdown/</link>
-      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
-      <guid>/post/2020-12-01-r-rmarkdown/</guid>
+      <title>Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.</title>
+      <link>/post/netcdf/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>/post/netcdf/</guid>
       <description>
 
 
-&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &amp;lt;- lm(dist ~ speed, data = cars)
-fit
+&lt;p&gt;Nas últimas semanas estive trabalhando em um projeto com dados atmosféricos. Tem sido de grande aprendizado não apenas por ser uma temática nova, mas também pela demanda de processamento de dados.&lt;/p&gt;
+&lt;p&gt;Os aprendizados relacionados ao processamento de dados (sua otimização, claro), serão abordados em artigos ainda em produção. Mas um ponto fundamental e que percebi ser ignorado pela maioria, e neste sentido me incluo, é a estrutura de dados dos arquivos raster em &lt;em&gt;netCDF.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Já vi, e já respodi a muitas pessoas perguntando como carregar dados &lt;em&gt;netCDF&lt;/em&gt; no R, com um simples “com o pacote &lt;code&gt;raster&lt;/code&gt;, ora bolas”. No pior das hipóteses, teremos apenas que instalar uma dependencia que é o pacote &lt;code&gt;ncdf4&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Pois é, os dados atmosféricos que tenho trabahado estão em formato &lt;em&gt;netCDF&lt;/em&gt;. E usar o pacote &lt;code&gt;raster&lt;/code&gt; para carregá-lo e manipulá-lo, me foi útil enquanto a análise era exploratória. Ao ver o volume de dados crescer de três dias para dois meses e, em seguida para dois anos de dados produzidos a cada três horas do dia, todos os dias, totalizando 731 arquivos, percebi que precisaria deixar de preguiça e entender esse tal de &lt;em&gt;netCDF&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Lendo sobre o pacote &lt;code&gt;ncdf4&lt;/code&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;, o formato &lt;em&gt;netCDF&lt;/em&gt; é descrito da seguinte forma:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“binary data files that are portable across platforms and include metadata information in addition to the data sets.”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Acho nesse fragmento já dá para entender a importância do formato, não?&lt;/p&gt;
+&lt;p&gt;Vamos entender isso? Vejam a diferença:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(raster)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: sp&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(r.ppm25 &amp;lt;- stack(&amp;quot;./rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required namespace: ncdf4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## class      : RasterStack 
+## dimensions : 59, 75, 4425, 6  (nrow, ncol, ncell, nlayers)
+## resolution : 0.4, 0.4  (x, y)
+## extent     : -74.19, -44.19, -18.24, 5.36  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+## names      : X2019.06.30.12.00.00, X2019.06.30.15.00.00, X2019.06.30.18.00.00, X2019.06.30.21.00.00, X2019.07.01.00.00.00, X2019.07.01.03.00.00&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Aos que já trabalham com o pacote &lt;code&gt;raster&lt;/code&gt; e conhecem os dados raster, poderão ver que, sim, ainda que dependendo do &lt;code&gt;ncdf4&lt;/code&gt;, o &lt;code&gt;raster&lt;/code&gt; carrega os dados, aparentemente, sem grandes problemas. O mínimo esperado está aí. Um raster, com um &lt;code&gt;extent&lt;/code&gt;, linhas, colunas, células, layers…&lt;/p&gt;
+&lt;p&gt;Mas, se os dados estão em &lt;em&gt;netCDF&lt;/em&gt;, e esse tipo de dados permite armazenar metadados também, cadê eles?&lt;/p&gt;
+&lt;p&gt;Pois é. Ao ignorar isso, passava por cima desse detalhe como um marreteiro diante de um parafuso.&lt;/p&gt;
+&lt;p&gt;Vamos abrir o arquivo com o &lt;code&gt;ncdf4&lt;/code&gt; para começar a identificar alguns pontos importantes, que, por sinal não ficam “apenas” no metadados:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ncdf4)
+(nc.ppm25 &amp;lt;- nc_open(&amp;quot;./rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## File ./rasters/ppm25_2019-06-30.nc (NC_FORMAT_64BIT):
 ## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
+##      1 variables (excluding dimension variables):
+##         short pm2p5[longitude,latitude,time]   
+##             scale_factor: 9.668789576322e-12
+##             add_offset: 3.16807559257767e-07
+##             _FillValue: -32767
+##             missing_value: -32767
+##             units: kg m**-3
+##             long_name: Particulate matter d &amp;lt; 2.5 um
+##             standard_name: mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
 ## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
+##      3 dimensions:
+##         longitude  Size:75
+##             units: degrees_east
+##             long_name: longitude
+##         latitude  Size:59
+##             units: degrees_north
+##             long_name: latitude
+##         time  Size:6   *** is unlimited ***
+##             units: hours since 1900-01-01 00:00:00.0
+##             long_name: time
+##             calendar: gregorian
+## 
+##     2 global attributes:
+##         Conventions: CF-1.6
+##         history: 2021-03-17 20:27:56 GMT by grib_to_netcdf-2.20.0: grib_to_netcdf /data/scratch/20210317-2020/8e/_mars-webmars-public-svc-blue-001-6fe5cac1a363ec1525f54343b6cc9fd8-ZAB6WD.grib -o /data/scratch/20210317-2020/b1/_grib2netcdf-webmars-public-svc-blue-000-6fe5cac1a363ec1525f54343b6cc9fd8-VDR6DW.nc -utime&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Antes de comentar toda riqueza e detalhamento de informação que nos brinda o &lt;code&gt;ncdf4&lt;/code&gt;, percebam que o comando é &lt;code&gt;nc_open()&lt;/code&gt;. Não importa de o dado tem uma ou mais “bandas” ou “camadas”. Isso me chamou atenção pois, como acham que vou saber a quantidade de camadas do dados que vou abrir, se ainda não o conheço? Mas enfim. Vamos ao mais importante, os detalhes:&lt;/p&gt;
+&lt;p&gt;Veja a estruturação. No arquivo em questão, eu tenho uma &lt;strong&gt;variável&lt;/strong&gt; apenas, que possui vários metadados, garantindo minimamente sua compreensão, como: &lt;em&gt;short_name&lt;/em&gt;, no caso “pm2p5”, &lt;em&gt;units&lt;/em&gt;, para descrever a unidade do dado, &lt;em&gt;long_name&lt;/em&gt; e &lt;em&gt;standart_name&lt;/em&gt;, além de vários outros.&lt;/p&gt;
+&lt;p&gt;E vejam também que são identificadas três dimensões:
+longitude, latitude e &lt;strong&gt;time&lt;/strong&gt;;&lt;/p&gt;
+&lt;p&gt;Eis que chegamos ao cubo de dados, não faz sentido?&lt;/p&gt;
+&lt;p&gt;Eu tenho uma variável (ppm&amp;lt;2.5) medida para uma mesma área (cena) ao longo do tempo. O &lt;em&gt;netCDF&lt;/em&gt;, como está preparado e pensado para esse tipo de situação já entende os dados como informação de dadta e hora (!) e os organiza como uma dimensão do dado e não atributo. O &lt;code&gt;raster&lt;/code&gt;, por ter outros objetivos, carrega tudo como um &lt;em&gt;stack&lt;/em&gt; (empilhamento de camadas) e adiciona uma string “X” ao nome das camadas, já que as mesmas são numéricas e o pacote em questão restringe o prefixo das camadas a texto, não permitindo valores numéricos. Enfim, nos obriga a digitar mais algumas linhas de código para que o dado fique mais apresentável.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;imgs/cube1.png&#34; alt=&#34;Fonte da imagem: r-spatial.github.io&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Fonte da imagem: &lt;a href=&#34;http://r-spatial.github.io&#34;&gt;r-spatial.github.io&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
-  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
-  init.angle = -50, border = NA
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2020-12-01-r-rmarkdown/index.en_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
-&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;Essa forma de estruturar os dados fará todo o sentido mais à frente quando formos falar um pouco mais do processamento desses dados.&lt;/p&gt;
+&lt;p&gt;O pacote &lt;code&gt;ncdf4&lt;/code&gt; está desenvolvido para o que se convêm chamar de CRUD, na área de desenvolvimento de sistemas: &lt;em&gt;Create, Update and Delete&lt;/em&gt;. Ou, seja, a ideia é fornecer ferramentas para manipular e ter controle total dos dados, criando, abrindo, alterando dimensões ou atributos e por aí vai. Mas não para visualização nem para as análises. Essas, ficarão para os próximos artigos.&lt;/p&gt;
+&lt;p&gt;Enquanto isso, fique à vontade em me contactar, dar uma alô lá &lt;a href=&#34;http://t.me/GeoCastBrasil&#34;&gt;no grupo do GeoCastBrasil&lt;/a&gt;, no Telegram ou no nosso &lt;a href=&#34;http://youtube.com/GeoCastBrasil&#34;&gt;canal do youtube&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Não pretendo explorar muitos detalhes, mas o nome do pacote (&lt;code&gt;ncdf4&lt;/code&gt;) faz referência à versão 4 de estratura em questão. Portanto, caso você esteja, por algum motivo, usando um arquivo &lt;em&gt;netCDF&lt;/em&gt; com versão anterior, o pacote &lt;code&gt;ncdf&lt;/code&gt; segue disponível, ainda que descontinuado.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 </description>
     </item>
