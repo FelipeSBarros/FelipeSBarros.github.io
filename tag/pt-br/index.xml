@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pt-BR | Felipe Sodré M. Barros</title>
+    <title>pt-br | Felipe Sodré M. Barros</title>
     <link>/tag/pt-br/</link>
       <atom:link href="/tag/pt-br/index.xml" rel="self" type="application/rss+xml" />
-    <description>Pt-BR</description>
+    <description>pt-br</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
-      <title>Pt-BR</title>
+      <title>pt-br</title>
       <link>/tag/pt-br/</link>
     </image>
     
@@ -100,6 +100,14 @@ longitude, latitude e &lt;strong&gt;time&lt;/strong&gt;;&lt;/p&gt;
       <link>/post/o-manifesto-nooscope/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/post/o-manifesto-nooscope/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cientista de dados geográficos - Como cheguei até aqui?!</title>
+      <link>/post/cientista-dados-geograficos-como-cheguei-aqui/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>/post/cientista-dados-geograficos-como-cheguei-aqui/</guid>
       <description></description>
     </item>
     
