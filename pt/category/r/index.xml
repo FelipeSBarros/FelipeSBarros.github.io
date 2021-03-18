@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | Felipe Sodré M. Barros</title>
-    <link>/pt/tag/r/</link>
-      <atom:link href="/pt/tag/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>/pt/category/r/</link>
+      <atom:link href="/pt/category/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
       <title>R</title>
-      <link>/pt/tag/r/</link>
+      <link>/pt/category/r/</link>
     </image>
     
     <item>
@@ -114,14 +114,6 @@ longitude, latitude e &lt;strong&gt;time&lt;/strong&gt;;&lt;/p&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Spatial Restoration Priorization</title>
-      <link>/pt/project/restoration-priorization/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/pt/project/restoration-priorization/</guid>
-      <description></description>
     </item>
     
   </channel>

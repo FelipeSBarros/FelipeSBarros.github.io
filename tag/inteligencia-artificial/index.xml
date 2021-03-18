@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Inteligência Artificial | Felipe Sodré M. Barros</title>
+    <link>/tag/inteligencia-artificial/</link>
+      <atom:link href="/tag/inteligencia-artificial/index.xml" rel="self" type="application/rss+xml" />
+    <description>Inteligência Artificial</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
+      <title>Inteligência Artificial</title>
+      <link>/tag/inteligencia-artificial/</link>
+    </image>
+    
+    <item>
+      <title>O Manifesto Nooscope</title>
+      <link>/post/o-manifesto-nooscope/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/post/o-manifesto-nooscope/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

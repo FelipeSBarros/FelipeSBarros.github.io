@@ -92,17 +92,15 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Acho nesse fragmento já dá para entender a importância do formato, não?&lt;/p&gt;
 &lt;p&gt;Vamos entender isso? Vejam a diferença:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(raster)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: sp&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(r.ppm25 &amp;lt;- stack(&amp;quot;./rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required namespace: ncdf4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(raster)
+(r.ppm25 &amp;lt;- stack(&amp;quot;./rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## class      : RasterStack 
 ## dimensions : 59, 75, 4425, 6  (nrow, ncol, ncell, nlayers)
 ## resolution : 0.4, 0.4  (x, y)
 ## extent     : -74.19, -44.19, -18.24, 5.36  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
 ## names      : X2019.06.30.12.00.00, X2019.06.30.15.00.00, X2019.06.30.18.00.00, X2019.06.30.21.00.00, X2019.07.01.00.00.00, X2019.07.01.03.00.00&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Aos que já trabalham com o pacote &lt;code&gt;raster&lt;/code&gt; e conhecem os dados raster, poderão ver que, sim, ainda que dependendo do &lt;code&gt;ncdf4&lt;/code&gt;, o &lt;code&gt;raster&lt;/code&gt; carrega os dados, aparentemente, sem grandes problemas. O mínimo esperado está aí. Um raster, com um &lt;code&gt;extent&lt;/code&gt;, linhas, colunas, células, layers…&lt;/p&gt;
+&lt;p&gt;Aos que já trabalham com o pacote &lt;code&gt;raster&lt;/code&gt; e conhecem os dados raster, poderão ver que, sim, ainda que dependendo do &lt;code&gt;ncdf4&lt;/code&gt;, o &lt;code&gt;raster&lt;/code&gt; carrega os dados, aparentemente, sem grandes problemas. O mínimo esperado está aí. Um raster, com uma determinada extensão, linhas, colunas, células, bandas ou camadas…&lt;/p&gt;
 &lt;p&gt;Mas, se os dados estão em &lt;em&gt;netCDF&lt;/em&gt;, e esse tipo de dados permite armazenar metadados também, cadê eles?&lt;/p&gt;
 &lt;p&gt;Pois é. Ao ignorar isso, passava por cima desse detalhe como um marreteiro diante de um parafuso.&lt;/p&gt;
 &lt;p&gt;Vamos abrir o arquivo com o &lt;code&gt;ncdf4&lt;/code&gt; para começar a identificar alguns pontos importantes, que, por sinal não ficam “apenas” no metadados:&lt;/p&gt;
@@ -135,19 +133,42 @@
 ##     2 global attributes:
 ##         Conventions: CF-1.6
 ##         history: 2021-03-17 20:27:56 GMT by grib_to_netcdf-2.20.0: grib_to_netcdf /data/scratch/20210317-2020/8e/_mars-webmars-public-svc-blue-001-6fe5cac1a363ec1525f54343b6cc9fd8-ZAB6WD.grib -o /data/scratch/20210317-2020/b1/_grib2netcdf-webmars-public-svc-blue-000-6fe5cac1a363ec1525f54343b6cc9fd8-VDR6DW.nc -utime&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Antes de comentar toda riqueza e detalhamento de informação que nos brinda o &lt;code&gt;ncdf4&lt;/code&gt;, percebam que o comando é &lt;code&gt;nc_open()&lt;/code&gt;. Não importa de o dado tem uma ou mais “bandas” ou “camadas”. Isso me chamou atenção pois, como acham que vou saber a quantidade de camadas do dados que vou abrir, se ainda não o conheço? Mas enfim. Vamos ao mais importante, os detalhes:&lt;/p&gt;
+&lt;p&gt;Antes de comentar toda riqueza e detalhamento de informação que nos brinda o &lt;code&gt;ncdf4&lt;/code&gt;, percebam que o comando é &lt;code&gt;nc_open()&lt;/code&gt;. Não importa de o dado tem uma ou mais “bandas” ou “camadas”. Isso me chamou atenção pois:
+&amp;gt; como acham que vou saber a quantidade de camadas do dado que quero abrir, se ainda não o conheço?&lt;/p&gt;
+&lt;p&gt;Mas enfim. Vamos ao mais importante, os detalhes:&lt;/p&gt;
 &lt;p&gt;Veja a estruturação. No arquivo em questão, eu tenho uma &lt;strong&gt;variável&lt;/strong&gt; apenas, que possui vários metadados, garantindo minimamente sua compreensão, como: &lt;em&gt;short_name&lt;/em&gt;, no caso “pm2p5”, &lt;em&gt;units&lt;/em&gt;, para descrever a unidade do dado, &lt;em&gt;long_name&lt;/em&gt; e &lt;em&gt;standart_name&lt;/em&gt;, além de vários outros.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;     1 variables (excluding dimension variables):
+        short pm2p5[longitude,latitude,time]   
+            scale_factor: 9.668789576322e-12
+            add_offset: 3.16807559257767e-07
+            _FillValue: -32767
+            missing_value: -32767
+            units: kg m**-3
+            long_name: Particulate matter d &amp;lt; 2.5 um
+            standard_name: mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;E vejam também que são identificadas três dimensões:
 longitude, latitude e &lt;strong&gt;time&lt;/strong&gt;;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;     3 dimensions:
+        longitude  Size:75
+            units: degrees_east
+            long_name: longitude
+        latitude  Size:59
+            units: degrees_north
+            long_name: latitude
+        time  Size:6   *** is unlimited ***
+            units: hours since 1900-01-01 00:00:00.0
+            long_name: time
+            calendar: gregorian&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Eis que chegamos ao cubo de dados, não faz sentido?&lt;/p&gt;
-&lt;p&gt;Eu tenho uma variável (ppm&amp;lt;2.5) medida para uma mesma área (cena) ao longo do tempo. O &lt;em&gt;netCDF&lt;/em&gt;, como está preparado e pensado para esse tipo de situação já entende os dados como informação de dadta e hora (!) e os organiza como uma dimensão do dado e não atributo. O &lt;code&gt;raster&lt;/code&gt;, por ter outros objetivos, carrega tudo como um &lt;em&gt;stack&lt;/em&gt; (empilhamento de camadas) e adiciona uma string “X” ao nome das camadas, já que as mesmas são numéricas e o pacote em questão restringe o prefixo das camadas a texto, não permitindo valores numéricos. Enfim, nos obriga a digitar mais algumas linhas de código para que o dado fique mais apresentável.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;imgs/cube1.png&#34; alt=&#34;Fonte da imagem: r-spatial.github.io&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Fonte da imagem: &lt;a href=&#34;http://r-spatial.github.io&#34;&gt;r-spatial.github.io&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
+&lt;p&gt;Eu tenho uma variável (ppm&amp;lt;2.5) medida para uma mesma área (cena) ao longo do tempo. O &lt;em&gt;netCDF&lt;/em&gt;, como está preparado e pensado para esse tipo de situação já entende os dados como informação de data e hora (!) e os organiza como uma dimensão do dado e não atributo.&lt;/p&gt;
+&lt;p&gt;O &lt;code&gt;raster&lt;/code&gt;, por ter outros objetivos, carrega tudo como um &lt;em&gt;stack&lt;/em&gt; (empilhamento de camadas) e adiciona uma string “X” ao nome das camadas (que são a informação de data e hora), já que as mesmas são numéricas e o pacote em questão restringe o prefixo das camadas a texto, não permitindo valores numéricos. Enfim, nos obriga a digitar mais algumas linhas de código para que o dado fique mais apresentável.&lt;/p&gt;
 &lt;p&gt;Essa forma de estruturar os dados fará todo o sentido mais à frente quando formos falar um pouco mais do processamento desses dados.&lt;/p&gt;
 &lt;p&gt;O pacote &lt;code&gt;ncdf4&lt;/code&gt; está desenvolvido para o que se convêm chamar de CRUD, na área de desenvolvimento de sistemas: &lt;em&gt;Create, Update and Delete&lt;/em&gt;. Ou, seja, a ideia é fornecer ferramentas para manipular e ter controle total dos dados, criando, abrindo, alterando dimensões ou atributos e por aí vai. Mas não para visualização nem para as análises. Essas, ficarão para os próximos artigos.&lt;/p&gt;
-&lt;p&gt;Enquanto isso, fique à vontade em me contactar, dar uma alô lá &lt;a href=&#34;http://t.me/GeoCastBrasil&#34;&gt;no grupo do GeoCastBrasil&lt;/a&gt;, no Telegram ou no nosso &lt;a href=&#34;http://youtube.com/GeoCastBrasil&#34;&gt;canal do youtube&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Enquanto isso, fique à vontade em me contactar, dar uma alô lá &lt;a href=&#34;http://t.me/GeoCastBrasil&#34;&gt;no grupo do GeoCastBrasil&lt;/a&gt; no Telegram ou no nosso &lt;a href=&#34;http://youtube.com/GeoCastBrasil&#34;&gt;canal do youtube&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
