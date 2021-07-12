@@ -75,6 +75,408 @@
     </item>
     
     <item>
+      <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta II</title>
+      <link>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/</guid>
+      <description>&lt;h1 id=&#34;criando-um-sistema-para-gestão-de-dados-geográficos-de-forma-simples-e-robusta-ii&#34;&gt;Criando um sistema para gestão de dados geográficos de forma simples e robusta II&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%25C3%25A3o-de-dados-geogr%25C3%25A1ficos-e-felipe--1e&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Na &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;primeira publicação&lt;/a&gt; onde exploro a possibilidade de implementar um sistema de gestão de dados geoespaciais com Django, sem a necessidade de usar um servidor com PostGIS, vimos sobre:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;o &lt;a href=&#34;https://django-geojson.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-geojson&lt;/code&gt;&lt;/a&gt; para simular um campo geográfico no models;&lt;/li&gt;
+&lt;li&gt;o &lt;a href=&#34;https://geojson.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt; para criar um objeto da classe &lt;em&gt;geojson&lt;/em&gt; e realizar as validações necessárias para garantir robustez do sistema;&lt;/li&gt;
+&lt;li&gt;a criação do formulário de registro de dados usando o &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/#modelform&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;ModelForm&lt;/code&gt;&lt;/a&gt;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Agora é hora de evoluir e expandir um pouco o sistema criado. Nessa publicação vamos criar validadores de longitude e latitude para poder restringir a inserção de dados a uma determinada região. Com isso, o próximo passo (e artigo) será criar o &lt;em&gt;webmap&lt;/em&gt; no nosso sistema. Mas isso fica para breve.&lt;/p&gt;
+&lt;p&gt;Vamos ao que interessa:&lt;/p&gt;
+&lt;h2 id=&#34;criando-validadores-de-longitude-e-latitude&#34;&gt;Criando validadores de longitude e latitude&lt;/h2&gt;
+&lt;h3 id=&#34;sobre-os-validadores&#34;&gt;Sobre os validadores:&lt;/h3&gt;
+&lt;p&gt;Os validadores (&lt;a href=&#34;https://docs.djangoproject.com/en/3.2/ref/forms/validation/#validators&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;validators&lt;/code&gt;&lt;/a&gt;, em inglês) fazem parte do sistema de validação de formulários e de campos do Django. Ao criarmos campos de uma determinada classe no nosso modelo, como por exemplo &lt;em&gt;integer&lt;/em&gt;, o Django cuidará automaticamente da validação do valor passado a este campo pelo formulário, retornando um erro quando o usuário ingressar um valor de texto no campo em questão, por exemplo. O interessante é que além dos validadores já implementados para cada classe, podemos criar outros, conforme a nossa necessidade.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Por que necessitamos um validador para os campos de &lt;code&gt;latitude&lt;/code&gt; e &lt;code&gt;longitude&lt;/code&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Como estou explorando o desenvolvimento de um sistema de gestão de dados geográficos com recursos limitados, ou seja, sem uma infraestrutura de operações e consultas espaciais, não poderei consultar se o par de coordenadas inserido pelo usuário está contido nos limites de um determinado estado (uma operação clássica com dados geográficos). Não ter essa possibilidade de validação poderá colocar em risco a qualidade do dado inserido.&lt;/p&gt;
+&lt;p&gt;E como não se abre mão quando a questão é qualidade, uma saída será a criação de validadores personalizados para os campos de &lt;code&gt;latitude&lt;/code&gt; e &lt;code&gt;longitude&lt;/code&gt;, garantindo que esses possuem valores condizentes à nossa área de interesse.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;O que precisamos saber:&lt;/strong&gt;
+os &lt;code&gt;validators&lt;/code&gt; são funções que recebem um valor, apenas (neste caso, o valor inserido pelo usuário no campo a ser validado), que passará por uma lógica de validação retornando um &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/ref/forms/validation/#raising-validation-error&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;ValidationError&lt;/code&gt;&lt;/a&gt; quando o valor inserido não passar na validação. Com o &lt;code&gt;ValidationError&lt;/code&gt; podemos customizar uma mensagem de erro, indicando ao usuário o motivo do valor não ter sido considerado válido, para que o mesmo corrija.&lt;/p&gt;
+&lt;p&gt;Então, criarei validadores dos campos de &lt;code&gt;latitude&lt;/code&gt; e &lt;code&gt;longitude&lt;/code&gt; para sempre que entrarem com valores que não contemplem a área do estado do Rio de Janeiro, um &lt;code&gt;ValidationError&lt;/code&gt; será retornado.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ Essa não é uma solução ótima já que, dessa forma, estamos considerando o &lt;em&gt;bounding box&lt;/em&gt; do estado em questão, e com isso haverá áreas onde as coordenadas serão válidas, ainda que não estejam internas ao território estadual. Ainda assim, acredito que seja uma solução boa suficiente para alguns casos, principalmente por não depender de toda infraestrutura de GIS.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;O que é um &lt;code&gt;bounding box&lt;/code&gt;?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Bounding box&lt;/em&gt; poderia ser traduzido por &amp;ldquo;retângulo envolvente&amp;rdquo; do estado, ou de uma feição espacial. Na imagem abaixo, vemos o território do estado do Rio de Janeiro e o retângulo envolvente que limita as suas coordenadas máximas e mínimas de longitude e latitude.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./img/RJ_bbox.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Percebam que, como mencionado antes, o que conseguimos garantir é que os pares de coordenadas estejam em alguma área interna ao retângulo em questão o que não garante que as mesmas estejam no território do estado do Rio de Janeiro.&lt;/p&gt;
+&lt;p&gt;Por uma questão de organização, criei no &lt;code&gt;settings.py&lt;/code&gt; do meu projeto  as variáveis com os valores máximos e mínimos de latitude e longitude. Essa proposta surgiu do &lt;a href=&#34;https://twitter.com/cuducos&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;cuducos&lt;/code&gt;&lt;/a&gt;, e achei que valia a pena implementar. Entendo que é mais organizado e evita possíveis falhas humanas, caso os mesmos valores tenham que ser usados em outras partes do sistema.&lt;/p&gt;
+&lt;p&gt;Ao fim do meu &lt;code&gt;settings.py&lt;/code&gt;, adicionei:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# settings.py
+BOUNDING_BOX_LAT_MAX = -20.764962
+BOUNDING_BOX_LAT_MIN = -23.366868
+BOUNDING_BOX_LON_MAX = -40.95975
+BOUNDING_BOX_LON_MIN = -44.887212
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Agora, sim. Vamos criar os testes:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;se você não entendeu o motivo pelo qual eu começo criando testes, dá uma olhada na &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;primeira publicação&lt;/a&gt;. Nela comento um pouco sobre a abordagem &lt;em&gt;Test Driven Development (TDD)&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;criando-os-testes&#34;&gt;Criando os testes:&lt;/h2&gt;
+&lt;p&gt;No &lt;code&gt;tests.py&lt;/code&gt;, criei uma nova classe de teste &lt;code&gt;TestCase&lt;/code&gt;, com o objetivo de testar os validadores simulando o uso do &lt;code&gt;FenomenoForm&lt;/code&gt;. Por isso criei &lt;a href=&#34;https://realpython.com/instance-class-and-static-methods-demystified/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;staticmethod&lt;/code&gt;&lt;/a&gt; chamado &lt;code&gt;create_form&lt;/code&gt; que cria um dicionário com chaves e valores válidos do formulário em questão, que ao receber um conjunto de argumentos nomeados &lt;a href=&#34;https://realpython.com/python-kwargs-and-args/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;**kwargs&lt;/code&gt;&lt;/a&gt; terá tais argumentos atualizados e usados para instanciar e retornar o &lt;code&gt;FenomenoForm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Fiz isso para, a cada teste, ter uma instância do &lt;code&gt;FenoenoForm&lt;/code&gt; alterando apenas os campos que quero simular valores a serem validados, sem ter que passar sempre todos os valores do &lt;code&gt;ModelForm&lt;/code&gt;. Assim, eu posso criar diferentes métodos de &lt;em&gt;Test Case&lt;/em&gt;, usando o método criado anteriormente alterando o valor inicial a um inválido, testando se de fato um &lt;code&gt;ValidationError&lt;/code&gt; é retornado.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# tests.py
+class FenomenoFormValidatorsTest(TestCase):
+    @staticmethod
+    def create_form(**kwargs):
+        valid_form = {
+            &#39;nome&#39;: &#39;Teste&#39;,
+            &#39;data&#39;: &#39;2020-01-01&#39;,
+            &#39;hora&#39;: &#39;09:12:12&#39;,
+            &#39;longitude&#39;: -42,
+            &#39;latitude&#39;: -21}
+
+        valid_form.update(**kwargs)
+        form = FenomenoForm(valid_form)
+        return form
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nos métodos de teste uso primeiro o &lt;code&gt;assertFalse&lt;/code&gt; do método de validação do formulário (&lt;code&gt;form.is_valid()&lt;/code&gt;) para confirmar que o mesmo não é valido para, em seguida, testar com o &lt;code&gt;assertEqual&lt;/code&gt; se o texto da mensagem de erro é o que esperamos. Veja o link a seguir para saber sobre outros &lt;a href=&#34;https://docs.python.org/3/library/unittest.html#unittest.TestCase.debug&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;assertions&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# tests.py
+    def test_max_longitude_raises_error(self):
+        form = self.create_form(longitude=&#39;-45&#39;)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors[&amp;quot;longitude&amp;quot;][0], &#39;Coordenada longitude fora do contexto do estado do Rio de Janeiro&#39;)
+
+    def test_min_longitude_raises_error(self):
+        form = self.create_form(longitude=&#39;-40&#39;)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors[&amp;quot;longitude&amp;quot;][0], &#39;Coordenada longitude fora do contexto do estado do Rio de Janeiro&#39;)
+
+    def test_max_latitude_raises_error(self):
+        form = self.create_form(latitude=&#39;-24&#39;)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors[&amp;quot;latitude&amp;quot;][0], &#39;Coordenada latitude fora do contexto do estado do Rio de Janeiro&#39;)
+
+    def test_min_latitude_raises_error(self):
+        form = self.create_form(latitude=&#39;-19&#39;)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors[&amp;quot;latitude&amp;quot;][0], &#39;Coordenada latitude fora do contexto do estado do Rio de Janeiro&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Fazemos rodar os testes e teremos erros como esses:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Creating test database for alias &#39;default&#39;...
+System check identified no issues (0 silenced).
+...E.E..
+======================================================================
+ERROR: test_max_latitude (map_proj.core.tests.FenomenoFormValidatorsTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &amp;quot;/media/felipe/DATA/Repos/Django_Leaflet_Test/map_proj/core/tests.py&amp;quot;, line 78, in test_max_latitude
+    self.assertEqual(form.errors[&amp;quot;latitude&amp;quot;][0], &#39;Coordenada latitude fora do contexto do estado do Rio de Janeiro&#39;)
+KeyError: &#39;latitude&#39;
+
+======================================================================
+ERROR: test_min_latitude (map_proj.core.tests.FenomenoFormValidatorsTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &amp;quot;/media/felipe/DATA/Repos/Django_Leaflet_Test/map_proj/core/tests.py&amp;quot;, line 83, in test_min_latitude
+    self.assertEqual(form.errors[&amp;quot;latitude&amp;quot;][0], &#39;Coordenada latitude fora do contexto do estado do Rio de Janeiro&#39;)
+KeyError: &#39;latitude&#39;
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.012s
+
+FAILED (errors=2)
+Destroying test database for alias &#39;default&#39;...
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ou seja, o &lt;code&gt;forms&lt;/code&gt; após ser validado deveria conter um atributo &lt;em&gt;errors&lt;/em&gt; tendo como chave o nome do campo que apresentou dados inválidos. Como não temos os validadores criados, nenhum erro de validação foi acusado no campo de &lt;code&gt;latitude&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;criando-e-usando-validadores&#34;&gt;Criando e usando validadores:&lt;/h2&gt;
+&lt;p&gt;Para superá-los criamos, enfim, os validadores em um arquivo &lt;code&gt;validators.py&lt;/code&gt;. Percebam que é nesse ponto que usarei os valores máximos e mínimos de latitude e longitude adicionados no &lt;code&gt;settings.py&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# validators.py
+from django.core.exceptions import ValidationError
+from django.conf import settings
+
+
+def validate_longitude(lon):
+    if lon &amp;lt; settings.BOUNDING_BOX_LON_MIN or lon &amp;gt; settings.BOUNDING_BOX_LON_MAX:
+        raise ValidationError(&amp;quot;Coordenada longitude fora do contexto do estado do Rio de Janeiro&amp;quot;, &amp;quot;erro longitude&amp;quot;)
+
+def validate_latitude(lat):
+    if lat &amp;lt; settings.BOUNDING_BOX_LAT_MIN or lat &amp;gt; settings.BOUNDING_BOX_LAT_MAX:
+        raise ValidationError(&amp;quot;Coordenada latitude fora do contexto do estado do Rio de Janeiro&amp;quot;, &amp;quot;erro latitude&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com esses validadores estou garantindo que ambos latitude e longitude estejam na área de interesse e, caso contrário, retorno um erro informando ao usuário.&lt;/p&gt;
+&lt;p&gt;E é preciso adicioná-los ao &lt;code&gt;forms.py&lt;/code&gt; para que sejam usados:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# forms.py
+from map_proj.core.validators import validate_longitude, validate_latitude
+
+class FenomenoForm(ModelForm):
+    longitude = FloatField(validators=[validate_longitude])
+    latitude = FloatField(validators=[validate_latitude])
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;No desenvolvimento dessa solução percebi pelos testes criados que, ao informar uma latitude ou longitude que não passe pela validação, a criação do campo &lt;code&gt;geom&lt;/code&gt; se tornava inválido por não receber um desses valores, gerando dois erros: o de validação do campo e o de validação do campo &lt;code&gt;geom&lt;/code&gt;. Lembre-se que é no método &lt;code&gt;clean&lt;/code&gt; do formulário que o campo &lt;code&gt;geom&lt;/code&gt; recebe os valores de &lt;code&gt;longitude&lt;/code&gt; e &lt;code&gt;latitude&lt;/code&gt; formando uma classe &lt;code&gt;geojson&lt;/code&gt; para, logo em seguida ser validado.&lt;/p&gt;
+&lt;p&gt;Para evitar isso, alterei o método clean de forma garantir que o campo &lt;code&gt;geom&lt;/code&gt; só seja criado e validado, quando ambos valores (&lt;code&gt;longitude&lt;/code&gt; e &lt;code&gt;latitude&lt;/code&gt;) existirem. Ou seja, tenham passado pelos validadores sem erro.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#forms.py
+    def clean(self):
+        cleaned_data = super().clean()
+        lon = cleaned_data.get(&#39;longitude&#39;)
+        lat = cleaned_data.get(&#39;latitude&#39;)
+        if not all((lon, lat)):
+            raise ValidationError(&#39;Erro em latitude ou longitude&#39;)
+        
+        cleaned_data[&#39;geom&#39;] = Point((lon, lat))
+        if not cleaned_data[&#39;geom&#39;].is_valid:
+                raise ValidationError(&#39;Geometria inválida&#39;)
+        
+        return cleaned_data
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Outro ponto (na verdade, erro) importante que só percebi a partir dos testes é que no &lt;code&gt;forms.py&lt;/code&gt; eu não estava considerando o campo &lt;code&gt;geom&lt;/code&gt; na lista de &lt;code&gt;fields&lt;/code&gt; a serem usados. Com isso o mesmo não é passado ao banco de dados, mesmo passando pelo método &lt;code&gt;clean&lt;/code&gt; que o cria.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Por esse motivo, tive que alterar algumas coisas no &lt;code&gt;forms.py&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inseri o campo &lt;code&gt;geom&lt;/code&gt; à tupla de &lt;code&gt;fields&lt;/code&gt; do &lt;code&gt;forms.py&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Inseri o campo &lt;code&gt;geom&lt;/code&gt; com um widget de &lt;code&gt;HiddenInput&lt;/code&gt;. Esse último, o fiz por se tratar de um campo que não quero expor ao usuário, já que será criado automaticamente no método &lt;code&gt;clean&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Finalmente, a classe &lt;code&gt;Meta&lt;/code&gt; do &lt;code&gt;forms.py&lt;/code&gt; ficou da seguinte forma:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    class Meta:
+        model = Fenomeno
+        fields = (&#39;nome&#39;, &#39;data&#39;, &#39;hora&#39;, &#39;latitude&#39;, &#39;longitude&#39;, &#39;geom&#39;)
+        widgets = {&#39;geom&#39;: HiddenInput()}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pronto, com tudo isso que fizemos, já temos um sistema que, apesar de não poder fazer consultas espaciais, é capaz de validar os campos de &lt;code&gt;latitude&lt;/code&gt; e &lt;code&gt;longitude&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;No próximo artigo, vou abordar sobre o que está por trás de toda mágica de um webmap, usando o módulo &lt;a href=&#34;https://django-leaflet.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-leaflet&lt;/code&gt;&lt;/a&gt;. Enquanto isso, dê uma olhada &lt;a href=&#34;http://felipesbarros.github.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;no que tenho desenvolvido.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%25C3%25A3o-de-dados-geogr%25C3%25A1ficos-e-felipe--1e&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta</title>
+      <link>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      <guid>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/</guid>
+      <description>&lt;h1 id=&#34;criando-um-sistema-para-gestão-de-dados-geográficos-de-forma-simples-e-robusta&#34;&gt;Criando um sistema para gestão de dados geográficos de forma simples e robusta&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django. Decidi expor alguns aprendizados em uma serie de artigos. A ideia é que esses textos me ajudem na consolidação do conhecimento e, ao tê-los publicado, ajudar a outros que tenham interesse na área.&lt;/p&gt;
+&lt;p&gt;Aproveito para deixar meu agradecimento ao Cuducos que, tanto neste artigo, como em todos meus estudos tem sido um grande mentor. Vamos ao que interessa:&lt;/p&gt;
+&lt;p&gt;Por simples, entende-se:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Um sistema sem a necessidade da instalação e configuração de base de dados PostgreSQL/GIS, Geoserver, etc;&lt;/li&gt;
+&lt;li&gt;Um sistema clássico tipo &lt;em&gt;Create&lt;/em&gt;, &lt;em&gt;Retrieve&lt;/em&gt;, &lt;em&gt;Update&lt;/em&gt;, &lt;em&gt;Delete&lt;/em&gt; (CRUD) para dados geográficos;&lt;/li&gt;
+&lt;li&gt;Um sistema que não demande operações e consultas espaciais;&lt;/li&gt;
+&lt;li&gt;Mas um sistema que garanta a qualidade na gestão dos dados geográficos;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;visão-geral-da-proposta&#34;&gt;Visão geral da proposta:&lt;/h3&gt;
+&lt;p&gt;Vamos criar um ambiente virtual Python e instalar a framework Django, para criar o sistema, assim como alguns módulos como &lt;a href=&#34;https://pypi.org/project/jsonfield/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jsonfield&lt;/code&gt;&lt;/a&gt;, que nos vai habilitar a criação de campos &lt;code&gt;JSON&lt;/code&gt; em nossa base de dados; &lt;a href=&#34;https://pypi.org/project/django-geojson/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-geojson&lt;/code&gt;&lt;/a&gt;, que depende do &lt;code&gt;jsonfield&lt;/code&gt; e será responsável por habilitar instâncias de dados geográficos, baseando-se em &lt;code&gt;JSON&lt;/code&gt;; &lt;a href=&#34;https://pypi.org/project/geojson/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt;, que possui todas as regras &lt;em&gt;básicas&lt;/em&gt; de validação de dados geográficos, usando a estrutura homônima, &lt;a href=&#34;https://geojson.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;O uso desses três módulos nos permitirá o desenvolvimento de um sistema de gestão de dados geográficos sem a necessidade de termos instalado um sistema de gerenciamento de dados geográficos, como o PostGIS. Sim, nosso sistema será bem limitado a algumas tarefas. Mas em contrapartida, poderemos desenvolvê-lo e implementar soluções &amp;ldquo;corriqueiras&amp;rdquo; de forma facilitada.&lt;/p&gt;
+&lt;p&gt;No presente exemplo estarei usando &lt;a href=&#34;https://www.sqlite.org/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SQLite&lt;/a&gt;, como base de dados.&lt;/p&gt;
+&lt;p&gt;Nosso projeto se chamará de &lt;em&gt;map_proj&lt;/em&gt;. E nele vou criar uma app, dentro da pasta do meu projeto &lt;code&gt;Django&lt;/code&gt;, chamada &lt;code&gt;core&lt;/code&gt;. Essa organização e nomenclatura usada, vem das sugestões do &lt;a href=&#34;https://github.com/okfn-brasil/jarbas/issues/28#issuecomment-256117262&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Henrique Bastos&lt;/a&gt;. Afinal, o sistema está nascendo. Ainda que eu tenha uma ideia do que ele será, é interessante iniciar com uma aplicação &amp;ldquo;genérica&amp;rdquo; e a partir do momento que o sistema se torne complexo, poderemos desacoplá-la em diferentes aplicações.&lt;/p&gt;
+&lt;h3 id=&#34;criando-ambiente-de-desenvolvimento-projeto-e-nossa-app&#34;&gt;Criando ambiente de desenvolvimento, projeto e nossa app:&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python -m venv .djleaflet # cria ambiente virtual python
+# ativando o ambiente virtual:
+source ./venv/bin/activate
+
+# atualizando o pip
+pip install --upgrade pip
+
+# intalando os módulos a serem usados
+pip install django jsonfield django-geojson geojson
+
+# criando projeto
+django-admin startproject map_proj .
+
+# criando app dentro do projeto
+cd map_proj
+python manage.py startapp core
+
+# criando a base de dados inicial
+python manage.py migrate 
+
+# criando superusuário
+python manage.py createsuperuser 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;adicionando-os-módulos-e-a-app-ao-projeto&#34;&gt;Adicionando os módulos e a app ao projeto&lt;/h4&gt;
+&lt;p&gt;Agora é adicionar ao &lt;code&gt;map_proj/settings.py&lt;/code&gt;, a app criada e os módulos que usaremos.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# setting.py
+INSTALLED_APPS = [
+    ...
+    &#39;djgeojson&#39;,
+    &#39;map_proj.core&#39;,
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Perceba que para poder acessar as classes de alto nível criadas pelo pacote &lt;code&gt;djgeojson&lt;/code&gt;, teremos que adicioná-lo ao &lt;code&gt;INSTALLED_APPS&lt;/code&gt; do &lt;code&gt;settings.py&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;criando-a-base-de-dados&#34;&gt;Criando a base de dados&lt;/h3&gt;
+&lt;p&gt;Ainda que eu concorde com o Henrique Bastos, que a visão de começar os projetos Django pelo &lt;code&gt;models.py&lt;/code&gt; é um tanto &amp;ldquo;perigosa&amp;rdquo;, por colocar ênfase em uma parte da app e, em muitos casos, negligenciar vários outros atributos e ferramentas que o Django nos oferece, irei desconsiderar sua abordagem. Afinal, o objetivo deste artigo não é explorar todo o potencial do Django, mas sim apresentar uma solução simples no desenvolvimento e implementação de um sistema de gestão de dados geográficos para servir como ferramenta de estudo e projeto prático.&lt;/p&gt;
+&lt;p&gt;Em &lt;code&gt;models.py&lt;/code&gt; usaremos instâncias de alto nível que o Django nos brinda para criar e configurar os campos e as tabelas que teremos em nosso sistema, bem como alguns comportamentos do sistema.&lt;/p&gt;
+&lt;p&gt;Como estou desenvolvendo um sistema multi propósito, vou tentar mantê-lo bem genérico. A ideia é que vocês possam imaginar o que adequar para um sistema especialista na sua área de interesse. Vou criar, então, uma tabela para mapear &amp;ldquo;fenômenos&amp;rdquo; (quaisquer). Esse modelo terá os campos &lt;em&gt;nome&lt;/em&gt;, &lt;em&gt;data&lt;/em&gt;, &lt;em&gt;hora&lt;/em&gt; e &lt;em&gt;geometria&lt;/em&gt;, a qual será uma instância de &lt;code&gt;PointField&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;O &lt;code&gt;PointField&lt;/code&gt; é uma classe criada pelo &lt;code&gt;djgeojson&lt;/code&gt; que nos permite usar um campo para dados geográficos sem ter toda a infraestrutura do PostGIS, instalada, por exemplo. Nesse caso, estou simulando um campo de ponto, mas, de acordo com a documentação do pacote, todas as geometrias usadas em dados espaciais são suportadas:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All geometry types are supported and respectively validated : GeometryField, PointField, MultiPointField, LineStringField, MultiLineStringField, PolygonField, MultiPolygonField, GeometryCollectionField. ( &lt;a href=&#34;https://django-geojson.readthedocs.io/en/latest/models.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;djgeojson&lt;/code&gt;&lt;/a&gt; )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# models.py
+from django.db import models
+from djgeojson.fields import PointField
+
+
+class Fenomeno(models.Model):
+    nome = models.CharField(max_length=100,
+                            verbose_name=&#39;Fenomeno mapeado&#39;)
+    data = models.DateField(verbose_name=&#39;Data da observação&#39;)
+    hora = models.TimeField()
+    geom = PointField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Percebam que eu importo de &lt;code&gt;djgeojson&lt;/code&gt; a classe &lt;code&gt;PointField&lt;/code&gt;. O que o &lt;code&gt;django-geojson&lt;/code&gt; fez foi criar uma classe [com estrutura de dados geográfico] de alto nível, mas que no banco de dados será armazenado em um campo &lt;code&gt;JSON&lt;/code&gt;. Vale a pena deixar claro: não espero que o usuário do meu sistema saiba preencher o campo &lt;code&gt;geom&lt;/code&gt; em formato &lt;code&gt;JSON&lt;/code&gt;. Por isso, criarei no &lt;code&gt;forms.py&lt;/code&gt;, os campos &lt;em&gt;latitude&lt;/em&gt; e &lt;em&gt;longitude&lt;/em&gt; e a partir deles, o campo geom será preenchido. Detalharei esse processo mais adiante.&lt;/p&gt;
+&lt;p&gt;Pronto, já temos o modelo da &amp;lsquo;tabela de dados &amp;ldquo;geográficos&amp;rdquo;&amp;rsquo;, mas esse modelo ainda não foi registrado em nossa base. Para isso:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python manage.py makemigrations
+python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;O &lt;code&gt;makemigrations&lt;/code&gt; analisa o &lt;code&gt;models.py&lt;/code&gt; e o compara com a versão anterior identificando as alterações e criando um arquivo que será executado pelo &lt;code&gt;migrate&lt;/code&gt;, aplicando tais alterações ao banco de dados. Aprendi com o Henrique Bastos e &lt;a href=&#34;https://twitter.com/cuducos&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cuducos&lt;/a&gt; que o migrate é um sistema de versionamento da estrutura do banco de dados, permitindo retroceder, quando necessário, a outras versões.&lt;/p&gt;
+&lt;h3 id=&#34;criando-o-formulário&#34;&gt;Criando o formulário&lt;/h3&gt;
+&lt;p&gt;Vou aproveitar algumas &amp;ldquo;pilhas já incluídas&amp;rdquo; do Django, ao usar o &lt;code&gt;ModelForm&lt;/code&gt; para criar o formulário para o carregamento de dados. O &lt;code&gt;ModelForm&lt;/code&gt; facilita esse processo.&lt;/p&gt;
+&lt;p&gt;Aliás, é importante pensar que os formulários do Django vão muito além da &amp;ldquo;carga de dados&amp;rdquo;, já que são os responsáveis por cuidar da interação com o usuário e o(s) processo(s) de validação e limpeza dos dados preenchidos.&lt;/p&gt;
+&lt;p&gt;Digo isso, pois ao meu &lt;code&gt;FenomenosForm&lt;/code&gt;, eu sobreescrevo o método &lt;code&gt;clean()&lt;/code&gt;, que cuida da validação e limpeza do formulário e incluo nele:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;a construção dos dados do campo &lt;code&gt;geom&lt;/code&gt; a partir dos valores dos campos de &lt;em&gt;latitude&lt;/em&gt; e &lt;em&gt;longitude&lt;/em&gt; (criados exclusivamente para a gerção do campo geom);&lt;/li&gt;
+&lt;li&gt;a validação do campo geom;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# forms.py
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm, FloatField
+from map_proj.core.models import Fenomeno
+from geojson import Point
+
+
+class FenomenoForm(ModelForm):
+    longitude = FloatField()
+    latitude = FloatField()
+    class Meta:
+        model = Fenomeno
+        fields = (&#39;nome&#39;, &#39;data&#39;, &#39;hora&#39;, &#39;latitude&#39;, &#39;longitude&#39;)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        lon = cleaned_data.get(&#39;longitude&#39;)
+        lat = cleaned_data.get(&#39;latitude&#39;)
+        cleaned_data[&#39;geom&#39;] = Point((lon, lat))
+
+        if not cleaned_data[&#39;geom&#39;].is_valid:
+            raise ValidationError(&#39;Geometria inválida&#39;)
+        return cleaned_data
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ainda que pareça simples, não foi fácil chegar a essa estratégia de estruturação dos &lt;code&gt;models&lt;/code&gt; e &lt;code&gt;forms&lt;/code&gt;. Contei com a ajuda e paciencia do &lt;a href=&#34;https://twitter.com/cuducos&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cuducos&lt;/a&gt;. Inicialmente eu mantinha latitude e longitude no meu &lt;code&gt;models&lt;/code&gt;. Mas fazendo assim, além de ter uma redundância de dados e uma abertura a erros potenciais, estaria armazenando dados que não devo usar depois de contruir o campo geom. Uma alternativa, discutida com o Cuducos foi de ter tanto &lt;em&gt;latitude&lt;/em&gt; como &lt;em&gt;longitude&lt;/em&gt; no &lt;code&gt;models&lt;/code&gt;, mas o atributo &lt;code&gt;geom&lt;/code&gt; como &lt;a href=&#34;https://docs.python.org/3/howto/descriptor.html#properties&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;propriedade&lt;/a&gt;. Ainda que seja uma estratégia consistente, a redundância se mantém.&lt;/p&gt;
+&lt;p&gt;O processo de validação do campo &lt;code&gt;geom&lt;/code&gt; também foi fruto de muita discussão. De forma resumida, percebi que o &lt;code&gt;djgeojson&lt;/code&gt; apenas valida o tipo de geometria do campo e não a sua consistência. Ao conversar com os desenvolvedores, me disseram que toda a lógica de validação de objetos &lt;code&gt;geojson&lt;/code&gt; estavam sendo centralizados no módulo homônimo.&lt;/p&gt;
+&lt;p&gt;Por isso eu carrego a classe &lt;code&gt;Point&lt;/code&gt; do módulo &lt;code&gt;geojson&lt;/code&gt; e designo o campo &lt;code&gt;geom&lt;/code&gt; como instância dessa classe. Assim, passo a poder contar com um processo de validação mais consistente, como o método &lt;code&gt;is_valid&lt;/code&gt;, usado anteriormente.&lt;/p&gt;
+&lt;h4 id=&#34;mas-e-o-teste&#34;&gt;Mas e o teste?&lt;/h4&gt;
+&lt;p&gt;Pois é, eu adoraria apresentar isso usando a abordagem &lt;em&gt;Test Driven Development (TDD)&lt;/em&gt;. Mas, talvez pela falta de prática, conhecimento e etc, vou apenas apontar onde e como eu testaria esse sistema. Faço isso como uma forma de estudo, mesmo. Também me pareceu complicado apresentar a abordagem TDD em um artigo, já que a mesma se faz de forma incremental.&lt;/p&gt;
+&lt;h5 id=&#34;sobre-tdd&#34;&gt;Sobre TDD&lt;/h5&gt;
+&lt;p&gt;Com o Henrique Bastos e toda a comunidade do &lt;a href=&#34;https://medium.com/welcome-to-the-django/o-wttd-%C3%A9-tudo-que-eu-ensinaria-sobre-prop%C3%B3sito-de-vida-para-mim-mesmo-se-pudesse-voltar-no-tempo-d73e516f911c&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Welcome to The Django&lt;/em&gt;&lt;/a&gt; vi que essa abordagem é tanto filosófica quanto técnica. É praticamente &amp;ldquo;Chora agora, ri depois&amp;rdquo;, mas sem a parte de chorar. Pois com o tempo as coisas ficam mais claras&amp;hellip; Alguns pontos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O erro não é para ser evitado no processo de desenvolvimento, mas sim quando estive em produção. Logo,&lt;/li&gt;
+&lt;li&gt;Entenda o que você quer do sistema, crie um teste antes de implementar e deixe o erro te guiar até ter o que deseja;&lt;/li&gt;
+&lt;li&gt;Teste o comportamento esperado e não cada elemento do sistema;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sem mais delongas:&lt;/p&gt;
+&lt;h5 id=&#34;o-que-testar&#34;&gt;O que testar?&lt;/h5&gt;
+&lt;p&gt;Vamos usar o arquivo &lt;code&gt;tests.py&lt;/code&gt; e  criar nossos testes lá.
+Ao abrir vocês vão ver que já está o comando importando o &lt;code&gt;TestCase&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mas o que vamos testar?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Como pretendo testar tanto a estrutura da minha base de dados, quanto o formulário e, de quebra, a validação do meu campo &lt;code&gt;geom&lt;/code&gt;, faço o &lt;code&gt;import&lt;/code&gt; do modelo &lt;code&gt;Fenomenos&lt;/code&gt; e do form &lt;code&gt;FenomenosForm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;⚠️ Essa não é uma boa prática. O ideal é criar uma pasta para os testes e separá-los em arquivos distintos. Um para cada elemento do sistema (model, form, view, etc).&lt;/p&gt;
+&lt;p&gt;O primeiro teste será a carga de dados. Então, vou instanciar um objeto com o resultado da criação de um elemento do meu &lt;code&gt;model&lt;/code&gt; &lt;code&gt;Fenomeno&lt;/code&gt;. Faço isso no &lt;code&gt;setUp&lt;/code&gt;, para não ter que criá-lo sempre que for fazer um teste relacionado à carga de dados.&lt;/p&gt;
+&lt;p&gt;O teste seguinte será relacionado ao formulário e por isso instancio um formulário com os dados carregados e testo a sua validez. Ao fazer isso o formulário passa pelo processo de limpeza, onde está a construção e validação do campo &lt;code&gt;geom&lt;/code&gt;. Se qualquer campo for preenchido com dados errados ou inadequados, o django retornará &lt;code&gt;False&lt;/code&gt; ao método &lt;code&gt;is_valid&lt;/code&gt;. Ou seja, se eu tiver construido o campo &lt;code&gt;geom&lt;/code&gt; de forma equivocada, passando mais ou menos parâmetros que o esperado o nosso teste irá avisar, evitando surpresas.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# tests.py
+from django.test import TestCase
+from geojson import Point
+
+from map_proj.core.models import Fenomeno
+from map_proj.core.forms import FenomenoForm
+
+
+class ModelGeomTest(TestCase):
+    def setUp(self):
+        self.fenomeno = Fenomeno.objects.create(
+            nome=&#39;Arvore&#39;,
+            data=&#39;2020-11-06&#39;,
+            hora=&#39;09:30:00&#39;
+        )
+
+    def test_create(self):
+        self.assertTrue(Fenomeno.objects.exists())
+
+
+class FenomenoFormTest(TestCase):
+    def setUp(self):
+        self.form = FenomenoForm({
+            &#39;nome&#39;: &#39;Teste&#39;,
+            &#39;data&#39;: &#39;2020-01-01&#39;,
+            &#39;hora&#39;: &#39;09:12:12&#39;,
+            &#39;longitude&#39;: -45,
+            &#39;latitude&#39;: -22})
+        self.validation = self.form.is_valid()
+
+    def test_form_is_valid(self):
+        &amp;quot;&amp;quot;&amp;quot;&amp;quot;form must be valid&amp;quot;&amp;quot;&amp;quot;
+        self.assertTrue(self.validation)
+
+    def test_geom_coordinates(self):
+        &amp;quot;&amp;quot;&amp;quot;after validating, geom have same values of longitude and latitude&amp;quot;&amp;quot;&amp;quot;
+        self.assertEqual(self.form.cleaned_data[&#39;geom&#39;], Point(
+            (self.form.cleaned_data[&#39;longitude&#39;],
+        self.form.cleaned_data[&#39;latitude&#39;])))
+
+    def test_geom_is_valid(self):
+        &amp;quot;&amp;quot;&amp;quot;geom must be valid&amp;quot;&amp;quot;&amp;quot;
+        self.assertTrue(self.form.cleaned_data[&#39;geom&#39;].is_valid)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;⚠️ Reparem que:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;No &lt;code&gt;test_create()&lt;/code&gt; eu testo se existem objetos inseridos no model &lt;code&gt;Fenomeno&lt;/code&gt;. Logo, testo se o dado criado no &lt;code&gt;setUp&lt;/code&gt; foi corretamente incorporado no banco de dados.&lt;/li&gt;
+&lt;li&gt;Na classe &lt;code&gt;FenomenosFormTest&lt;/code&gt; eu crio uma instância do meu modelForm e realizo três testes:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;test_form_is_valid()&lt;/code&gt; estou testando se os dados carregados são condizentes com o informado no model e, pelo fato desse método usar o método &lt;code&gt;clean()&lt;/code&gt;, posso dizer que estou testando indiretamente a validez do campo &lt;code&gt;geom&lt;/code&gt;. Caso ele não fosse válido, o form também não seria válido.&lt;/li&gt;
+&lt;li&gt;Em &lt;code&gt;test_geom_coordinates()&lt;/code&gt; testo se após a validação o campo geom foi criado como esperado (como uma instância de Point com os dalores de longitude e latitude).&lt;/li&gt;
+&lt;li&gt;O teste &lt;code&gt;test_geom_is_valid()&lt;/code&gt; serve para garantir que a contrução do campo geom é valido. Ainda que ao testar se o formulário é valido eu estaria implicitamente testando a validez do campo geom, esse teste serve para garantir a criação válida do campo. Afinal, por algum motivo (como por exemplo, refatoração), pode ser que façamos alguma alteração no método &lt;code&gt;clean()&lt;/code&gt; que mantenha o formulário como válido mas deixe de garantir a validez do campo geom.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A diferença entre as classes de teste criadas está no fato de ao inserir os dados usando o método &lt;code&gt;create()&lt;/code&gt; - e aconteceria o mesmo se estivesse usando o &lt;code&gt;save()&lt;/code&gt; -, apenas será validado se o elemento a ser inserido é condizente com o tipo de coluna no banco de dados. Vale deixar claro: Dessa forma, eu não estou validando a consistência do campo &lt;code&gt;geom&lt;/code&gt;, já que o mesmo, caso seja informado, será salvo com sucesso sempre que represente um &lt;code&gt;JSON&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Esse fato é importante para reforçar o entendimento de que o &lt;code&gt;djgeojson&lt;/code&gt; implementa classes de alto nível a serem trabalhados em &lt;code&gt;views&lt;/code&gt; e &lt;code&gt;models&lt;/code&gt;. No banco, mesmo, temos um campo de &lt;code&gt;JSON&lt;/code&gt;.
+Enquanto que, para poder validar a consistência do campo &lt;code&gt;geom&lt;/code&gt;, preciso passar os dados pelo formulário onde, no processo de limpeza do mesmo, o campo será criado e validado usando o módulo &lt;code&gt;geojson&lt;/code&gt;. Por isso a classe com os testes relacionados ao comportamento do formulário.&lt;/p&gt;
+&lt;h3 id=&#34;registrando-modelo-no-admin&#34;&gt;Registrando modelo no admin&lt;/h3&gt;
+&lt;p&gt;Para facilitar, vou usar o django-admin. Trata-se de uma aplicação já criada onde basta registrar os modelos e views que estamos trabalhando para termos uma interface &amp;ldquo;frontend&amp;rdquo; genérica.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#admin.py
+from django.contrib import admin
+from map_proj.core.models import Fenomeno
+from map_proj.core.forms import FenomenoForm
+
+class FenomenoAdmin(admin.ModelAdmin):
+    model = Fenomeno
+    form = FenomenoForm
+
+admin.site.register(Fenomeno, FenomenoAdmin)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;to-be-continued&#34;&gt;To be continued&amp;hellip;&lt;/h3&gt;
+&lt;p&gt;Até o momento já temos algo bastante interessante: um sistema de CRUD que nos permite adicionar, editar e remover dados geográficos. Talvez você esteja pensando consigo mesmo:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;OK. Mas o que foi feito até agora, poderia ter sido feito basicamente com uma base de dados que possuam as colunas latitude e longitude&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Eu diria que sim, até certo ponto. Uma grande diferença, eu diria, da forma como foi implementada é o uso das ferramentas de validação dos dados com o módulo &lt;code&gt;geojson&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A ideia é, a seguir (e seja lá quando isso for), extender a funcionalidade do sistema ao implementar um webmap para visualizar os dados mapeados.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.</title>
       <link>/post/netcdf/</link>
       <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>

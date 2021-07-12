@@ -138,8 +138,98 @@
   </url>
   
   <url>
+    <loc>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/</loc>
+    <lastmod>2021-07-11T22:20:57-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/django/</loc>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/django/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/django/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/pt-br/</loc>
+    <lastmod>2021-07-11T22:20:57-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/pt-br/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/pt-br/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/python/</loc>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
-    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
@@ -149,6 +239,36 @@
                 rel="alternate"
                 hreflang="en"
                 href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/</loc>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/"
+                />
+  </url>
+  
+  <url>
+    <loc>/category/python/</loc>
+    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/category/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/category/python/"
                 />
   </url>
   
@@ -164,36 +284,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/post/netcdf/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tag/pt-br/</loc>
-    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/pt-br/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/pt-br/"
                 />
   </url>
   
@@ -224,21 +314,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/category/r/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-03-17T23:17:27-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
                 />
   </url>
   
@@ -509,21 +584,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/project/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tag/python/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/python/"
                 />
   </url>
   
