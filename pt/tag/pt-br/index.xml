@@ -5,12 +5,118 @@
     <link>/pt/tag/pt-br/</link>
       <atom:link href="/pt/tag/pt-br/index.xml" rel="self" type="application/rss+xml" />
     <description>pt-br</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Fri, 05 Nov 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
       <title>pt-br</title>
       <link>/pt/tag/pt-br/</link>
     </image>
+    
+    <item>
+      <title>Hacktoberfest 2021</title>
+      <link>/pt/post/hacktoberfest-2021/</link>
+      <pubDate>Fri, 05 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/pt/post/hacktoberfest-2021/</guid>
+      <description>&lt;h1 id=&#34;hacktoberfest-colaborações-e-aprendizados&#34;&gt;Hacktoberfest: Colaborações e aprendizados&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/hacktoberfest-colabora%C3%A7%C3%B5es-e-aprendizados-felipe-sodr%C3%A9-mendes-barros/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hacktoberfest-full.f42e3b1.svg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;O &lt;a href=&#34;https://hacktoberfest.digitalocean.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HacktoberFest&lt;/a&gt; é um evento promovido pela Digital Ocean durante o mês de outubro e já está na sua oitava edição. O objetivo é incentivar a colaboração em projetos de código aberto e, claro, como uma forma de democratizar o conhecimento em sistemas de versionamento, como o &lt;a href=&#34;https://git-scm.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;git&lt;/a&gt;, além de outras tecnologias.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;hellip;Ah, e o incentivo vem com a possibilidade de ganhar uma camisa do evento ao ter aprovado quatro &lt;a href=&#34;https://git-scm.com/docs/git-request-pull&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;pull requests&lt;/em&gt;&lt;/a&gt; em repositórios participantes (para participar, basta adicionar a tag &amp;ldquo;Hactoberfest&amp;rdquo; ao repositório ou adicionar a tag &amp;ldquo;Hacktoberfest-accepted&amp;rdquo; no &lt;em&gt;Pull request&lt;/em&gt; em questão).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Não foi minha primeira participação, mas foi a primeira vez que pude colaborar em projetos diferentes daqueles relacionados ao meu trabalho cotidiano. E já fazia algum tempo que tinha interesse em colaborar, mas não sabia como quebrar a inércia. Compartilho neste artigo, alguns projetos desenvolvidos este ano e o que pude aprender nos mesmos.&lt;/p&gt;
+&lt;h3 id=&#34;fogo-cruzado&#34;&gt;Fogo Cruzado&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://fogocruzado.org.br/wp-content/uploads/2019/05/logo_fogo_cruzado_v2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;O projeto &lt;a href=&#34;https://fogocruzado.org.br/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fogo Cruzado&lt;/a&gt; foi desenvolvido pela &lt;a href=&#34;https://voltdata.info/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Volt Data Lab&lt;/a&gt; e &lt;a href=&#34;https://twitter.com/fogocruzado&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Instituto Fogo Cruzado&lt;/a&gt;, como um sistema &lt;a href=&#34;https://pt.wikipedia.org/wiki/Crowdsourcing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Crowdsourcing&lt;/a&gt; para monitoramento dos tiroteios no Rio de Janeiro e/ou em Recife. &lt;a href=&#34;https://fogocruzado.org.br/sobre-a-api/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;O mesmo disponibiliza uma API&lt;/a&gt; para acessar aos dados, bastando criar um usuário, sem custo. E o projeto já tem um pacote para acessar os dados pelo &lt;a href=&#34;https://github.com/voltdatalab/crossfire&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Como faltava um módulo python para acessar os dados do projeto, decidi fazê-lo durante o #Hacktoberfest. Esse foi o primeiro projeto: um módulo python para acessar os dados da API, direto do python.&lt;/p&gt;
+&lt;p&gt;Foi um desafio legal e, até certa forma, simples, pois eu já tinha um modelo de como funcionava o pacote em R. Então o trabalho foi, principalmente &amp;ldquo;traduzir&amp;rdquo; ao python. Com isso aproveitei para refatorar algumas partes do código.&lt;/p&gt;
+&lt;p&gt;No geral, posso dizer que ao desenvolver esse projeto, aprendi sobre:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python-poetry (do zero);&lt;/li&gt;
+&lt;li&gt;Validação de login usando variáveis do sistema;&lt;/li&gt;
+&lt;li&gt;Publicação de módulos no PyPi;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;E fica como desafios para melhor/implementar em breve:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Melhorar o código com &lt;code&gt;type annotation&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;Criação de documentação com &lt;code&gt;Sphynx&lt;/code&gt; (se alguém quiser sugerir outra alternativa será bem-vinda);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pyinaturalist-convert&#34;&gt;PyInaturalist-convert&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/niconoe/pyinaturalist/main/docs/images/pyinaturalist_logo_med.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;O segundo projeto que atuei nesse mês foi no &lt;a href=&#34;https://github.com/JWCook/pyinaturalist-convert&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PyInaturalist-convert&lt;/a&gt;. A história deste módulo é bem interessante e surge de uma demanda pessoal: O &lt;a href=&#34;https://imibio.misiones.gob.ar/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IMiBio&lt;/a&gt;, Instituição onde trabalho, está desenvolvendo um projeto com o &lt;a href=&#34;https://www.inaturalist.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;INaturalist&lt;/a&gt;, uma aplicação de &lt;a href=&#34;https://pt.wikipedia.org/wiki/Crowdsourcing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;crowdsourcing&lt;/a&gt; para observação de biodiversidade, e eu tive que criar um sistema que acesse os dados do projeto usando a &lt;a href=&#34;https://github.com/inaturalist/iNaturalistAPI&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;API deles&lt;/a&gt;. Com isso, conheci o módulo &lt;a href=&#34;https://github.com/niconoe/pyinaturalist&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PyINaturalist&lt;/a&gt;. Conversando com os desenvolvedores, comentei que seria interessante ter os dados no padrão &lt;a href=&#34;https://dwc.tdwg.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;darwincore&lt;/a&gt;. Um deles achou pertinente e começamos a desenvolver juntos. Contudo, fiquei uns bons meses afastado do projeto e ao voltar, já era um pacote bem estruturado. Por isso, para entender a estrutura do mesmo e saber por onde começar, além de ler as &lt;a href=&#34;https://guides.github.com/features/issues/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issues&lt;/a&gt; abertas, adotei a estratégia de ler os testes&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&amp;hellip; E foi lendo os testes que percebi que estavam implementando um objeto geojson, &amp;ldquo;na unha&amp;rdquo;. Como estive estudando sobre o &lt;a href=&#34;https://pypi.org/project/geojson/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt; (e, inclusive foi &lt;a href=&#34;https://felipesbarros.github.io/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;um dos temas explorados por mim em outros artigos&lt;/a&gt;, propus usá-lo. Com isso, poderíamos usar os métodos de validação já implementados no módulo, garantindo consistência aos dados;&lt;/p&gt;
+&lt;p&gt;Ao colaborar no módulo &lt;code&gt;PyInaturalist-converter&lt;/code&gt;, aprendi sobre:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Como colaborar a um projeto já estruturado. Tenho certeza que essa não é uma regra. Mas foi uma boa estratégia começar lendo os testes;&lt;/li&gt;
+&lt;li&gt;Mais aprendizados sobre python-poetry :);&lt;/li&gt;
+&lt;li&gt;Soube da existência do formatador de código [Black](The Uncompromising Code Formatter);&lt;/li&gt;
+&lt;li&gt;Soube da existencia do &lt;a href=&#34;https://pycqa.github.io/isort/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ISORT&lt;/a&gt;, para padronizar os imports;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Além desses aprendizados, o autor principal do módulo já tinha configurado no repositório um &lt;a href=&#34;https://docs.github.com/pt/actions&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;fluxo de ações&lt;/a&gt; e validações bem interessantes. Dessa forma, havia um sistema de validação do que se estava propondo como &lt;a href=&#34;https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;pull request&lt;/code&gt;&lt;/a&gt;. Ainda não tive tempo de me aprofundar, mas já está na lista de estudos futuros&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;análise-espacial-no-frontend&#34;&gt;Análise espacial no &lt;em&gt;frontend&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;Uma última atividade que queria compartilhar, não está relacionada a uma contribuição minha, mas sim, um projeto ao qual eu recebi ajuda.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/pulse/an%C3%A1lise-espacial-frontend-felipe-sodr%C3%A9-mendes-barros?trk=public_post-content_share-article&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Publiquei recentemente&lt;/a&gt; um artigo apresentando alguns módulos de JavaScript que nos permitem fazer algumas análises espaciais sem depender de uma infraestrutura de servidores de dados e de mapas.&lt;/p&gt;
+&lt;p&gt;Eu fui apresentado a essas tecnologias no &lt;a href=&#34;https://2021.foss4g.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FOSS4G 2021&lt;/a&gt; e por pura curiosidade, já que frontend não é a &amp;ldquo;minha praia&amp;rdquo;, comecei a fazer alguns testes como estratégia de estudos, mesmo.&lt;/p&gt;
+&lt;p&gt;Pude evoluir bastante com os estudos, mas num momento vi que poderia ser feito muito mais, mas que eu não tinha conhecimento técnico em JS para isso. Não tive dúvidas em contactar um amigo que trabalha com JS e apresentei a ele o que estava tentando fazer. Ele curtiu e acabou colaborando com o projeto, transformando essa prova de conceito numa solução, em algo realmente interessante.&lt;/p&gt;
+&lt;p&gt;Percebam que essa colaboração não surgiu pelo Hacktoberfest. Mas por uma mudança de postura minha em me conectar com outras pessoas e apresentar o que eu estava estudando, as &amp;ldquo;minhas dores&amp;rdquo; e o que pretendia fazer.&lt;/p&gt;
+&lt;p&gt;Neste projeto estudei e aprendi sobre:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;O &lt;a href=&#34;https://github.com/geotiff/georaster&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster&lt;/code&gt;&lt;/a&gt;, uma biblioteca JavaScript que nos permite carrregar, e até mesmo criar, dados raster a partir de objetos JavaScript;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/GeoTIFF/georaster-layer-for-leaflet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster-layer-for-leaflet&lt;/code&gt;&lt;/a&gt; que é uma biblioteca que nos permite apresentar dados &lt;code&gt;raster&lt;/code&gt; (a princípio geotif) nos mapas feitos em &lt;a href=&#34;https://leafletjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;leaflet&lt;/code&gt;&lt;/a&gt;;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt; que é um pacote desenvolvido em JavaScript para permitir analisar dados carregados como georaster.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Como resultado, criamos dois visualizadores de dados &lt;em&gt;raster&lt;/em&gt; apenas com tecnologia &lt;em&gt;frontend&lt;/em&gt;. &lt;a href=&#34;https://felipesbarros.github.io/geoblaze_test/clicking_pixel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;No primeiro o usuário interage com o pixel&lt;/a&gt; (clicando num píxel específico) e o gráfico apresenta o comportamento temporal daquele pixel; &lt;a href=&#34;https://felipesbarros.github.io/geoblaze_test/clicking_polygon&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;No segundo visualizador&lt;/a&gt; o usuário clica em um dos estados e o gráfico apresenta o valor médio dos pixels daquele estado ao longo do tempo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;notas-finais-sobre-hacktoberfest&#34;&gt;Notas finais sobre Hacktoberfest&lt;/h2&gt;
+&lt;p&gt;Entendo que muitos &amp;ldquo;torcem o nariz&amp;rdquo; para o Hacktoberfest, pois poucos o utilizam como uma estratégia de estudos, crescimento ou colaboração a projeto de código aberto, que são os objetivos principais. A ideia de escrever sobre as colaborações feitas é justamente destacar que o evento é uma grande estratégia/ferramenta para aprender mais, conectar-se com outros desenvolvedores e se engajar em projetos de código aberto.&lt;/p&gt;
+&lt;p&gt;Espero que os meus aprendizados serviam de motivação aos demais. Qualquer coisa, fico à disposição para conversar mais a respeito.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/hacktoberfest-colabora%C3%A7%C3%B5es-e-aprendizados-felipe-sodr%C3%A9-mendes-barros/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Análise espacial no frontend</title>
+      <link>/pt/post/analise-espacial-frontend/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/pt/post/analise-espacial-frontend/</guid>
+      <description>&lt;h1 id=&#34;criando-um-sistema-para-gestão-de-dados-geográficos-de-forma-simples-e-robusta&#34;&gt;Criando um sistema para gestão de dados geográficos de forma simples e robusta&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/an%C3%A1lise-espacial-frontend-felipe-sodr%C3%A9-mendes-barros/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Este ano pude participar do projeto de jornalismo de dados &lt;a href=&#34;https://infoamazonia.org/project/engolindo-fumaca/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Engolindo Fumaça&lt;/a&gt;, desenvolvido pelo &lt;a href=&#34;https://infoamazonia.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;InfoAmazonia&lt;/a&gt;. Foi um projeto bem desafiador que me trouxe vários aprendizados. Muitos deles já viraram artigos, como os de &lt;a href=&#34;https://felipesbarros.github.io/pt/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cubo de dados&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ainda que o projeto tenha sido um sucesso (inclusive, foi um dos finalistas do &lt;a href=&#34;https://premio.jornalismodedados.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;prêmio de jornalismo de dados Cláudio Weber Abramo&lt;/a&gt; ) alguns desafios ficaram pendentes. Um deles está com a possibilidade de apresentar dados raster em um sistema webmap, sem dispor de grande infraestrutura de SIG, como base de dados e servidor de mapas, PostGIS e geoserver, respectivamente. Afinal, após todo o processo de análise de dados e produção das matérias, era importante apresentar os dados de forma interativa.&lt;/p&gt;
+&lt;p&gt;Aliás, desenvolvimento de soluções com dados espaciais com infraestrutura limitada tem sido um tema explorado por mim em &lt;a href=&#34;https://felipesbarros.github.io/pt/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;alguns artigos&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Então, em resumo, a necessidade era: apresentar as imagens de satélite utilizadas nas reportagens em um mapa dinâmico, sem depender de um servidor de mapas, para que os leitores da matéria pudessem explorar os dados. Algo similar a um &lt;em&gt;dashboard&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Pois foi ao moderar uma sessão da conferência &lt;a href=&#34;https://2021.foss4g.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Free and Open Source Software for Geospatial&lt;/a&gt; (#FOSS4G) deste ano que, sem querer, me deparei com as possíveis soluções. A solução seria transportar a responsabilidade de carregar, apresentar e calcular algumas estatísticas ao &lt;em&gt;frontend&lt;/em&gt;, usando o conjunto de bibliotecas &lt;a href=&#34;https://github.com/geotiff/georaster&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;https://github.com/GeoTIFF/georaster-layer-for-leaflet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster-layer-for-leaflet&lt;/code&gt;&lt;/a&gt; e &lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt;. A apresentação que me dispertou para essas ferramentas foi feita pelo &lt;a href=&#34;https://www.linkedin.com/in/danieljdufour&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Daniel Dufour&lt;/a&gt; sobre o &lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/geotiff/georaster&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster&lt;/code&gt;&lt;/a&gt; é uma biblioteca JavaScript que nos permite carrregar, e até mesmo criar, dados raster a partir de objetos JavaScript;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/GeoTIFF/georaster-layer-for-leaflet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster-layer-for-leaflet&lt;/code&gt;&lt;/a&gt; é uma biblioteca que nos permite apresentar dados &lt;code&gt;raster&lt;/code&gt; (a princípio geotif) nos mapas feitos em &lt;a href=&#34;https://leafletjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;leaflet&lt;/code&gt;&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt; é um pacote desenvolvido em JavaScript para permitir analisar dados carregados como georaster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dessa forma, com essa stack the bibliotecas poderemos carregar uma imagem raster georreferenciada, extrair estatísticas gerais e espaciais, bem como aplicar alguns processamentos, como algebra de bandas e apresentá-las em um webmap &lt;code&gt;leaflet&lt;/code&gt;. Tudo isso sem depender de uma infraestrutura de &lt;em&gt;backend&lt;/em&gt;. Tudo sendo processado no &lt;em&gt;frontend&lt;/em&gt;. Sim, essa solução pode ser limitada para alguns casos. Mas nem todos.&lt;/p&gt;
+&lt;p&gt;E, por isso, decidi explorar essa alternativa, ainda que &lt;em&gt;frontend&lt;/em&gt; (e JavaScript) não seja a &amp;ldquo;minha praia&amp;rdquo;. A verdade é que não consegui conter o entusiasmo e parti para uma prova conceitual. &lt;a href=&#34;https://observablehq.com/@felipesbarros/proof_of_concept_geoblaze&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Compartilho a prova de conceito que fiz&lt;/a&gt;, usando o &lt;a href=&#34;https://observablehq.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;observablehq&lt;/a&gt; (uma espécie de &lt;em&gt;jupyter-notebook&lt;/em&gt; para programação &lt;em&gt;frontend&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Aproveitei para consolidar o resultado em uma &lt;em&gt;landingpage&lt;/em&gt;. Nela, além de apresentar o raster, foi possível garantir que o usuário possa interagir com o mesmo, de duas formas distintas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clicando em um &lt;em&gt;pixel&lt;/em&gt;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://felipesbarros.github.io/geoblaze_test/img/landingpage.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ou clicando em um dos polígonos que representam os limites dos estados que compõem a Amazônia Legal. (⚠️ não estamos representando o estado do Maranhão já que o mesmo não é contemplado integramente na Amazônia Legal);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://felipesbarros.github.io/geoblaze_test/img/landingpage_polygon.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Em ambas implementações os valores dos pixels são extraídos &lt;a href=&#34;https://pt.wikipedia.org/wiki/Just_in_time&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;just-in-time&lt;/em&gt;&lt;/a&gt; e o gráfico em &lt;a href=&#34;https://plotly.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;plotly&lt;/a&gt; é atualizado representando o comportamento temporal dos mesmos. Tais dados se referem a &lt;a href=&#34;https://pt.wikipedia.org/wiki/Material_particulado&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Material Particulado &amp;lt; 2.5&lt;/a&gt; do ano de 2020. No gráfico, apresentamos, ainda, o valor máximo sugerido pela Organização Mundial da Saúde (&lt;strong&gt;World Health Organization - WHO&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;Essas duas implementações visam explorar oportunidades diferentes das ferramentas em questão. Separamos os resultados em duas páginas diferentes: &lt;a href=&#34;https://felipesbarros.github.io/geoblaze_test/clicking_pixel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;clicando pixel a pixel&lt;/a&gt;; &lt;a href=&#34;https://felipesbarros.github.io/geoblaze_test/clicking_polygon&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;clicando num polígono&lt;/a&gt;;&lt;/p&gt;
+&lt;p&gt;E, é lógico: tenho tudo documentado no &lt;a href=&#34;https://github.com/felipesbarros/geoblaze_test/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Não posso deixar de mencionar que o projeto só foi possível com a ajuda do &lt;a href=&#34;https://kylefelipe.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kyle Felipe&lt;/a&gt; quem, inclusive, foi o responsável pela evolução do projeto implementando a solução em JS baseada na seleção de polígonos.&lt;/p&gt;
+&lt;p&gt;Espero que seja útil :)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/an%C3%A1lise-espacial-frontend-felipe-sodr%C3%A9-mendes-barros/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta II</title>
@@ -190,106 +296,268 @@ class FenomenoForm(ModelForm):
     </item>
     
     <item>
+      <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta</title>
+      <link>/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      <guid>/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/</guid>
+      <description>&lt;h1 id=&#34;criando-um-sistema-para-gestão-de-dados-geográficos-de-forma-simples-e-robusta&#34;&gt;Criando um sistema para gestão de dados geográficos de forma simples e robusta&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django. Decidi expor alguns aprendizados em uma serie de artigos. A ideia é que esses textos me ajudem na consolidação do conhecimento e, ao tê-los publicado, ajudar a outros que tenham interesse na área.&lt;/p&gt;
+&lt;p&gt;Aproveito para deixar meu agradecimento ao Cuducos que, tanto neste artigo, como em todos meus estudos tem sido um grande mentor. Vamos ao que interessa:&lt;/p&gt;
+&lt;p&gt;Por simples, entende-se:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Um sistema sem a necessidade da instalação e configuração de base de dados PostgreSQL/GIS, Geoserver, etc;&lt;/li&gt;
+&lt;li&gt;Um sistema clássico tipo &lt;em&gt;Create&lt;/em&gt;, &lt;em&gt;Retrieve&lt;/em&gt;, &lt;em&gt;Update&lt;/em&gt;, &lt;em&gt;Delete&lt;/em&gt; (CRUD) para dados geográficos;&lt;/li&gt;
+&lt;li&gt;Um sistema que não demande operações e consultas espaciais;&lt;/li&gt;
+&lt;li&gt;Mas um sistema que garanta a qualidade na gestão dos dados geográficos;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;visão-geral-da-proposta&#34;&gt;Visão geral da proposta:&lt;/h3&gt;
+&lt;p&gt;Vamos criar um ambiente virtual Python e instalar a framework Django, para criar o sistema, assim como alguns módulos como &lt;a href=&#34;https://pypi.org/project/jsonfield/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jsonfield&lt;/code&gt;&lt;/a&gt;, que nos vai habilitar a criação de campos &lt;code&gt;JSON&lt;/code&gt; em nossa base de dados; &lt;a href=&#34;https://pypi.org/project/django-geojson/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-geojson&lt;/code&gt;&lt;/a&gt;, que depende do &lt;code&gt;jsonfield&lt;/code&gt; e será responsável por habilitar instâncias de dados geográficos, baseando-se em &lt;code&gt;JSON&lt;/code&gt;; &lt;a href=&#34;https://pypi.org/project/geojson/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt;, que possui todas as regras &lt;em&gt;básicas&lt;/em&gt; de validação de dados geográficos, usando a estrutura homônima, &lt;a href=&#34;https://geojson.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;O uso desses três módulos nos permitirá o desenvolvimento de um sistema de gestão de dados geográficos sem a necessidade de termos instalado um sistema de gerenciamento de dados geográficos, como o PostGIS. Sim, nosso sistema será bem limitado a algumas tarefas. Mas em contrapartida, poderemos desenvolvê-lo e implementar soluções &amp;ldquo;corriqueiras&amp;rdquo; de forma facilitada.&lt;/p&gt;
+&lt;p&gt;No presente exemplo estarei usando &lt;a href=&#34;https://www.sqlite.org/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SQLite&lt;/a&gt;, como base de dados.&lt;/p&gt;
+&lt;p&gt;Nosso projeto se chamará de &lt;em&gt;map_proj&lt;/em&gt;. E nele vou criar uma app, dentro da pasta do meu projeto &lt;code&gt;Django&lt;/code&gt;, chamada &lt;code&gt;core&lt;/code&gt;. Essa organização e nomenclatura usada, vem das sugestões do &lt;a href=&#34;https://github.com/okfn-brasil/jarbas/issues/28#issuecomment-256117262&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Henrique Bastos&lt;/a&gt;. Afinal, o sistema está nascendo. Ainda que eu tenha uma ideia do que ele será, é interessante iniciar com uma aplicação &amp;ldquo;genérica&amp;rdquo; e a partir do momento que o sistema se torne complexo, poderemos desacoplá-la em diferentes aplicações.&lt;/p&gt;
+&lt;h3 id=&#34;criando-ambiente-de-desenvolvimento-projeto-e-nossa-app&#34;&gt;Criando ambiente de desenvolvimento, projeto e nossa app:&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python -m venv .djleaflet # cria ambiente virtual python
+# ativando o ambiente virtual:
+source ./venv/bin/activate
+
+# atualizando o pip
+pip install --upgrade pip
+
+# intalando os módulos a serem usados
+pip install django jsonfield django-geojson geojson
+
+# criando projeto
+django-admin startproject map_proj .
+
+# criando app dentro do projeto
+cd map_proj
+python manage.py startapp core
+
+# criando a base de dados inicial
+python manage.py migrate 
+
+# criando superusuário
+python manage.py createsuperuser 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;adicionando-os-módulos-e-a-app-ao-projeto&#34;&gt;Adicionando os módulos e a app ao projeto&lt;/h4&gt;
+&lt;p&gt;Agora é adicionar ao &lt;code&gt;map_proj/settings.py&lt;/code&gt;, a app criada e os módulos que usaremos.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# setting.py
+INSTALLED_APPS = [
+    ...
+    &#39;djgeojson&#39;,
+    &#39;map_proj.core&#39;,
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Perceba que para poder acessar as classes de alto nível criadas pelo pacote &lt;code&gt;djgeojson&lt;/code&gt;, teremos que adicioná-lo ao &lt;code&gt;INSTALLED_APPS&lt;/code&gt; do &lt;code&gt;settings.py&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;criando-a-base-de-dados&#34;&gt;Criando a base de dados&lt;/h3&gt;
+&lt;p&gt;Ainda que eu concorde com o Henrique Bastos, que a visão de começar os projetos Django pelo &lt;code&gt;models.py&lt;/code&gt; é um tanto &amp;ldquo;perigosa&amp;rdquo;, por colocar ênfase em uma parte da app e, em muitos casos, negligenciar vários outros atributos e ferramentas que o Django nos oferece, irei desconsiderar sua abordagem. Afinal, o objetivo deste artigo não é explorar todo o potencial do Django, mas sim apresentar uma solução simples no desenvolvimento e implementação de um sistema de gestão de dados geográficos para servir como ferramenta de estudo e projeto prático.&lt;/p&gt;
+&lt;p&gt;Em &lt;code&gt;models.py&lt;/code&gt; usaremos instâncias de alto nível que o Django nos brinda para criar e configurar os campos e as tabelas que teremos em nosso sistema, bem como alguns comportamentos do sistema.&lt;/p&gt;
+&lt;p&gt;Como estou desenvolvendo um sistema multi propósito, vou tentar mantê-lo bem genérico. A ideia é que vocês possam imaginar o que adequar para um sistema especialista na sua área de interesse. Vou criar, então, uma tabela para mapear &amp;ldquo;fenômenos&amp;rdquo; (quaisquer). Esse modelo terá os campos &lt;em&gt;nome&lt;/em&gt;, &lt;em&gt;data&lt;/em&gt;, &lt;em&gt;hora&lt;/em&gt; e &lt;em&gt;geometria&lt;/em&gt;, a qual será uma instância de &lt;code&gt;PointField&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;O &lt;code&gt;PointField&lt;/code&gt; é uma classe criada pelo &lt;code&gt;djgeojson&lt;/code&gt; que nos permite usar um campo para dados geográficos sem ter toda a infraestrutura do PostGIS, instalada, por exemplo. Nesse caso, estou simulando um campo de ponto, mas, de acordo com a documentação do pacote, todas as geometrias usadas em dados espaciais são suportadas:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All geometry types are supported and respectively validated : GeometryField, PointField, MultiPointField, LineStringField, MultiLineStringField, PolygonField, MultiPolygonField, GeometryCollectionField. ( &lt;a href=&#34;https://django-geojson.readthedocs.io/en/latest/models.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;djgeojson&lt;/code&gt;&lt;/a&gt; )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# models.py
+from django.db import models
+from djgeojson.fields import PointField
+
+
+class Fenomeno(models.Model):
+    nome = models.CharField(max_length=100,
+                            verbose_name=&#39;Fenomeno mapeado&#39;)
+    data = models.DateField(verbose_name=&#39;Data da observação&#39;)
+    hora = models.TimeField()
+    geom = PointField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Percebam que eu importo de &lt;code&gt;djgeojson&lt;/code&gt; a classe &lt;code&gt;PointField&lt;/code&gt;. O que o &lt;code&gt;django-geojson&lt;/code&gt; fez foi criar uma classe [com estrutura de dados geográfico] de alto nível, mas que no banco de dados será armazenado em um campo &lt;code&gt;JSON&lt;/code&gt;. Vale a pena deixar claro: não espero que o usuário do meu sistema saiba preencher o campo &lt;code&gt;geom&lt;/code&gt; em formato &lt;code&gt;JSON&lt;/code&gt;. Por isso, criarei no &lt;code&gt;forms.py&lt;/code&gt;, os campos &lt;em&gt;latitude&lt;/em&gt; e &lt;em&gt;longitude&lt;/em&gt; e a partir deles, o campo geom será preenchido. Detalharei esse processo mais adiante.&lt;/p&gt;
+&lt;p&gt;Pronto, já temos o modelo da &amp;lsquo;tabela de dados &amp;ldquo;geográficos&amp;rdquo;&amp;rsquo;, mas esse modelo ainda não foi registrado em nossa base. Para isso:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;python manage.py makemigrations
+python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;O &lt;code&gt;makemigrations&lt;/code&gt; analisa o &lt;code&gt;models.py&lt;/code&gt; e o compara com a versão anterior identificando as alterações e criando um arquivo que será executado pelo &lt;code&gt;migrate&lt;/code&gt;, aplicando tais alterações ao banco de dados. Aprendi com o Henrique Bastos e &lt;a href=&#34;https://twitter.com/cuducos&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cuducos&lt;/a&gt; que o migrate é um sistema de versionamento da estrutura do banco de dados, permitindo retroceder, quando necessário, a outras versões.&lt;/p&gt;
+&lt;h3 id=&#34;criando-o-formulário&#34;&gt;Criando o formulário&lt;/h3&gt;
+&lt;p&gt;Vou aproveitar algumas &amp;ldquo;pilhas já incluídas&amp;rdquo; do Django, ao usar o &lt;code&gt;ModelForm&lt;/code&gt; para criar o formulário para o carregamento de dados. O &lt;code&gt;ModelForm&lt;/code&gt; facilita esse processo.&lt;/p&gt;
+&lt;p&gt;Aliás, é importante pensar que os formulários do Django vão muito além da &amp;ldquo;carga de dados&amp;rdquo;, já que são os responsáveis por cuidar da interação com o usuário e o(s) processo(s) de validação e limpeza dos dados preenchidos.&lt;/p&gt;
+&lt;p&gt;Digo isso, pois ao meu &lt;code&gt;FenomenosForm&lt;/code&gt;, eu sobreescrevo o método &lt;code&gt;clean()&lt;/code&gt;, que cuida da validação e limpeza do formulário e incluo nele:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;a construção dos dados do campo &lt;code&gt;geom&lt;/code&gt; a partir dos valores dos campos de &lt;em&gt;latitude&lt;/em&gt; e &lt;em&gt;longitude&lt;/em&gt; (criados exclusivamente para a gerção do campo geom);&lt;/li&gt;
+&lt;li&gt;a validação do campo geom;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# forms.py
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm, FloatField
+from map_proj.core.models import Fenomeno
+from geojson import Point
+
+
+class FenomenoForm(ModelForm):
+    longitude = FloatField()
+    latitude = FloatField()
+    class Meta:
+        model = Fenomeno
+        fields = (&#39;nome&#39;, &#39;data&#39;, &#39;hora&#39;, &#39;latitude&#39;, &#39;longitude&#39;)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        lon = cleaned_data.get(&#39;longitude&#39;)
+        lat = cleaned_data.get(&#39;latitude&#39;)
+        cleaned_data[&#39;geom&#39;] = Point((lon, lat))
+
+        if not cleaned_data[&#39;geom&#39;].is_valid:
+            raise ValidationError(&#39;Geometria inválida&#39;)
+        return cleaned_data
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ainda que pareça simples, não foi fácil chegar a essa estratégia de estruturação dos &lt;code&gt;models&lt;/code&gt; e &lt;code&gt;forms&lt;/code&gt;. Contei com a ajuda e paciencia do &lt;a href=&#34;https://twitter.com/cuducos&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cuducos&lt;/a&gt;. Inicialmente eu mantinha latitude e longitude no meu &lt;code&gt;models&lt;/code&gt;. Mas fazendo assim, além de ter uma redundância de dados e uma abertura a erros potenciais, estaria armazenando dados que não devo usar depois de contruir o campo geom. Uma alternativa, discutida com o Cuducos foi de ter tanto &lt;em&gt;latitude&lt;/em&gt; como &lt;em&gt;longitude&lt;/em&gt; no &lt;code&gt;models&lt;/code&gt;, mas o atributo &lt;code&gt;geom&lt;/code&gt; como &lt;a href=&#34;https://docs.python.org/3/howto/descriptor.html#properties&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;propriedade&lt;/a&gt;. Ainda que seja uma estratégia consistente, a redundância se mantém.&lt;/p&gt;
+&lt;p&gt;O processo de validação do campo &lt;code&gt;geom&lt;/code&gt; também foi fruto de muita discussão. De forma resumida, percebi que o &lt;code&gt;djgeojson&lt;/code&gt; apenas valida o tipo de geometria do campo e não a sua consistência. Ao conversar com os desenvolvedores, me disseram que toda a lógica de validação de objetos &lt;code&gt;geojson&lt;/code&gt; estavam sendo centralizados no módulo homônimo.&lt;/p&gt;
+&lt;p&gt;Por isso eu carrego a classe &lt;code&gt;Point&lt;/code&gt; do módulo &lt;code&gt;geojson&lt;/code&gt; e designo o campo &lt;code&gt;geom&lt;/code&gt; como instância dessa classe. Assim, passo a poder contar com um processo de validação mais consistente, como o método &lt;code&gt;is_valid&lt;/code&gt;, usado anteriormente.&lt;/p&gt;
+&lt;h4 id=&#34;mas-e-o-teste&#34;&gt;Mas e o teste?&lt;/h4&gt;
+&lt;p&gt;Pois é, eu adoraria apresentar isso usando a abordagem &lt;em&gt;Test Driven Development (TDD)&lt;/em&gt;. Mas, talvez pela falta de prática, conhecimento e etc, vou apenas apontar onde e como eu testaria esse sistema. Faço isso como uma forma de estudo, mesmo. Também me pareceu complicado apresentar a abordagem TDD em um artigo, já que a mesma se faz de forma incremental.&lt;/p&gt;
+&lt;h5 id=&#34;sobre-tdd&#34;&gt;Sobre TDD&lt;/h5&gt;
+&lt;p&gt;Com o Henrique Bastos e toda a comunidade do &lt;a href=&#34;https://medium.com/welcome-to-the-django/o-wttd-%C3%A9-tudo-que-eu-ensinaria-sobre-prop%C3%B3sito-de-vida-para-mim-mesmo-se-pudesse-voltar-no-tempo-d73e516f911c&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Welcome to The Django&lt;/em&gt;&lt;/a&gt; vi que essa abordagem é tanto filosófica quanto técnica. É praticamente &amp;ldquo;Chora agora, ri depois&amp;rdquo;, mas sem a parte de chorar. Pois com o tempo as coisas ficam mais claras&amp;hellip; Alguns pontos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O erro não é para ser evitado no processo de desenvolvimento, mas sim quando estive em produção. Logo,&lt;/li&gt;
+&lt;li&gt;Entenda o que você quer do sistema, crie um teste antes de implementar e deixe o erro te guiar até ter o que deseja;&lt;/li&gt;
+&lt;li&gt;Teste o comportamento esperado e não cada elemento do sistema;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sem mais delongas:&lt;/p&gt;
+&lt;h5 id=&#34;o-que-testar&#34;&gt;O que testar?&lt;/h5&gt;
+&lt;p&gt;Vamos usar o arquivo &lt;code&gt;tests.py&lt;/code&gt; e  criar nossos testes lá.
+Ao abrir vocês vão ver que já está o comando importando o &lt;code&gt;TestCase&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mas o que vamos testar?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Como pretendo testar tanto a estrutura da minha base de dados, quanto o formulário e, de quebra, a validação do meu campo &lt;code&gt;geom&lt;/code&gt;, faço o &lt;code&gt;import&lt;/code&gt; do modelo &lt;code&gt;Fenomenos&lt;/code&gt; e do form &lt;code&gt;FenomenosForm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;⚠️ Essa não é uma boa prática. O ideal é criar uma pasta para os testes e separá-los em arquivos distintos. Um para cada elemento do sistema (model, form, view, etc).&lt;/p&gt;
+&lt;p&gt;O primeiro teste será a carga de dados. Então, vou instanciar um objeto com o resultado da criação de um elemento do meu &lt;code&gt;model&lt;/code&gt; &lt;code&gt;Fenomeno&lt;/code&gt;. Faço isso no &lt;code&gt;setUp&lt;/code&gt;, para não ter que criá-lo sempre que for fazer um teste relacionado à carga de dados.&lt;/p&gt;
+&lt;p&gt;O teste seguinte será relacionado ao formulário e por isso instancio um formulário com os dados carregados e testo a sua validez. Ao fazer isso o formulário passa pelo processo de limpeza, onde está a construção e validação do campo &lt;code&gt;geom&lt;/code&gt;. Se qualquer campo for preenchido com dados errados ou inadequados, o django retornará &lt;code&gt;False&lt;/code&gt; ao método &lt;code&gt;is_valid&lt;/code&gt;. Ou seja, se eu tiver construido o campo &lt;code&gt;geom&lt;/code&gt; de forma equivocada, passando mais ou menos parâmetros que o esperado o nosso teste irá avisar, evitando surpresas.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# tests.py
+from django.test import TestCase
+from geojson import Point
+
+from map_proj.core.models import Fenomeno
+from map_proj.core.forms import FenomenoForm
+
+
+class ModelGeomTest(TestCase):
+    def setUp(self):
+        self.fenomeno = Fenomeno.objects.create(
+            nome=&#39;Arvore&#39;,
+            data=&#39;2020-11-06&#39;,
+            hora=&#39;09:30:00&#39;
+        )
+
+    def test_create(self):
+        self.assertTrue(Fenomeno.objects.exists())
+
+
+class FenomenoFormTest(TestCase):
+    def setUp(self):
+        self.form = FenomenoForm({
+            &#39;nome&#39;: &#39;Teste&#39;,
+            &#39;data&#39;: &#39;2020-01-01&#39;,
+            &#39;hora&#39;: &#39;09:12:12&#39;,
+            &#39;longitude&#39;: -45,
+            &#39;latitude&#39;: -22})
+        self.validation = self.form.is_valid()
+
+    def test_form_is_valid(self):
+        &amp;quot;&amp;quot;&amp;quot;&amp;quot;form must be valid&amp;quot;&amp;quot;&amp;quot;
+        self.assertTrue(self.validation)
+
+    def test_geom_coordinates(self):
+        &amp;quot;&amp;quot;&amp;quot;after validating, geom have same values of longitude and latitude&amp;quot;&amp;quot;&amp;quot;
+        self.assertEqual(self.form.cleaned_data[&#39;geom&#39;], Point(
+            (self.form.cleaned_data[&#39;longitude&#39;],
+        self.form.cleaned_data[&#39;latitude&#39;])))
+
+    def test_geom_is_valid(self):
+        &amp;quot;&amp;quot;&amp;quot;geom must be valid&amp;quot;&amp;quot;&amp;quot;
+        self.assertTrue(self.form.cleaned_data[&#39;geom&#39;].is_valid)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;⚠️ Reparem que:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;No &lt;code&gt;test_create()&lt;/code&gt; eu testo se existem objetos inseridos no model &lt;code&gt;Fenomeno&lt;/code&gt;. Logo, testo se o dado criado no &lt;code&gt;setUp&lt;/code&gt; foi corretamente incorporado no banco de dados.&lt;/li&gt;
+&lt;li&gt;Na classe &lt;code&gt;FenomenosFormTest&lt;/code&gt; eu crio uma instância do meu modelForm e realizo três testes:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;test_form_is_valid()&lt;/code&gt; estou testando se os dados carregados são condizentes com o informado no model e, pelo fato desse método usar o método &lt;code&gt;clean()&lt;/code&gt;, posso dizer que estou testando indiretamente a validez do campo &lt;code&gt;geom&lt;/code&gt;. Caso ele não fosse válido, o form também não seria válido.&lt;/li&gt;
+&lt;li&gt;Em &lt;code&gt;test_geom_coordinates()&lt;/code&gt; testo se após a validação o campo geom foi criado como esperado (como uma instância de Point com os dalores de longitude e latitude).&lt;/li&gt;
+&lt;li&gt;O teste &lt;code&gt;test_geom_is_valid()&lt;/code&gt; serve para garantir que a contrução do campo geom é valido. Ainda que ao testar se o formulário é valido eu estaria implicitamente testando a validez do campo geom, esse teste serve para garantir a criação válida do campo. Afinal, por algum motivo (como por exemplo, refatoração), pode ser que façamos alguma alteração no método &lt;code&gt;clean()&lt;/code&gt; que mantenha o formulário como válido mas deixe de garantir a validez do campo geom.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A diferença entre as classes de teste criadas está no fato de ao inserir os dados usando o método &lt;code&gt;create()&lt;/code&gt; - e aconteceria o mesmo se estivesse usando o &lt;code&gt;save()&lt;/code&gt; -, apenas será validado se o elemento a ser inserido é condizente com o tipo de coluna no banco de dados. Vale deixar claro: Dessa forma, eu não estou validando a consistência do campo &lt;code&gt;geom&lt;/code&gt;, já que o mesmo, caso seja informado, será salvo com sucesso sempre que represente um &lt;code&gt;JSON&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Esse fato é importante para reforçar o entendimento de que o &lt;code&gt;djgeojson&lt;/code&gt; implementa classes de alto nível a serem trabalhados em &lt;code&gt;views&lt;/code&gt; e &lt;code&gt;models&lt;/code&gt;. No banco, mesmo, temos um campo de &lt;code&gt;JSON&lt;/code&gt;.
+Enquanto que, para poder validar a consistência do campo &lt;code&gt;geom&lt;/code&gt;, preciso passar os dados pelo formulário onde, no processo de limpeza do mesmo, o campo será criado e validado usando o módulo &lt;code&gt;geojson&lt;/code&gt;. Por isso a classe com os testes relacionados ao comportamento do formulário.&lt;/p&gt;
+&lt;h3 id=&#34;registrando-modelo-no-admin&#34;&gt;Registrando modelo no admin&lt;/h3&gt;
+&lt;p&gt;Para facilitar, vou usar o django-admin. Trata-se de uma aplicação já criada onde basta registrar os modelos e views que estamos trabalhando para termos uma interface &amp;ldquo;frontend&amp;rdquo; genérica.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#admin.py
+from django.contrib import admin
+from map_proj.core.models import Fenomeno
+from map_proj.core.forms import FenomenoForm
+
+class FenomenoAdmin(admin.ModelAdmin):
+    model = Fenomeno
+    form = FenomenoForm
+
+admin.site.register(Fenomeno, FenomenoAdmin)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;to-be-continued&#34;&gt;To be continued&amp;hellip;&lt;/h3&gt;
+&lt;p&gt;Até o momento já temos algo bastante interessante: um sistema de CRUD que nos permite adicionar, editar e remover dados geográficos. Talvez você esteja pensando consigo mesmo:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;OK. Mas o que foi feito até agora, poderia ter sido feito basicamente com uma base de dados que possuam as colunas latitude e longitude&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Eu diria que sim, até certo ponto. Uma grande diferença, eu diria, da forma como foi implementada é o uso das ferramentas de validação dos dados com o módulo &lt;code&gt;geojson&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A ideia é, a seguir (e seja lá quando isso for), extender a funcionalidade do sistema ao implementar um webmap para visualizar os dados mapeados.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.</title>
-      <link>/pt/post/netcdf/</link>
-      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>/pt/post/netcdf/</guid>
+      <link>/pt/2021-04-24-netcdf/netcdf/</link>
+      <pubDate>Sat, 24 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>/pt/2021-04-24-netcdf/netcdf/</guid>
       <description>
 
 
-&lt;p&gt;Nas últimas semanas estive trabalhando em um projeto com dados atmosféricos. Tem sido de grande aprendizado não apenas por ser uma temática nova, mas também pela demanda de processamento de dados.&lt;/p&gt;
-&lt;p&gt;Os aprendizados relacionados ao processamento de dados (sua otimização, claro), serão abordados em artigos ainda em produção. Mas um ponto fundamental e que percebi ser ignorado pela maioria, e neste sentido me incluo, é a estrutura de dados dos arquivos raster em &lt;em&gt;netCDF.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Já vi, e já respodi a muitas pessoas perguntando como carregar dados &lt;em&gt;netCDF&lt;/em&gt; no R, com um simples “com o pacote &lt;code&gt;raster&lt;/code&gt;, ora bolas”. No pior das hipóteses, teremos apenas que instalar uma dependencia que é o pacote &lt;code&gt;ncdf4&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Pois é, os dados atmosféricos que tenho trabahado estão em formato &lt;em&gt;netCDF&lt;/em&gt;. E usar o pacote &lt;code&gt;raster&lt;/code&gt; para carregá-lo e manipulá-lo, me foi útil enquanto a análise era exploratória. Ao ver o volume de dados crescer de três dias para dois meses e, em seguida para dois anos de dados produzidos a cada três horas do dia, todos os dias, totalizando 731 arquivos, percebi que precisaria deixar de preguiça e entender esse tal de &lt;em&gt;netCDF&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Lendo sobre o pacote &lt;code&gt;ncdf4&lt;/code&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;, o formato &lt;em&gt;netCDF&lt;/em&gt; é descrito da seguinte forma:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“binary data files that are portable across platforms and include metadata information in addition to the data sets.”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Acho nesse fragmento já dá para entender a importância do formato, não?&lt;/p&gt;
-&lt;p&gt;Vamos entender isso? Vejam a diferença:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(raster)
-(r.ppm25 &amp;lt;- stack(&amp;quot;./rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## class      : RasterStack 
-## dimensions : 59, 75, 4425, 6  (nrow, ncol, ncell, nlayers)
-## resolution : 0.4, 0.4  (x, y)
-## extent     : -74.19, -44.19, -18.24, 5.36  (xmin, xmax, ymin, ymax)
-## crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
-## names      : X2019.06.30.12.00.00, X2019.06.30.15.00.00, X2019.06.30.18.00.00, X2019.06.30.21.00.00, X2019.07.01.00.00.00, X2019.07.01.03.00.00&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Aos que já trabalham com o pacote &lt;code&gt;raster&lt;/code&gt; e conhecem os dados raster, poderão ver que, sim, ainda que dependendo do &lt;code&gt;ncdf4&lt;/code&gt;, o &lt;code&gt;raster&lt;/code&gt; carrega os dados, aparentemente, sem grandes problemas. O mínimo esperado está aí. Um raster, com uma determinada extensão, linhas, colunas, células, bandas ou camadas…&lt;/p&gt;
-&lt;p&gt;Mas, se os dados estão em &lt;em&gt;netCDF&lt;/em&gt;, e esse tipo de dados permite armazenar metadados também, cadê eles?&lt;/p&gt;
-&lt;p&gt;Pois é. Ao ignorar isso, passava por cima desse detalhe como um marreteiro diante de um parafuso.&lt;/p&gt;
-&lt;p&gt;Vamos abrir o arquivo com o &lt;code&gt;ncdf4&lt;/code&gt; para começar a identificar alguns pontos importantes, que, por sinal não ficam “apenas” no metadados:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ncdf4)
-(nc.ppm25 &amp;lt;- nc_open(&amp;quot;./rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## File ./rasters/ppm25_2019-06-30.nc (NC_FORMAT_64BIT):
-## 
-##      1 variables (excluding dimension variables):
-##         short pm2p5[longitude,latitude,time]   
-##             scale_factor: 9.668789576322e-12
-##             add_offset: 3.16807559257767e-07
-##             _FillValue: -32767
-##             missing_value: -32767
-##             units: kg m**-3
-##             long_name: Particulate matter d &amp;lt; 2.5 um
-##             standard_name: mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
-## 
-##      3 dimensions:
-##         longitude  Size:75
-##             units: degrees_east
-##             long_name: longitude
-##         latitude  Size:59
-##             units: degrees_north
-##             long_name: latitude
-##         time  Size:6   *** is unlimited ***
-##             units: hours since 1900-01-01 00:00:00.0
-##             long_name: time
-##             calendar: gregorian
-## 
-##     2 global attributes:
-##         Conventions: CF-1.6
-##         history: 2021-03-17 20:27:56 GMT by grib_to_netcdf-2.20.0: grib_to_netcdf /data/scratch/20210317-2020/8e/_mars-webmars-public-svc-blue-001-6fe5cac1a363ec1525f54343b6cc9fd8-ZAB6WD.grib -o /data/scratch/20210317-2020/b1/_grib2netcdf-webmars-public-svc-blue-000-6fe5cac1a363ec1525f54343b6cc9fd8-VDR6DW.nc -utime&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Antes de comentar toda riqueza e detalhamento de informação que nos brinda o &lt;code&gt;ncdf4&lt;/code&gt;, percebam que o comando é &lt;code&gt;nc_open()&lt;/code&gt;. Não importa de o dado tem uma ou mais “bandas” ou “camadas”. Isso me chamou atenção pois:
-&amp;gt; como acham que vou saber a quantidade de camadas do dado que quero abrir, se ainda não o conheço?&lt;/p&gt;
-&lt;p&gt;Mas enfim. Vamos ao mais importante, os detalhes:&lt;/p&gt;
-&lt;p&gt;Veja a estruturação. No arquivo em questão, eu tenho uma &lt;strong&gt;variável&lt;/strong&gt; apenas, que possui vários metadados, garantindo minimamente sua compreensão, como: &lt;em&gt;short_name&lt;/em&gt;, no caso “pm2p5”, &lt;em&gt;units&lt;/em&gt;, para descrever a unidade do dado, &lt;em&gt;long_name&lt;/em&gt; e &lt;em&gt;standart_name&lt;/em&gt;, além de vários outros.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;     1 variables (excluding dimension variables):
-        short pm2p5[longitude,latitude,time]   
-            scale_factor: 9.668789576322e-12
-            add_offset: 3.16807559257767e-07
-            _FillValue: -32767
-            missing_value: -32767
-            units: kg m**-3
-            long_name: Particulate matter d &amp;lt; 2.5 um
-            standard_name: mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;E vejam também que são identificadas três dimensões:
-longitude, latitude e &lt;strong&gt;time&lt;/strong&gt;;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;     3 dimensions:
-        longitude  Size:75
-            units: degrees_east
-            long_name: longitude
-        latitude  Size:59
-            units: degrees_north
-            long_name: latitude
-        time  Size:6   *** is unlimited ***
-            units: hours since 1900-01-01 00:00:00.0
-            long_name: time
-            calendar: gregorian&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Eis que chegamos ao cubo de dados, não faz sentido?&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;imgs/cube1.png&#34; alt=&#34;Fonte da imagem: r-spatial.github.io&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Fonte da imagem: &lt;a href=&#34;http://r-spatial.github.io&#34;&gt;r-spatial.github.io&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;No &lt;a href=&#34;&#34;&gt;último artigo&lt;/a&gt; fiz uma apresentação breve sobre os arquivos raster armazenados no formato &lt;em&gt;netCDF.&lt;/em&gt; No artigo em questão falo apenas dos dados raster, sua estrutura apontando alguns pontos positivos deste formato. Apresentei o pacote &lt;code&gt;ncdf4&lt;/code&gt; e deixei claro a ideia de que&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stars)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: abind&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: sf&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linking to GEOS 3.7.1, GDAL 2.2.3, PROJ 4.9.3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(nc.ppm25 &amp;lt;- read_stars(&amp;quot;../2021-03-17-netcdf/rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## stars object with 3 dimensions and 1 attribute
+## attribute(s):
+##                              Min.      1st Qu.       Median         Mean
+## ppm25_2019-06-30.nc [kg/m^3]    0 3.693478e-09 6.642458e-09 8.645638e-09
+##                                   3rd Qu.         Max.
+## ppm25_2019-06-30.nc [kg/m^3] 1.073236e-08 6.336248e-07
+## dimension(s):
+##      from to                  offset   delta  refsys point values x/y
+## x       1 75                  -74.19     0.4      NA    NA   NULL [x]
+## y       1 59                    5.36    -0.4      NA    NA   NULL [y]
+## time    1  6 2019-06-30 12:00:00 UTC 3 hours POSIXct    NA   NULL&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(rasterVis)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: raster&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: sp&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: latticeExtra&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(nc.ppm25)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## downsample set to c(0,0,1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/pt/post/2021-04-24-netcdf/inde.___files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Eu tenho uma variável (ppm&amp;lt;2.5) medida para uma mesma área (cena) ao longo do tempo. O &lt;em&gt;netCDF&lt;/em&gt;, como está preparado e pensado para esse tipo de situação já entende os dados como informação de data e hora (!) e os organiza como uma dimensão do dado e não atributo.&lt;/p&gt;
 &lt;p&gt;O &lt;code&gt;raster&lt;/code&gt;, por ter outros objetivos, carrega tudo como um &lt;em&gt;stack&lt;/em&gt; (empilhamento de camadas) e adiciona uma string “X” ao nome das camadas (que são a informação de data e hora), já que as mesmas são numéricas e o pacote em questão restringe o prefixo das camadas a texto, não permitindo valores numéricos. Enfim, nos obriga a digitar mais algumas linhas de código para que o dado fique mais apresentável.&lt;/p&gt;
 &lt;p&gt;Essa forma de estruturar os dados fará todo o sentido mais à frente quando formos falar um pouco mais do processamento desses dados.&lt;/p&gt;
 &lt;p&gt;O pacote &lt;code&gt;ncdf4&lt;/code&gt; está desenvolvido para o que se convêm chamar de CRUD, na área de desenvolvimento de sistemas: &lt;em&gt;Create, Update and Delete&lt;/em&gt;. Ou, seja, a ideia é fornecer ferramentas para manipular e ter controle total dos dados, criando, abrindo, alterando dimensões ou atributos e por aí vai. Mas não para visualização nem para as análises. Essas, ficarão para os próximos artigos.&lt;/p&gt;
 &lt;p&gt;Enquanto isso, fique à vontade em me contactar, dar uma alô lá &lt;a href=&#34;http://t.me/GeoCastBrasil&#34;&gt;no grupo do GeoCastBrasil&lt;/a&gt; no Telegram ou no nosso &lt;a href=&#34;http://youtube.com/GeoCastBrasil&#34;&gt;canal do youtube&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Não pretendo explorar muitos detalhes, mas o nome do pacote (&lt;code&gt;ncdf4&lt;/code&gt;) faz referência à versão 4 de estratura em questão. Portanto, caso você esteja, por algum motivo, usando um arquivo &lt;em&gt;netCDF&lt;/em&gt; com versão anterior, o pacote &lt;code&gt;ncdf&lt;/code&gt; segue disponível, ainda que descontinuado.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     

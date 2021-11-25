@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JS | Felipe Sodré M. Barros</title>
+    <link>/tag/js/</link>
+      <atom:link href="/tag/js/index.xml" rel="self" type="application/rss+xml" />
+    <description>JS</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
+      <title>JS</title>
+      <link>/tag/js/</link>
+    </image>
+    
+    <item>
+      <title>Análise espacial no frontend</title>
+      <link>/post/analise-espacial-frontend/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/post/analise-espacial-frontend/</guid>
+      <description>&lt;h1 id=&#34;criando-um-sistema-para-gestão-de-dados-geográficos-de-forma-simples-e-robusta&#34;&gt;Criando um sistema para gestão de dados geográficos de forma simples e robusta&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/an%C3%A1lise-espacial-frontend-felipe-sodr%C3%A9-mendes-barros/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Este ano pude participar do projeto de jornalismo de dados &lt;a href=&#34;https://infoamazonia.org/project/engolindo-fumaca/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Engolindo Fumaça&lt;/a&gt;, desenvolvido pelo &lt;a href=&#34;https://infoamazonia.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;InfoAmazonia&lt;/a&gt;. Foi um projeto bem desafiador que me trouxe vários aprendizados. Muitos deles já viraram artigos, como os de &lt;a href=&#34;https://felipesbarros.github.io/pt/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cubo de dados&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ainda que o projeto tenha sido um sucesso (inclusive, foi um dos finalistas do &lt;a href=&#34;https://premio.jornalismodedados.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;prêmio de jornalismo de dados Cláudio Weber Abramo&lt;/a&gt; ) alguns desafios ficaram pendentes. Um deles está com a possibilidade de apresentar dados raster em um sistema webmap, sem dispor de grande infraestrutura de SIG, como base de dados e servidor de mapas, PostGIS e geoserver, respectivamente. Afinal, após todo o processo de análise de dados e produção das matérias, era importante apresentar os dados de forma interativa.&lt;/p&gt;
+&lt;p&gt;Aliás, desenvolvimento de soluções com dados espaciais com infraestrutura limitada tem sido um tema explorado por mim em &lt;a href=&#34;https://felipesbarros.github.io/pt/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;alguns artigos&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Então, em resumo, a necessidade era: apresentar as imagens de satélite utilizadas nas reportagens em um mapa dinâmico, sem depender de um servidor de mapas, para que os leitores da matéria pudessem explorar os dados. Algo similar a um &lt;em&gt;dashboard&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Pois foi ao moderar uma sessão da conferência &lt;a href=&#34;https://2021.foss4g.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Free and Open Source Software for Geospatial&lt;/a&gt; (#FOSS4G) deste ano que, sem querer, me deparei com as possíveis soluções. A solução seria transportar a responsabilidade de carregar, apresentar e calcular algumas estatísticas ao &lt;em&gt;frontend&lt;/em&gt;, usando o conjunto de bibliotecas &lt;a href=&#34;https://github.com/geotiff/georaster&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;https://github.com/GeoTIFF/georaster-layer-for-leaflet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster-layer-for-leaflet&lt;/code&gt;&lt;/a&gt; e &lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt;. A apresentação que me dispertou para essas ferramentas foi feita pelo &lt;a href=&#34;https://www.linkedin.com/in/danieljdufour&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Daniel Dufour&lt;/a&gt; sobre o &lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/geotiff/georaster&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster&lt;/code&gt;&lt;/a&gt; é uma biblioteca JavaScript que nos permite carrregar, e até mesmo criar, dados raster a partir de objetos JavaScript;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/GeoTIFF/georaster-layer-for-leaflet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;georaster-layer-for-leaflet&lt;/code&gt;&lt;/a&gt; é uma biblioteca que nos permite apresentar dados &lt;code&gt;raster&lt;/code&gt; (a princípio geotif) nos mapas feitos em &lt;a href=&#34;https://leafletjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;leaflet&lt;/code&gt;&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://geoblaze.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geoblaze&lt;/code&gt;&lt;/a&gt; é um pacote desenvolvido em JavaScript para permitir analisar dados carregados como georaster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dessa forma, com essa stack the bibliotecas poderemos carregar uma imagem raster georreferenciada, extrair estatísticas gerais e espaciais, bem como aplicar alguns processamentos, como algebra de bandas e apresentá-las em um webmap &lt;code&gt;leaflet&lt;/code&gt;. Tudo isso sem depender de uma infraestrutura de &lt;em&gt;backend&lt;/em&gt;. Tudo sendo processado no &lt;em&gt;frontend&lt;/em&gt;. Sim, essa solução pode ser limitada para alguns casos. Mas nem todos.&lt;/p&gt;
+&lt;p&gt;E, por isso, decidi explorar essa alternativa, ainda que &lt;em&gt;frontend&lt;/em&gt; (e JavaScript) não seja a &amp;ldquo;minha praia&amp;rdquo;. A verdade é que não consegui conter o entusiasmo e parti para uma prova conceitual. &lt;a href=&#34;https://observablehq.com/@felipesbarros/proof_of_concept_geoblaze&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Compartilho a prova de conceito que fiz&lt;/a&gt;, usando o &lt;a href=&#34;https://observablehq.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;observablehq&lt;/a&gt; (uma espécie de &lt;em&gt;jupyter-notebook&lt;/em&gt; para programação &lt;em&gt;frontend&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Aproveitei para consolidar o resultado em uma &lt;em&gt;landingpage&lt;/em&gt;. Nela, além de apresentar o raster, foi possível garantir que o usuário possa interagir com o mesmo, de duas formas distintas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clicando em um &lt;em&gt;pixel&lt;/em&gt;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://felipesbarros.github.io/geoblaze_test/img/landingpage.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ou clicando em um dos polígonos que representam os limites dos estados que compõem a Amazônia Legal. (⚠️ não estamos representando o estado do Maranhão já que o mesmo não é contemplado integramente na Amazônia Legal);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://felipesbarros.github.io/geoblaze_test/img/landingpage_polygon.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Em ambas implementações os valores dos pixels são extraídos &lt;a href=&#34;https://pt.wikipedia.org/wiki/Just_in_time&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;just-in-time&lt;/em&gt;&lt;/a&gt; e o gráfico em &lt;a href=&#34;https://plotly.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;plotly&lt;/a&gt; é atualizado representando o comportamento temporal dos mesmos. Tais dados se referem a &lt;a href=&#34;https://pt.wikipedia.org/wiki/Material_particulado&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Material Particulado &amp;lt; 2.5&lt;/a&gt; do ano de 2020. No gráfico, apresentamos, ainda, o valor máximo sugerido pela Organização Mundial da Saúde (&lt;strong&gt;World Health Organization - WHO&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;Essas duas implementações visam explorar oportunidades diferentes das ferramentas em questão. Separamos os resultados em duas páginas diferentes: &lt;a href=&#34;https://felipesbarros.github.io/geoblaze_test/clicking_pixel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;clicando pixel a pixel&lt;/a&gt;; &lt;a href=&#34;https://felipesbarros.github.io/geoblaze_test/clicking_polygon&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;clicando num polígono&lt;/a&gt;;&lt;/p&gt;
+&lt;p&gt;E, é lógico: tenho tudo documentado no &lt;a href=&#34;https://github.com/felipesbarros/geoblaze_test/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Não posso deixar de mencionar que o projeto só foi possível com a ajuda do &lt;a href=&#34;https://kylefelipe.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kyle Felipe&lt;/a&gt; quem, inclusive, foi o responsável pela evolução do projeto implementando a solução em JS baseada na seleção de polígonos.&lt;/p&gt;
+&lt;p&gt;Espero que seja útil :)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Artigo publicado também no &lt;a href=&#34;https://www.linkedin.com/pulse/an%C3%A1lise-espacial-frontend-felipe-sodr%C3%A9-mendes-barros/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;linkedin&lt;/strong&gt;&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

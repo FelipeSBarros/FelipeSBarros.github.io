@@ -1,0 +1,1218 @@
+<!DOCTYPE html><html lang="pt-br" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Felipe Sodré Mendes Barros">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Hacktoberfest: Colaborações e aprendizados Artigo publicado também no linkedin.
+O HacktoberFest é um evento promovido pela Digital Ocean durante o mês de outubro e já está na sua oitava edição. O objetivo é incentivar a colaboração em projetos de código aberto e, claro, como uma forma de democratizar o conhecimento em sistemas de versionamento, como o git, além de outras tecnologias.">
+
+  
+  <link rel="alternate" hreflang="en" href="/post/hacktoberfest-2021/">
+  
+  <link rel="alternate" hreflang="pt-br" href="/pt/post/hacktoberfest-2021/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9763f5be8493c9d07b95458db93fbb03.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/pt/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/pt/post/hacktoberfest-2021/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Felipe Sodré M. Barros">
+  <meta property="og:url" content="/pt/post/hacktoberfest-2021/">
+  <meta property="og:title" content="Hacktoberfest 2021 | Felipe Sodré M. Barros">
+  <meta property="og:description" content="Hacktoberfest: Colaborações e aprendizados Artigo publicado também no linkedin.
+O HacktoberFest é um evento promovido pela Digital Ocean durante o mês de outubro e já está na sua oitava edição. O objetivo é incentivar a colaboração em projetos de código aberto e, claro, como uma forma de democratizar o conhecimento em sistemas de versionamento, como o git, além de outras tecnologias."><meta property="og:image" content="/pt/post/hacktoberfest-2021/featured.png">
+  <meta property="twitter:image" content="/pt/post/hacktoberfest-2021/featured.png"><meta property="og:locale" content="pt-br">
+  
+    
+      <meta property="article:published_time" content="2021-11-05T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-05-11T22:25:12-03:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/pt/post/hacktoberfest-2021/"
+  },
+  "headline": "Hacktoberfest 2021",
+  
+  "image": [
+    "/pt/post/hacktoberfest-2021/featured.png"
+  ],
+  
+  "datePublished": "2021-11-05T00:00:00Z",
+  "dateModified": "2021-05-11T22:25:12-03:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Felipe Sodré Mendes Barros"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Felipe Sodré M. Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Hacktoberfest: Colaborações e aprendizados Artigo publicado também no linkedin.\nO HacktoberFest é um evento promovido pela Digital Ocean durante o mês de outubro e já está na sua oitava edição. O objetivo é incentivar a colaboração em projetos de código aberto e, claro, como uma forma de democratizar o conhecimento em sistemas de versionamento, como o git, além de outras tecnologias."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Hacktoberfest 2021 | Felipe Sodré M. Barros</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Pesquisar</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Pesquisar..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Alterar navegação">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/pt"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/pt/#accomplishments"><span>Prêmios</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/pt/#projects"><span>Projetos</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/pt/#experience"><span>Resumo profissional</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/pt/#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">Português</span></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>Português</span>
+          </div>
+          
+          <a class="dropdown-item" href="/post/hacktoberfest-2021/">
+            <span>English</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Hacktoberfest 2021</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Última atualização em
+      
+    
+    May 11, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 minutos de leitura
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 180px;">
+  <div style="position: relative">
+    <img src="/pt/post/hacktoberfest-2021/featured_hucb5b940d697a0db95d3ec9dffa93c2a1_83023_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="hacktoberfest-colaborações-e-aprendizados">Hacktoberfest: Colaborações e aprendizados</h1>
+<p><em>Artigo publicado também no <a href="https://www.linkedin.com/pulse/hacktoberfest-colabora%C3%A7%C3%B5es-e-aprendizados-felipe-sodr%C3%A9-mendes-barros/" target="_blank" rel="noopener"><strong>linkedin</strong></a></em>.</p>
+<p><img src="https://hacktoberfest.digitalocean.com/_nuxt/img/logo-hacktoberfest-full.f42e3b1.svg" alt=""></p>
+<p>O <a href="https://hacktoberfest.digitalocean.com/" target="_blank" rel="noopener">HacktoberFest</a> é um evento promovido pela Digital Ocean durante o mês de outubro e já está na sua oitava edição. O objetivo é incentivar a colaboração em projetos de código aberto e, claro, como uma forma de democratizar o conhecimento em sistemas de versionamento, como o <a href="https://git-scm.com/" target="_blank" rel="noopener">git</a>, além de outras tecnologias.</p>
+<blockquote>
+<p>&hellip;Ah, e o incentivo vem com a possibilidade de ganhar uma camisa do evento ao ter aprovado quatro <a href="https://git-scm.com/docs/git-request-pull" target="_blank" rel="noopener"><em>pull requests</em></a> em repositórios participantes (para participar, basta adicionar a tag &ldquo;Hactoberfest&rdquo; ao repositório ou adicionar a tag &ldquo;Hacktoberfest-accepted&rdquo; no <em>Pull request</em> em questão).</p>
+</blockquote>
+<p>Não foi minha primeira participação, mas foi a primeira vez que pude colaborar em projetos diferentes daqueles relacionados ao meu trabalho cotidiano. E já fazia algum tempo que tinha interesse em colaborar, mas não sabia como quebrar a inércia. Compartilho neste artigo, alguns projetos desenvolvidos este ano e o que pude aprender nos mesmos.</p>
+<h3 id="fogo-cruzado">Fogo Cruzado</h3>
+<p><img src="https://fogocruzado.org.br/wp-content/uploads/2019/05/logo_fogo_cruzado_v2.png" alt=""></p>
+<p>O projeto <a href="https://fogocruzado.org.br/" target="_blank" rel="noopener">Fogo Cruzado</a> foi desenvolvido pela <a href="https://voltdata.info/" target="_blank" rel="noopener">Volt Data Lab</a> e <a href="https://twitter.com/fogocruzado" target="_blank" rel="noopener">Instituto Fogo Cruzado</a>, como um sistema <a href="https://pt.wikipedia.org/wiki/Crowdsourcing" target="_blank" rel="noopener">Crowdsourcing</a> para monitoramento dos tiroteios no Rio de Janeiro e/ou em Recife. <a href="https://fogocruzado.org.br/sobre-a-api/" target="_blank" rel="noopener">O mesmo disponibiliza uma API</a> para acessar aos dados, bastando criar um usuário, sem custo. E o projeto já tem um pacote para acessar os dados pelo <a href="https://github.com/voltdatalab/crossfire" target="_blank" rel="noopener">R</a>.</p>
+<p>Como faltava um módulo python para acessar os dados do projeto, decidi fazê-lo durante o #Hacktoberfest. Esse foi o primeiro projeto: um módulo python para acessar os dados da API, direto do python.</p>
+<p>Foi um desafio legal e, até certa forma, simples, pois eu já tinha um modelo de como funcionava o pacote em R. Então o trabalho foi, principalmente &ldquo;traduzir&rdquo; ao python. Com isso aproveitei para refatorar algumas partes do código.</p>
+<p>No geral, posso dizer que ao desenvolver esse projeto, aprendi sobre:</p>
+<ul>
+<li>Python-poetry (do zero);</li>
+<li>Validação de login usando variáveis do sistema;</li>
+<li>Publicação de módulos no PyPi;</li>
+</ul>
+<p><strong>E fica como desafios para melhor/implementar em breve:</strong></p>
+<ul>
+<li>Melhorar o código com <code>type annotation</code>;</li>
+<li>Criação de documentação com <code>Sphynx</code> (se alguém quiser sugerir outra alternativa será bem-vinda);</li>
+</ul>
+<h3 id="pyinaturalist-convert">PyInaturalist-convert</h3>
+<p><img src="https://raw.githubusercontent.com/niconoe/pyinaturalist/main/docs/images/pyinaturalist_logo_med.png" alt=""></p>
+<p>O segundo projeto que atuei nesse mês foi no <a href="https://github.com/JWCook/pyinaturalist-convert" target="_blank" rel="noopener">PyInaturalist-convert</a>. A história deste módulo é bem interessante e surge de uma demanda pessoal: O <a href="https://imibio.misiones.gob.ar/" target="_blank" rel="noopener">IMiBio</a>, Instituição onde trabalho, está desenvolvendo um projeto com o <a href="https://www.inaturalist.org/" target="_blank" rel="noopener">INaturalist</a>, uma aplicação de <a href="https://pt.wikipedia.org/wiki/Crowdsourcing" target="_blank" rel="noopener">crowdsourcing</a> para observação de biodiversidade, e eu tive que criar um sistema que acesse os dados do projeto usando a <a href="https://github.com/inaturalist/iNaturalistAPI" target="_blank" rel="noopener">API deles</a>. Com isso, conheci o módulo <a href="https://github.com/niconoe/pyinaturalist" target="_blank" rel="noopener">PyINaturalist</a>. Conversando com os desenvolvedores, comentei que seria interessante ter os dados no padrão <a href="https://dwc.tdwg.org/" target="_blank" rel="noopener">darwincore</a>. Um deles achou pertinente e começamos a desenvolver juntos. Contudo, fiquei uns bons meses afastado do projeto e ao voltar, já era um pacote bem estruturado. Por isso, para entender a estrutura do mesmo e saber por onde começar, além de ler as <a href="https://guides.github.com/features/issues/" target="_blank" rel="noopener">issues</a> abertas, adotei a estratégia de ler os testes&hellip;</p>
+<p>&hellip; E foi lendo os testes que percebi que estavam implementando um objeto geojson, &ldquo;na unha&rdquo;. Como estive estudando sobre o <a href="https://pypi.org/project/geojson/" target="_blank" rel="noopener"><code>geojson</code></a> (e, inclusive foi <a href="https://felipesbarros.github.io/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/" target="_blank" rel="noopener">um dos temas explorados por mim em outros artigos</a>, propus usá-lo. Com isso, poderíamos usar os métodos de validação já implementados no módulo, garantindo consistência aos dados;</p>
+<p>Ao colaborar no módulo <code>PyInaturalist-converter</code>, aprendi sobre:</p>
+<ul>
+<li>Como colaborar a um projeto já estruturado. Tenho certeza que essa não é uma regra. Mas foi uma boa estratégia começar lendo os testes;</li>
+<li>Mais aprendizados sobre python-poetry :);</li>
+<li>Soube da existência do formatador de código [Black](The Uncompromising Code Formatter);</li>
+<li>Soube da existencia do <a href="https://pycqa.github.io/isort/" target="_blank" rel="noopener">ISORT</a>, para padronizar os imports;</li>
+</ul>
+<p>Além desses aprendizados, o autor principal do módulo já tinha configurado no repositório um <a href="https://docs.github.com/pt/actions" target="_blank" rel="noopener">fluxo de ações</a> e validações bem interessantes. Dessa forma, havia um sistema de validação do que se estava propondo como <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank" rel="noopener"><code>pull request</code></a>. Ainda não tive tempo de me aprofundar, mas já está na lista de estudos futuros&hellip;</p>
+<h3 id="análise-espacial-no-frontend">Análise espacial no <em>frontend</em></h3>
+<p>Uma última atividade que queria compartilhar, não está relacionada a uma contribuição minha, mas sim, um projeto ao qual eu recebi ajuda.</p>
+<p><a href="https://www.linkedin.com/pulse/an%C3%A1lise-espacial-frontend-felipe-sodr%C3%A9-mendes-barros?trk=public_post-content_share-article" target="_blank" rel="noopener">Publiquei recentemente</a> um artigo apresentando alguns módulos de JavaScript que nos permitem fazer algumas análises espaciais sem depender de uma infraestrutura de servidores de dados e de mapas.</p>
+<p>Eu fui apresentado a essas tecnologias no <a href="https://2021.foss4g.org/" target="_blank" rel="noopener">FOSS4G 2021</a> e por pura curiosidade, já que frontend não é a &ldquo;minha praia&rdquo;, comecei a fazer alguns testes como estratégia de estudos, mesmo.</p>
+<p>Pude evoluir bastante com os estudos, mas num momento vi que poderia ser feito muito mais, mas que eu não tinha conhecimento técnico em JS para isso. Não tive dúvidas em contactar um amigo que trabalha com JS e apresentei a ele o que estava tentando fazer. Ele curtiu e acabou colaborando com o projeto, transformando essa prova de conceito numa solução, em algo realmente interessante.</p>
+<p>Percebam que essa colaboração não surgiu pelo Hacktoberfest. Mas por uma mudança de postura minha em me conectar com outras pessoas e apresentar o que eu estava estudando, as &ldquo;minhas dores&rdquo; e o que pretendia fazer.</p>
+<p>Neste projeto estudei e aprendi sobre:</p>
+<ul>
+<li>
+<p>O <a href="https://github.com/geotiff/georaster" target="_blank" rel="noopener"><code>georaster</code></a>, uma biblioteca JavaScript que nos permite carrregar, e até mesmo criar, dados raster a partir de objetos JavaScript;</p>
+</li>
+<li>
+<p><a href="https://github.com/GeoTIFF/georaster-layer-for-leaflet" target="_blank" rel="noopener"><code>georaster-layer-for-leaflet</code></a> que é uma biblioteca que nos permite apresentar dados <code>raster</code> (a princípio geotif) nos mapas feitos em <a href="https://leafletjs.com/" target="_blank" rel="noopener"><code>leaflet</code></a>;</p>
+</li>
+<li>
+<p><a href="https://geoblaze.io/" target="_blank" rel="noopener"><code>geoblaze</code></a> que é um pacote desenvolvido em JavaScript para permitir analisar dados carregados como georaster.</p>
+</li>
+<li>
+<p>Como resultado, criamos dois visualizadores de dados <em>raster</em> apenas com tecnologia <em>frontend</em>. <a href="https://felipesbarros.github.io/geoblaze_test/clicking_pixel" target="_blank" rel="noopener">No primeiro o usuário interage com o pixel</a> (clicando num píxel específico) e o gráfico apresenta o comportamento temporal daquele pixel; <a href="https://felipesbarros.github.io/geoblaze_test/clicking_polygon" target="_blank" rel="noopener">No segundo visualizador</a> o usuário clica em um dos estados e o gráfico apresenta o valor médio dos pixels daquele estado ao longo do tempo.</p>
+</li>
+</ul>
+<h2 id="notas-finais-sobre-hacktoberfest">Notas finais sobre Hacktoberfest</h2>
+<p>Entendo que muitos &ldquo;torcem o nariz&rdquo; para o Hacktoberfest, pois poucos o utilizam como uma estratégia de estudos, crescimento ou colaboração a projeto de código aberto, que são os objetivos principais. A ideia de escrever sobre as colaborações feitas é justamente destacar que o evento é uma grande estratégia/ferramenta para aprender mais, conectar-se com outros desenvolvedores e se engajar em projetos de código aberto.</p>
+<p>Espero que os meus aprendizados serviam de motivação aos demais. Qualquer coisa, fico à disposição para conversar mais a respeito.</p>
+<p><em>Artigo publicado também no <a href="https://www.linkedin.com/pulse/hacktoberfest-colabora%C3%A7%C3%B5es-e-aprendizados-felipe-sodr%C3%A9-mendes-barros/" target="_blank" rel="noopener"><strong>linkedin</strong></a></em>.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/pt/tag/software-livre/">Software Livre</a>
+  
+  <a class="badge badge-light" href="/pt/tag/hacktoberfest/">Hacktoberfest</a>
+  
+  <a class="badge badge-light" href="/pt/tag/autonomia/">Autonomia</a>
+  
+  <a class="badge badge-light" href="/pt/tag/pt-br/">pt-br</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/pt/author/felipe-sodre-mendes-barros/avatar_hu44392504df2335dcc3eaaf2f7e4811a3_211552_270x270_fill_q75_lanczos_center.jpg" alt="Felipe Sodré Mendes Barros">
+    
+
+    <div class="media-body">
+      <h5 class="card-title">Felipe Sodré Mendes Barros</h5>
+      <h6 class="card-subtitle">Cientista de dados geográficos</h6>
+      <p class="card-text">Geógrafo interessado em articular tecnologia e estatística para solucionar problemas ambientais</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/FelipeSBarros" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/felipesodre/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://lattes.cnpq.br/8403301812573195" target="_blank" rel="noopener">
+        <i class="ai ai-lattes"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=022IGOcAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/FelipeSMBarros" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Relacionados</h3>
+    <ul>
+      
+      <li><a href="/pt/post/analise-espacial-frontend/">Análise espacial no frontend</a></li>
+      
+      <li><a href="/pt/post/cientista-dados-geograficos-como-cheguei-aqui/">Cientista de dados geográficos - Como cheguei até aqui?!</a></li>
+      
+      <li><a href="/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta II</a></li>
+      
+      <li><a href="/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">Criando um sistema para gestão de dados geográficos de forma simples e robusta</a></li>
+      
+      <li><a href="/pt/2021-04-24-netcdf/netcdf/">Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Citação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copiar
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/pt/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"Sem resultados","placeholder":"Pesquisar...","results":"Resultados encontrados"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projetos",
+        'publication' : "Publicações",
+        'event' : "Palestras",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

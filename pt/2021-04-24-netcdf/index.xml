@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2021-04-24-netcdfs | Felipe Sodré M. Barros</title>
+    <link>/pt/2021-04-24-netcdf/</link>
+      <atom:link href="/pt/2021-04-24-netcdf/index.xml" rel="self" type="application/rss+xml" />
+    <description>2021-04-24-netcdfs</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Sat, 24 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
+      <title>2021-04-24-netcdfs</title>
+      <link>/pt/2021-04-24-netcdf/</link>
+    </image>
+    
+    <item>
+      <title>Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.</title>
+      <link>/pt/2021-04-24-netcdf/netcdf/</link>
+      <pubDate>Sat, 24 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>/pt/2021-04-24-netcdf/netcdf/</guid>
+      <description>
+
+
+&lt;p&gt;No &lt;a href=&#34;&#34;&gt;último artigo&lt;/a&gt; fiz uma apresentação breve sobre os arquivos raster armazenados no formato &lt;em&gt;netCDF.&lt;/em&gt; No artigo em questão falo apenas dos dados raster, sua estrutura apontando alguns pontos positivos deste formato. Apresentei o pacote &lt;code&gt;ncdf4&lt;/code&gt; e deixei claro a ideia de que&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stars)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: abind&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: sf&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linking to GEOS 3.7.1, GDAL 2.2.3, PROJ 4.9.3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(nc.ppm25 &amp;lt;- read_stars(&amp;quot;../2021-03-17-netcdf/rasters/ppm25_2019-06-30.nc&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## stars object with 3 dimensions and 1 attribute
+## attribute(s):
+##                              Min.      1st Qu.       Median         Mean
+## ppm25_2019-06-30.nc [kg/m^3]    0 3.693478e-09 6.642458e-09 8.645638e-09
+##                                   3rd Qu.         Max.
+## ppm25_2019-06-30.nc [kg/m^3] 1.073236e-08 6.336248e-07
+## dimension(s):
+##      from to                  offset   delta  refsys point values x/y
+## x       1 75                  -74.19     0.4      NA    NA   NULL [x]
+## y       1 59                    5.36    -0.4      NA    NA   NULL [y]
+## time    1  6 2019-06-30 12:00:00 UTC 3 hours POSIXct    NA   NULL&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(rasterVis)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: raster&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: sp&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: latticeExtra&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(nc.ppm25)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## downsample set to c(0,0,1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/pt/post/2021-04-24-netcdf/inde.___files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Eu tenho uma variável (ppm&amp;lt;2.5) medida para uma mesma área (cena) ao longo do tempo. O &lt;em&gt;netCDF&lt;/em&gt;, como está preparado e pensado para esse tipo de situação já entende os dados como informação de data e hora (!) e os organiza como uma dimensão do dado e não atributo.&lt;/p&gt;
+&lt;p&gt;O &lt;code&gt;raster&lt;/code&gt;, por ter outros objetivos, carrega tudo como um &lt;em&gt;stack&lt;/em&gt; (empilhamento de camadas) e adiciona uma string “X” ao nome das camadas (que são a informação de data e hora), já que as mesmas são numéricas e o pacote em questão restringe o prefixo das camadas a texto, não permitindo valores numéricos. Enfim, nos obriga a digitar mais algumas linhas de código para que o dado fique mais apresentável.&lt;/p&gt;
+&lt;p&gt;Essa forma de estruturar os dados fará todo o sentido mais à frente quando formos falar um pouco mais do processamento desses dados.&lt;/p&gt;
+&lt;p&gt;O pacote &lt;code&gt;ncdf4&lt;/code&gt; está desenvolvido para o que se convêm chamar de CRUD, na área de desenvolvimento de sistemas: &lt;em&gt;Create, Update and Delete&lt;/em&gt;. Ou, seja, a ideia é fornecer ferramentas para manipular e ter controle total dos dados, criando, abrindo, alterando dimensões ou atributos e por aí vai. Mas não para visualização nem para as análises. Essas, ficarão para os próximos artigos.&lt;/p&gt;
+&lt;p&gt;Enquanto isso, fique à vontade em me contactar, dar uma alô lá &lt;a href=&#34;http://t.me/GeoCastBrasil&#34;&gt;no grupo do GeoCastBrasil&lt;/a&gt; no Telegram ou no nosso &lt;a href=&#34;http://youtube.com/GeoCastBrasil&#34;&gt;canal do youtube&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
