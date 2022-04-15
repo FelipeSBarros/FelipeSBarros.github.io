@@ -5,12 +5,91 @@
     <link>/pt/tag/autonomia/</link>
       <atom:link href="/pt/tag/autonomia/index.xml" rel="self" type="application/rss+xml" />
     <description>Autonomia</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Fri, 05 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>pt-br</language><lastBuildDate>Fri, 15 Apr 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
       <title>Autonomia</title>
       <link>/pt/tag/autonomia/</link>
     </image>
+    
+    <item>
+      <title>Bug buster</title>
+      <link>/pt/post/bug-buster/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>/pt/post/bug-buster/</guid>
+      <description>&lt;h3 id=&#34;como-tudo-começou&#34;&gt;Como tudo começou:&lt;/h3&gt;
+&lt;p&gt;Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa. Um ponto que não previ no processo de desenvolvimento é que nomes, como qualquer outro elemento textual da lingua portuguesa, podem ter acentos (ou &amp;ldquo;caracteres especiais&amp;rdquo;).&lt;/p&gt;
+&lt;p&gt;Pois é, foi pratimente sem querer que vi, olhando os logs produzidos, que os nomes com acento estavam com problema de &lt;code&gt;encoding&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;E assim começou a minha caça ao bug. Uma caça que me tomou um dia e meio. Mas foi de grande aprendizado.&lt;/p&gt;
+&lt;h3 id=&#34;um-pouco-do-contexto&#34;&gt;Um pouco do contexto:&lt;/h3&gt;
+&lt;p&gt;Antes de descrever essa aventura, comento um pouco o fluxo do programa que apresentou erro:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Uma função é executada pelo terminal e recebe um parâmtero, que é o nome de uma pessoa;&lt;/li&gt;
+&lt;li&gt;Esse nome é usado para instanciar um objeto. Logo no &lt;code&gt;__init__&lt;/code&gt; tenho o ponto de acesso ao que foi informado pelo terminal com a incorporação do mesmo como atributo da instância.&lt;/li&gt;
+&lt;li&gt;Alguns processamnetos, que não vem ao caso, são realizados;&lt;/li&gt;
+&lt;li&gt;O log do processamento realizado é persistirdo numa base de dados usando o &lt;code&gt;SQLAlchemy&lt;/code&gt;, onde a tabela que o recebe possui um campo id e outro json, com os logs organizados em tal formato.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;e-agora-por-onde-começar&#34;&gt;E agora? Por onde começar?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Buscando o bug no terminal&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Como o parâmetro estava sendo passado por terminal, achei que o problema estava nesse ponto: no terminal. Primeiro passo: checar o encoding usado pelo sistema. Mas logo vi que estava tudo em &lt;code&gt;utf-8&lt;/code&gt;, o que por sí, não deveria apresentar problema.&lt;/p&gt;
+&lt;p&gt;Como o nome estava sendo passado como um parâmetro do sistema a partir de uma variável, aproveitei para checar se o erro não estava aí. Nada que um print e alguns testes no terminal não resolva.  E nada, os nomes armazenados na variáve e passados como parâmetro não sofriam qualquer alteração neste processo inicial.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Interseção terminal/python&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Achei, então que o erro estava em alguma incompatibilidade entre o que era passado no terminal e o como o python estava recebendo.&lt;/p&gt;
+&lt;p&gt;Segundo passo, então, foi checar o ponto de contato entre terminal e o python. Ler o seguinte trecho, de uma resposta do &lt;em&gt;stackOverFlow&lt;/em&gt; me deu a certeza de que era aí o erro:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When Python does not detect that it is printing to a terminal, sys.stdout.encoding is set to None.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ou seja, quando o python não pode detectar o que está sendo apresentado ao terminal o &lt;code&gt;sys.stdout.encoding&lt;/code&gt; é definido como &lt;code&gt;None&lt;/code&gt;; Ora, estou passando um parametro a partir de uma variável do terminal, logo um string. O Python não consegue identificar o encoding dessa string e está definindo, então o encoding a None, o que deve estar gerando o erro.&lt;/p&gt;
+&lt;p&gt;Tentando resolver isso, busquei alguma forma de declarar o encoding&amp;hellip; Cheguei a adicionar ao &lt;code&gt;__init__&lt;/code&gt;, quando a classe é instanciada e recebe o nome da pessoa os métodos, &lt;code&gt;.encode().decode(&#39;utf-8&#39;)&lt;/code&gt; ao objeto que recebe o valor. Parecia que ia funcionar, vejam:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nome = &#39;Felipe Sodré&#39;
+b&#39;Felipe Sodr\xc3\xa9&#39;
+# e ao adicionar o decode o texto volta ao normal...
+nome.encode().decode(&#39;utf-8&#39;)
+&#39;Felipe Sodré&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;ldquo;Meio&amp;rdquo; gambiarra, não? Mas o importante é se funcionar.&lt;/p&gt;
+&lt;p&gt;Contudo, o que parecia a solução, foi logo por agua abaixo na primeira rodada de teste. O nome continua com erro de encoding.&lt;/p&gt;
+&lt;p&gt;Decidí, então, usar o módulo &lt;code&gt;logging&lt;/code&gt; para apresentar o nome recebido pelo terminal e nome após a classe estar instanciada durante o processamento. Aliás, o &lt;a href=&#34;https://twitter.com/dunossauro&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@dunosauro&lt;/a&gt; apresentou &lt;a href=&#34;https://www.youtube.com/watch?v=PGAOqAWuwC0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uma live&lt;/a&gt; muito boa sobre o uso do &lt;code&gt;logging&lt;/code&gt;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Bom, ao usar o &lt;code&gt;logging&lt;/code&gt; tive certeza de que estava tentando resolver o erro no ponto errado, todas as mensagens de log estavam sem o tal erro de encoding, mas no log persistido no banco de dados seguia com o maldito erro&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Será que o banco de dados está configurado com uma encoding diferente?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;No banco de dados&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;✔️ Banco configurado como &amp;lsquo;utf-8&amp;rsquo;;&lt;/p&gt;
+&lt;p&gt;Até que me veio uma luz: nas mensagens de log o nome está sem erro. Mas o log que está sendo persistido no banco de dados ( que são algumas dessas mensagens filtradas para monitorar alguns pontos importantes do sistema) é uma compilação salva em um campo JSON.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Bom deve ser nesse ponto, então.&amp;rdquo;, pensei.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reproduzindo o erro em &lt;code&gt;JSON&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Parti então para tentar reproduzir esse erro:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;import json
+&amp;gt;&amp;gt;&amp;gt;info = {&#39;nome&#39;:&#39;Felipe Sodré&#39;, &#39;idade&#39;:38}
+&amp;gt;&amp;gt;&amp;gt;info
+{&#39;nome&#39;: &#39;Felipe Sodré&#39;, &#39;idade&#39;: 28}
+&amp;gt;&amp;gt;&amp;gt;json.dumps(info)
+&#39;{&amp;quot;nome&amp;quot;: &amp;quot;Felipe Sodr\xc3\xa9&amp;quot;, &amp;quot;idade&amp;quot;: 38}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pronto! Aí está o problema. No processo de conversão do dicionário ao JSON, há algum tipo de conversão que gera o erro de encoding.&lt;/p&gt;
+&lt;p&gt;Não levei &amp;ldquo;muito tempo&amp;rdquo; (tempo é relativo, né?) para encontrar que o método &lt;a href=&#34;https://docs.python.org/3/library/json.html#json.dumps&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;dumps()&lt;/code&gt;&lt;/a&gt; possui o parâmetro &lt;code&gt;ensure_ascii&lt;/code&gt;, com valor padrão &lt;code&gt;True&lt;/code&gt;, que garante que as &lt;code&gt;strings&lt;/code&gt; do JSON que possuam caracteres não-ASCII estejam com &lt;code&gt;scape&lt;/code&gt;.:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If ensure_ascii is true (the default), the output is guaranteed to have all incoming non-ASCII characters escaped. If ensure_ascii is false, these characters will be output as-is.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Testei usando o &lt;code&gt;dumps()&lt;/code&gt; com &lt;code&gt;ensur_ascii=False&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt;json.dumps(info, ensure_ascii=False)
+&#39;{&amp;quot;nome&amp;quot;: &amp;quot;Flávia Duarte Nascimento&amp;quot;, &amp;quot;idade&amp;quot;: 12}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pronto, ponto de erro encontrado. Basta adicionar o parâmetro apra False e tudo se resolveria.&lt;/p&gt;
+&lt;p&gt;Mas não foi bem assim, ainda faltava um ponto. Eu não estava gerando o dump e salvando no banco. O que estou fazendo é passar o dado, ainda em dicionário, para o banco usando o &lt;em&gt;SQLAlchemy&lt;/em&gt; e ele cuida disso para mim.&lt;/p&gt;
+&lt;p&gt;Como, ou melhor, onde, então, eu devo informar esse &lt;code&gt;ensure_ascii&lt;/code&gt;?&lt;/p&gt;
+&lt;h3 id=&#34;enfim-a-solução&#34;&gt;Enfim, a solução:&lt;/h3&gt;
+&lt;p&gt;Foi lendo &lt;a href=&#34;https://stackoverflow.com/a/36438671&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;essa responta no SOF&lt;/a&gt; que entendí que como o ORM &lt;em&gt;SQLAlchemy&lt;/em&gt; está cuidadno disso para mim, ele possui um serializador e que o mesmo é, nada mais, nada menos que os métodos &lt;code&gt;jason.dumps()&lt;/code&gt; e &lt;code&gt;json.loads()&lt;/code&gt;, passados na função &lt;a href=&#34;https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;create_engine&lt;/code&gt;&lt;/a&gt; como um &lt;em&gt;kwargs&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;engine = create_engine(..., json_serializer=dumps)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;O golpe final foi ao ler a docuementação do  SQLAlchemy sobre &lt;a href=&#34;https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.JSON&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;o tipo de dado JSON&lt;/a&gt; e aprender que podemos customizar o serializador. Olha só o exemplo da documentação, me dando de &amp;ldquo;bandeja&amp;rdquo; a solução para o bug em questão:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;engine = create_engine(
+    &amp;quot;sqlite://&amp;quot;,
+    json_serializer=lambda obj: json.dumps(obj, ensure_ascii=False))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Agora sim, vida que segue, graças à persistẽncia e perseverança na caça aos bugs.&lt;/p&gt;
+&lt;p&gt;Ah, claro. Essa investigação contou com a ajuda de outros colegas que dedicaram alguns minutos para conversar e propor soluções, tabém. Muito obrigado!&lt;/p&gt;
+&lt;p&gt;E vocês, que estratégias adotam na caça aos bugs?&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hacktoberfest 2021</title>

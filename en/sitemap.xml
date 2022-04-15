@@ -139,7 +139,7 @@
   
   <url>
     <loc>/tag/autonomia/</loc>
-    <lastmod>2021-11-01T22:25:12-03:00</lastmod>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
@@ -149,6 +149,126 @@
                 rel="alternate"
                 hreflang="en"
                 href="/tag/autonomia/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/bug-buster/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/bug-buster/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/bug-buster/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/bug-fixing/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/bug-fixing/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/bug-fixing/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/pt-br/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/pt-br/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/pt-br/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/python/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/category/python/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/category/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/category/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
                 />
   </url>
   
@@ -183,36 +303,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2021-11-01T22:25:12-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tag/pt-br/</loc>
-    <lastmod>2021-11-01T22:25:12-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/pt-br/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/pt-br/"
-                />
-  </url>
-  
-  <url>
     <loc>/tag/software-livre/</loc>
     <lastmod>2021-11-01T22:25:12-03:00</lastmod>
     <xhtml:link
@@ -224,21 +314,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/tag/software-livre/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-11-01T22:25:12-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
                 />
   </url>
   
@@ -303,36 +378,6 @@
   </url>
   
   <url>
-    <loc>/tag/python/</loc>
-    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/python/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/"
-                />
-  </url>
-  
-  <url>
     <loc>/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/</loc>
     <lastmod>2021-07-11T22:25:12-03:00</lastmod>
     <xhtml:link
@@ -344,21 +389,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/"
-                />
-  </url>
-  
-  <url>
-    <loc>/category/python/</loc>
-    <lastmod>2021-07-11T22:25:12-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/category/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/category/python/"
                 />
   </url>
   
