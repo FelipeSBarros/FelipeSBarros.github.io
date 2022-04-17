@@ -19,7 +19,7 @@
       <guid>/pt/post/bug-buster/</guid>
       <description>&lt;h3 id=&#34;como-tudo-começou&#34;&gt;Como tudo começou:&lt;/h3&gt;
 &lt;p&gt;Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa. Um ponto que não previ no processo de desenvolvimento é que nomes, como qualquer outro elemento textual da lingua portuguesa, podem ter acentos (ou &amp;ldquo;caracteres especiais&amp;rdquo;).&lt;/p&gt;
-&lt;p&gt;Pois é, foi pratimente sem querer que vi, olhando os logs produzidos, que os nomes com acento estavam com problema de &lt;code&gt;encoding&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Pois é, foi praticamente sem querer que vi, olhando os logs produzidos, que os nomes com acento estavam com problema de &lt;code&gt;encoding&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;E assim começou a minha caça ao bug. Uma caça que me tomou um dia e meio. Mas foi de grande aprendizado.&lt;/p&gt;
 &lt;h3 id=&#34;um-pouco-do-contexto&#34;&gt;Um pouco do contexto:&lt;/h3&gt;
 &lt;p&gt;Antes de descrever essa aventura, comento um pouco o fluxo do programa que apresentou erro:&lt;/p&gt;
