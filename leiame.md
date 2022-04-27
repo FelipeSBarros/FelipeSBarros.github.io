@@ -5,3 +5,6 @@ usar PortifolioBlogdown/content/pt/home
 usar PortifolioBlogdown/content/en/home
 # para commitar:
 ./PortifolioBlogdown/public
+
+# Post criado pelo blogdown
+content/en/post/

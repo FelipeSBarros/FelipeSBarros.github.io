@@ -34,7 +34,8 @@
   
     
   
-  <meta name="description" content="Como tudo começou: Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa.">
+  <meta name="description" content="Como tudo começou:  Nota do autor: artigo publiciado em 27/04/2022:
+ Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal.">
 
   
   <link rel="alternate" hreflang="en" href="/post/bug-buster/">
@@ -281,7 +282,8 @@
   <meta property="og:site_name" content="Felipe Sodré M. Barros">
   <meta property="og:url" content="/pt/post/bug-buster/">
   <meta property="og:title" content="Bug buster | Felipe Sodré M. Barros">
-  <meta property="og:description" content="Como tudo começou: Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa."><meta property="og:image" content="/pt/post/bug-buster/featured.jpg">
+  <meta property="og:description" content="Como tudo começou:  Nota do autor: artigo publiciado em 27/04/2022:
+ Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal."><meta property="og:image" content="/pt/post/bug-buster/featured.jpg">
   <meta property="twitter:image" content="/pt/post/bug-buster/featured.jpg"><meta property="og:locale" content="pt-br">
   
     
@@ -335,7 +337,7 @@
       "url": "/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Como tudo começou: Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa."
+  "description": "Como tudo começou:  Nota do autor: artigo publiciado em 27/04/2022:\n Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal."
 }
 </script>
 
@@ -737,7 +739,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    5 minutos de leitura
+    6 minutos de leitura
   </span>
   
 
@@ -787,6 +789,9 @@
 
     <div class="article-style">
       <h3 id="como-tudo-começou">Como tudo começou:</h3>
+<blockquote>
+<p>Nota do autor: artigo publiciado em 27/04/2022:</p>
+</blockquote>
 <p>Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa. Um ponto que não previ no processo de desenvolvimento é que nomes, como qualquer outro elemento textual da lingua portuguesa, podem ter acentos (ou &ldquo;caracteres especiais&rdquo;).</p>
 <p>Pois é, foi praticamente sem querer que vi, olhando os logs produzidos, que os nomes com acento estavam com problema de <code>encoding</code>.</p>
 <p>E assim começou a minha caça ao bug. Uma caça que me tomou um dia e meio. Mas foi de grande aprendizado.</p>
@@ -856,6 +861,20 @@ nome.encode().decode('utf-8')
 </code></pre>
 <p>Agora sim, vida que segue, graças à persistẽncia e perseverança na caça aos bugs.</p>
 <p>Ah, claro. Essa investigação contou com a ajuda de outros colegas que dedicaram alguns minutos para conversar e propor soluções, tabém. Muito obrigado!</p>
+<blockquote>
+<p>nota do autor: artigo publiciado em 27/04/2022:</p>
+</blockquote>
+<p>Quando achei que estava tudo funcionando e coloquei em produção a correção, eis que me deparo com um novo erro. Dessa vez um <code>TypeError</code>:</p>
+<pre><code>raise TypeError(f'Object of type {o.__class__.__name__} '
+sqlalchemy.exc.StatementError: (builtins.TypeError) Object of type datetime is not JSON serializable
+</code></pre>
+<p>Com algumas pesquisas, pude identificar que, como estou indicando um serializador, Todo objeto a ser inluido no JSON passará por ele. Mas, como o próprio erro informa, um objeto <code>datetime</code> não pode ser seriaizado. E por isso que o método <code>json.dumps()</code>, além de ter o parâmetro <code>ensure_ascii</code>, possui um argumento para a serialização padrão.</p>
+<p>Portanto o último bug foi resolvido usando o parâmetro <code>default=str</code>. Ou seja, o serializador padrãoa pe transformar o objeto a uma classe <em>string</em>.</p>
+<p>O codigo ficou, então da seguinte forma:</p>
+<pre><code>engine = create_engine(
+    &quot;sqlite://&quot;,
+    json_serializer=lambda obj: json.dumps(obj, ensure_ascii=False, default=str))
+</code></pre>
 <p>E vocês, que estratégias adotam na caça aos bugs?</p>
 <p>Note: image from <a href="https://www.mclibre.org/consultar/documentacion/listados/thepracticaldev.html" target="_blank" rel="noopener">@ThePracticalDev</a></p>
 

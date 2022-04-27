@@ -18,6 +18,9 @@
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       <guid>/pt/post/bug-buster/</guid>
       <description>&lt;h3 id=&#34;como-tudo-começou&#34;&gt;Como tudo começou:&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nota do autor: artigo publiciado em 27/04/2022:&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Estou trabalhando num projeto onde uma das funções do python é executada e recebe um um parâmtero pelo terminal. Um detalhe é que esse parâmetro é o nome de uma pessoa. Um ponto que não previ no processo de desenvolvimento é que nomes, como qualquer outro elemento textual da lingua portuguesa, podem ter acentos (ou &amp;ldquo;caracteres especiais&amp;rdquo;).&lt;/p&gt;
 &lt;p&gt;Pois é, foi praticamente sem querer que vi, olhando os logs produzidos, que os nomes com acento estavam com problema de &lt;code&gt;encoding&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;E assim começou a minha caça ao bug. Uma caça que me tomou um dia e meio. Mas foi de grande aprendizado.&lt;/p&gt;
@@ -87,6 +90,20 @@ nome.encode().decode(&#39;utf-8&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Agora sim, vida que segue, graças à persistẽncia e perseverança na caça aos bugs.&lt;/p&gt;
 &lt;p&gt;Ah, claro. Essa investigação contou com a ajuda de outros colegas que dedicaram alguns minutos para conversar e propor soluções, tabém. Muito obrigado!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;nota do autor: artigo publiciado em 27/04/2022:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Quando achei que estava tudo funcionando e coloquei em produção a correção, eis que me deparo com um novo erro. Dessa vez um &lt;code&gt;TypeError&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;raise TypeError(f&#39;Object of type {o.__class__.__name__} &#39;
+sqlalchemy.exc.StatementError: (builtins.TypeError) Object of type datetime is not JSON serializable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com algumas pesquisas, pude identificar que, como estou indicando um serializador, Todo objeto a ser inluido no JSON passará por ele. Mas, como o próprio erro informa, um objeto &lt;code&gt;datetime&lt;/code&gt; não pode ser seriaizado. E por isso que o método &lt;code&gt;json.dumps()&lt;/code&gt;, além de ter o parâmetro &lt;code&gt;ensure_ascii&lt;/code&gt;, possui um argumento para a serialização padrão.&lt;/p&gt;
+&lt;p&gt;Portanto o último bug foi resolvido usando o parâmetro &lt;code&gt;default=str&lt;/code&gt;. Ou seja, o serializador padrãoa pe transformar o objeto a uma classe &lt;em&gt;string&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;O codigo ficou, então da seguinte forma:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;engine = create_engine(
+    &amp;quot;sqlite://&amp;quot;,
+    json_serializer=lambda obj: json.dumps(obj, ensure_ascii=False, default=str))
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;E vocês, que estratégias adotam na caça aos bugs?&lt;/p&gt;
 &lt;p&gt;Note: image from &lt;a href=&#34;https://www.mclibre.org/consultar/documentacion/listados/thepracticaldev.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@ThePracticalDev&lt;/a&gt;&lt;/p&gt;
 </description>
