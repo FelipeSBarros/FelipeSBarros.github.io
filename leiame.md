@@ -1,8 +1,8 @@
 # para rodar:
 portifolioblogdown
 # Para editar:
-usar PortifolioBlogdown/content/pt/home
-usar PortifolioBlogdown/content/en/home
+usar PortifolioBlogdown/content/pt/
+usar PortifolioBlogdown/content/en/
 # para commitar:
 ./PortifolioBlogdown/public
 

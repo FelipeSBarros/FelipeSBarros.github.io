@@ -138,8 +138,23 @@
   </url>
   
   <url>
+    <loc>/tag/autoconhecimento/</loc>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/autoconhecimento/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/autoconhecimento/"
+                />
+  </url>
+  
+  <url>
     <loc>/tag/autonomia/</loc>
-    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
@@ -149,6 +164,66 @@
                 rel="alternate"
                 hreflang="en"
                 href="/tag/autonomia/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/carreira-e-xadrez/</loc>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/carreira-e-xadrez/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/carreira-e-xadrez/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/pt-br/</loc>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/pt-br/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/pt-br/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
                 />
   </url>
   
@@ -198,36 +273,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tag/pt-br/</loc>
-    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/pt-br/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/pt-br/"
-                />
-  </url>
-  
-  <url>
     <loc>/tag/python/</loc>
     <lastmod>2022-04-15T08:59:13-03:00</lastmod>
     <xhtml:link
@@ -254,21 +299,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/category/python/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2022-04-15T08:59:13-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
                 />
   </url>
   
@@ -464,21 +494,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/post/o-manifesto-nooscope/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tag/autoconhecimento/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/autoconhecimento/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/autoconhecimento/"
                 />
   </url>
   
