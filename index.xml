@@ -75,6 +75,311 @@
     </item>
     
     <item>
+      <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta III</title>
+      <link>/post/sistema-dados-geograficos-iii/</link>
+      <pubDate>Sat, 04 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>/post/sistema-dados-geograficos-iii/</guid>
+      <description>&lt;p&gt;Caso não tenha visto as publicações anteriores, deixo aqui o &lt;em&gt;link&lt;/em&gt; e os temas abordados:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Na primeira publicação&lt;/a&gt; falo sobre o &lt;a href=&#34;https://django-geojson.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-geojson&lt;/code&gt;&lt;/a&gt; para simular um campo geográfico no models; o &lt;a href=&#34;https://geojson.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;geojson&lt;/code&gt;&lt;/a&gt; para criar um objeto da classe &lt;em&gt;geojson&lt;/em&gt; e realizar as validações necessárias para garantir robustez do sistema, e a criação do formulário de registro de dados usando o &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/#modelform&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;ModelForm&lt;/code&gt;&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe--1e/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Na segunda publicação&lt;/a&gt; apresento os validadores de campo do &lt;code&gt;Django&lt;/code&gt; como uma ferramenta fundamental na qualidade dos dados espaciais, &lt;strong&gt;sem depender de infraestrutura SIG (GIS)&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Agora a ideia é implementar um &lt;em&gt;webmap&lt;/em&gt; usando o módulo &lt;a href=&#34;https://django-leaflet.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-leaflet&lt;/code&gt;&lt;/a&gt; para apresentar os fenômenos mapeados com algumas informações no &lt;em&gt;popup&lt;/em&gt; do mapa. Para isso iremos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;usar o &lt;code&gt;GeoJSONLayerView&lt;/code&gt;, do &lt;a href=&#34;https://django-geojson.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-geojson&lt;/code&gt;&lt;/a&gt; para retornar os dados salvos no formato apropriado para exibição no &lt;em&gt;webmap&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;usar o &lt;a href=&#34;https://django-leaflet.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;django-leaflet&lt;/code&gt;&lt;/a&gt; para, além de implementar o &lt;em&gt;webmap&lt;/em&gt;, podermos usar várias outras ferramentas (&lt;code&gt;widget&lt;/code&gt;);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Vamos lá!&lt;/p&gt;
+&lt;h2 id=&#34;view-geojsonlayerview&#34;&gt;View GeoJSONLayerView&lt;/h2&gt;
+&lt;p&gt;A serialização ou, em inglês &lt;code&gt;serialization&lt;/code&gt;, é o processo/mecanismo de tradução dos objetos armazenados na base de dados em outros formatos (em geral, baseado em texto como, por exemplo, XML ou JSON), para serem enviados e/ou consumidos no processo de &lt;em&gt;request/response&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;No nosso caso isso será importante, pois para apresentar os dados salvos em um &lt;em&gt;webmap&lt;/em&gt;, precisaremos servi-los no formato &lt;code&gt;geojson&lt;/code&gt;. E é aí que o &lt;code&gt;django-geojson&lt;/code&gt; entra. Nós o utilizaremos para fazer a mágica acontecer ao usar a classe &lt;a href=&#34;https://django-geojson.readthedocs.io/en/latest/views.html#geojson-layer-view&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;GeoJSONLayerView&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A classe &lt;code&gt;GeoJSONLayerView&lt;/code&gt; é um &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/topics/class-based-views/mixins/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;mixin&lt;/code&gt;&lt;/a&gt; que, em base ao modelo informado do nosso projeto, serializa os dados transformando-os em &lt;code&gt;geojson&lt;/code&gt; e os servindo em uma &lt;code&gt;view&lt;/code&gt;. Acredite, é bastante coisa para apenas algumas linhas de código.&lt;/p&gt;
+&lt;p&gt;Para entender a serialização, segue um exemplo&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Ao acessar os dados do banco de dados do nosso projeto, temos uma &lt;code&gt;QuerySet&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; Fenomeno.objects.all()
+&amp;lt;QuerySet [&amp;lt;Fenomeno: fenomeno_teste&amp;gt;]&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ao acessar a geometria de um objeto do banco de dados do nosso projeto, temos um &lt;code&gt;geojson&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; Fenomeno.objects.get(pk=3).geom
+{&#39;type&#39;: &#39;Point&#39;, &#39;coordinates&#39;: [-42.0, -22.0]}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ao serializá-lo com o &lt;code&gt;GeoJSONSerializer&lt;/code&gt;, temos como retorno uma &lt;a href=&#34;https://datatracker.ietf.org/doc/html/rfc7946#section-3.3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;FeatureCollection&lt;/code&gt;&lt;/a&gt; seguindo o formato &lt;code&gt;geojson&lt;/code&gt;, tendo como propriedades os campos do &lt;code&gt;model&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt;&amp;gt;&amp;gt; from djgeojson.serializers import Serializer as GeoJSONSerializer
+&amp;gt;&amp;gt;&amp;gt; GeoJSONSerializer().serialize(Fenomeno.objects.all(), use_natural_keys=True, with_modelname=False)
+&#39;{&#39;crs&#39;: {&#39;properties&#39;: {&#39;href&#39;: &#39;http://spatialreference.org/ref/epsg/4326/&#39;,
+                        &#39;type&#39;: &#39;proj4&#39;},
+         &#39;type&#39;: &#39;link&#39;},
+ &#39;features&#39;: [{&#39;geometry&#39;: {&#39;coordinates&#39;: [-42.0, -22.0], &#39;type&#39;: &#39;Point&#39;},
+               &#39;id&#39;: 3,
+               &#39;properties&#39;: {&#39;data&#39;: &#39;2021-06-22&#39;,
+                              &#39;hora&#39;: &#39;02:07:57&#39;,
+                              &#39;nome&#39;: &#39;teste&#39;},
+               &#39;type&#39;: &#39;Feature&#39;}],
+ &#39;type&#39;: &#39;FeatureCollection&#39;}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Mais sobre serialização pode ser encontrado &lt;a href=&#34;https://django-portuguese.readthedocs.io/en/1.0/topics/serialization.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aqui&lt;/a&gt; ou &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/ref/contrib/gis/serializers/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aqui, com outro exemplo relacionado a dado geográfico usando o GeoDjango&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Então, ciente de toda a mágica por trás do &lt;code&gt;GeoJSONLayerView&lt;/code&gt; e o seu resultado, vamos criar os testes para essa &lt;code&gt;view&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;criando-os-testes-da-view&#34;&gt;Criando os testes da &lt;code&gt;view&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Como estou testando justamente uma &lt;code&gt;view&lt;/code&gt; que serializa o objeto do meu modelo em formato &lt;code&gt;geojson&lt;/code&gt;, precisarei desses dados salvos no banco de dados. Para tanto, vou adicionar ao &lt;code&gt;setUp&lt;/code&gt; do meu &lt;code&gt;TestCase&lt;/code&gt; valores válidos ao banco de dados do teste. Sem isso, não poderemos confirmar se a serialização está ocorrendo de forma correta. E, uma vez salvo, realizo um conjunto básico de testes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Confirmo se o &lt;em&gt;status code&lt;/em&gt; do request (método &amp;ldquo;get&amp;rdquo;) ao &lt;em&gt;path&lt;/em&gt; que pretendo usar para essa views (no caso, &amp;ldquo;/geojson/&amp;quot;), retorna 200, código que indica sucesso no processo de &lt;em&gt;request/response&lt;/em&gt;. &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Veja mais sobre os códigos aqui&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Em seguida, confirmo se a resposta recebida é uma &lt;code&gt;FetureCollection&lt;/code&gt; com os dados da instância criada anteriormente.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# testes.py
+class FenomenoGeoJsonTest(TestCase):
+    def setUp(self):
+        Fenomeno.objects.create(
+            nome=&amp;quot;Teste&amp;quot;,
+            data=&amp;quot;2020-01-01&amp;quot;,
+            hora=&amp;quot;09:12:12&amp;quot;,
+            geom={&amp;quot;type&amp;quot;: &amp;quot;Point&amp;quot;, &amp;quot;coordinates&amp;quot;: [-42, -22]},
+        )
+
+    def teste_geojson_status_code(self):
+        self.resp = self.client.get(r(&amp;quot;geojson&amp;quot;))
+        self.assertEqual(200, self.resp.status_code)
+
+    def teste_path_geojson_returns_valid_feature_collection(self):
+        self.resp = self.client.get(r(&amp;quot;geojson&amp;quot;))
+        self.assertEqual(
+            self.resp.json(),
+            {
+                &amp;quot;type&amp;quot;: &amp;quot;FeatureCollection&amp;quot;,
+                &amp;quot;features&amp;quot;: [
+                    {
+                        &amp;quot;type&amp;quot;: &amp;quot;Feature&amp;quot;,
+                        &amp;quot;properties&amp;quot;: {
+                            &amp;quot;popup_content&amp;quot;: &amp;quot;&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;span&amp;gt;Nome: &amp;lt;/span&amp;gt;Teste&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;,
+                            &amp;quot;model&amp;quot;: &amp;quot;core.fenomeno&amp;quot;,
+                        },
+                        &amp;quot;id&amp;quot;: 1,
+                        &amp;quot;geometry&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;Point&amp;quot;, &amp;quot;coordinates&amp;quot;: [-42.0, -22.0]},
+                    }
+                ],
+                &amp;quot;crs&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;name&amp;quot;, &amp;quot;properties&amp;quot;: {&amp;quot;name&amp;quot;: &amp;quot;EPSG:4326&amp;quot;}},
+            },
+        )
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Obviamente, ambos testes falharão, pois, ainda não criamos a view e nem a designamos a um &lt;em&gt;path&lt;/em&gt; do nosso sistema.&lt;/p&gt;
+&lt;p&gt;Para fazê-los passar, vamos primeiro criar a view: Em &lt;code&gt;views.py&lt;/code&gt; criaremos uma classe nova, herdando da classe &lt;code&gt;GeoJSONLayerView&lt;/code&gt;. Ela será a view responsável por resgatar os dados e servir-nos como uma &lt;code&gt;FeatureCollection&lt;/code&gt; seguindo a estrutura de um &lt;code&gt;geojson&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Um último detalhe é que, como estamos usando um &lt;code&gt;Class Based-View&lt;/code&gt;, ao final a convertemos em view, com o método &lt;code&gt;as_view()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# views.py
+from djgeojson.views import GeoJSONLayerView
+
+from map_proj.core.models import Fenomeno
+
+
+class FenomenoGeoJson(GeoJSONLayerView):
+    model = Fenomeno
+    properties = (&amp;quot;popup_content&amp;quot;,)
+
+
+fenomeno_geojson = FenomenoGeoJson.as_view()
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;adicionando-propriedade-para-popup&#34;&gt;Adicionando propriedade para &lt;em&gt;popup&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;Percebam que no &lt;code&gt;teste_geojson_FeatureCollection&lt;/code&gt; eu já estou considerando que o &lt;code&gt;geojson&lt;/code&gt; virá com &lt;code&gt;properties&lt;/code&gt; com o nome de &lt;code&gt;popup-content&lt;/code&gt;. Essa &lt;code&gt;property&lt;/code&gt; ainda deverá ser criada no model em questão e poderá ter quantas informações acharmos pertinentes. Se tratam das informações do model a serem apresentadas no &lt;em&gt;popup&lt;/em&gt; do mapa.&lt;/p&gt;
+&lt;p&gt;Por agora estou apenas informando o nome do fenômeno mapeado mas, mais à frente, podemos incrementar, adicionando um &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/ref/models/instances/#get-absolute-url&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;get_absolute_url&lt;/code&gt;&lt;/a&gt; por exemplo, para poder acessar aos detalhes do fenômeno diretamente a partir do &lt;em&gt;popup&lt;/em&gt; do mapa.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#models.py
+...
+    @property
+    def popup_content(self):
+        return self.nome
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;adicionando-um-path-a-view&#34;&gt;Adicionando um &lt;em&gt;path&lt;/em&gt; a &lt;code&gt;view&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Para poder acessar essa view, precisamos incorporá-la na nossa &lt;code&gt;urls.py&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# urls.py
+from django.contrib import admin
+from django.urls import path
+
+from map_proj.core.views import fenomeno_geojson # novo!
+
+urlpatterns = [
+    path(&amp;quot;admin/&amp;quot;, admin.site.urls),
+    path(&amp;quot;geojson/&amp;quot;, fenomeno_geojson, name=&amp;quot;geojson&amp;quot;), # novo!
+]
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com isso teremos os nossos últimos testes passando. Se ainda assim você tiver curiosidade, pode executar o &lt;code&gt;runserver&lt;/code&gt; e acessar os dados pela &lt;em&gt;url&lt;/em&gt; &lt;code&gt;http://127.0.0.1:8000/geojson/&lt;/code&gt;. O resultado esperado são os dados servidos em &lt;code&gt;geojson&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+                &amp;quot;type&amp;quot;: &amp;quot;FeatureCollection&amp;quot;,
+                &amp;quot;features&amp;quot;: [
+                    {
+                        &amp;quot;type&amp;quot;: &amp;quot;Feature&amp;quot;,
+                        &amp;quot;properties&amp;quot;: {
+                            &amp;quot;popup_content&amp;quot;: &amp;quot;&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;span&amp;gt;Nome: &amp;lt;/span&amp;gt;Teste&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;,
+                            &amp;quot;model&amp;quot;: &amp;quot;core.fenomeno&amp;quot;,
+                        },
+                        &amp;quot;id&amp;quot;: 1,
+                        &amp;quot;geometry&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;Point&amp;quot;, &amp;quot;coordinates&amp;quot;: [-42.0, -22.0]},
+                    }
+                ],
+                &amp;quot;crs&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;name&amp;quot;, &amp;quot;properties&amp;quot;: {&amp;quot;name&amp;quot;: &amp;quot;EPSG:4326&amp;quot;}},
+            }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;⚠️ Garanta que você já tenha inserido algum dado ao seu projeto ;)&lt;/p&gt;
+&lt;p&gt;Pronto, já temos uma &lt;code&gt;view&lt;/code&gt; nos servindo os dados em formato &lt;code&gt;geojson&lt;/code&gt;. Vamos ao &lt;code&gt;Django-leaflet&lt;/code&gt;, para entender como montar um &lt;em&gt;webmap&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;django-leaflet&#34;&gt;Django-leaflet&lt;/h2&gt;
+&lt;p&gt;Para saber mais sobre o &lt;code&gt;django-leaflet&lt;/code&gt;, recomendo dar uma olhada na página &lt;a href=&#34;https://pypi.org/project/django-leaflet/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pypi&lt;/a&gt; e na &lt;a href=&#34;https://django-leaflet.readthedocs.io/en/latest/installation.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentação&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Você deve estar se perguntando: &amp;ldquo;por quê usar o &lt;code&gt;django-leaflet&lt;/code&gt; se eu posso usar o &lt;a href=&#34;https://leafletjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;leaflet&lt;/code&gt;&lt;/a&gt; &amp;ldquo;puro&amp;rdquo;, já que se trata de uma biblioteca JavaScript para produção do mapa no &lt;em&gt;frontend&lt;/em&gt;?&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Os autores do projeto &lt;code&gt;django-leaflet&lt;/code&gt; deixam alguns pontos que justificam sua adoção na página da documentação. Das quais eu destaco:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Possibilidade de uso das ferramentas de edição de geometría usando os &lt;code&gt;widget&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;Fácil integração dos &lt;code&gt;widgets&lt;/code&gt; na página &lt;code&gt;admin&lt;/code&gt; do Django;&lt;/li&gt;
+&lt;li&gt;Controle da aparência dos mapas a partir do Django &lt;code&gt;settings.py&lt;/code&gt;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⚠️ E por último, mas não menos importante:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;django-leaflet&lt;/code&gt; é compatível com os campos  &lt;code&gt;django-geojson&lt;/code&gt;, o que permite o uso de dados geográficos sem a necessidade de uma base de dados espaciais. O motivo de toda essa série que tenho produzido :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Bem legal! Eles criaram um pacote já compatível com o pacote &lt;code&gt;django-geojson&lt;/code&gt;, que nos permite simular campos geográficos sem a necessidade de toda a infraestrutura de uma base de dados de SIG (PostGIS, por exemplo).&lt;/p&gt;
+&lt;p&gt;⚠️ Porém, atenção ao seguinte detalhe:+&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;O &lt;code&gt;django-leaflet&lt;/code&gt; depende da biblioteca &lt;a href=&#34;https://pypi.org/project/GDAL/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GDAL&lt;/a&gt;, não se esqueça de instalá-la antes.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;instalando-django-leaflet&#34;&gt;Instalando &lt;code&gt;django-leaflet&lt;/code&gt;&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;pip install django-leaflet
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Após a sua instalação é necessário incluí-lo no &lt;code&gt;settings.py&lt;/code&gt; como &lt;em&gt;INSTALLED_APPS&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;⚠️ Não esqueça de adicioná-lo ao &lt;code&gt;requirements.txt&lt;/code&gt; do projeto, também.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# settings.py
+INSTALLED_APPS = [
+    ...
+    &#39;djgeojson&#39;,
+    &#39;leaflet&#39;, # novo
+    ...
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;usando-o-leaflet&#34;&gt;Usando o leaflet&lt;/h3&gt;
+&lt;p&gt;Com &lt;code&gt;leaflet&lt;/code&gt; instalado, devemos então:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Na pasta da nossa &lt;em&gt;app&lt;/em&gt;, vamos criar uma pasta chamada &amp;ldquo;templates&amp;rdquo;;&lt;/li&gt;
+&lt;li&gt;E nessa pasta, criar um arquivo HTML (neste caso vou chamar de &amp;ldquo;map.html&amp;rdquo;;&lt;/li&gt;
+&lt;li&gt;Nessa página vamos carregar as &lt;a href=&#34;https://www.geeksforgeeks.org/django-template-tags/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;template_tags&lt;/code&gt;&lt;/a&gt; do &lt;code&gt;leaflet&lt;/code&gt; para poder usar &lt;code&gt;leaflet_js&lt;/code&gt;, &lt;code&gt;leaflet_css&lt;/code&gt; e o &lt;code&gt;leaflet_map&lt;/code&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Nosso &lt;code&gt;map.html&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% load leaflet_tags %}
+
+&amp;lt;head&amp;gt;
+    ...
+    {% leaflet_js %}
+    {% leaflet_css %}
+&amp;lt;/head&amp;gt;
+...
+&amp;lt;body&amp;gt;
+    ...
+    {% leaflet_map &amp;quot;yourmap&amp;quot; %}
+    ...
+&amp;lt;/body&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Essas &lt;a href=&#34;https://github.com/makinacorpus/django-leaflet/blob/master/leaflet/templatetags/leaflet_tags.py&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;template_tags&lt;/code&gt;&lt;/a&gt; irão tentar acessar as configurações do &lt;code&gt;leaflet&lt;/code&gt; presentes no &lt;code&gt;settings.py&lt;/code&gt; da app, caso existam. Do contrário, serão usados valores padrão de configuração. O interessante dessas &lt;code&gt;template_tags&lt;/code&gt; é que com elas podemos customizar tais configurações a cada &lt;em&gt;template&lt;/em&gt;;&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;Como a ideia é apenas renderizar essa página, vou adicionar ao &lt;code&gt;urls.py&lt;/code&gt; um &lt;em&gt;path&lt;/em&gt; a ela, usando o &lt;a href=&#34;https://docs.djangoproject.com/en/4.0/topics/class-based-views/#basic-examples&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;TemplateView&lt;/code&gt;&lt;/a&gt;. Com isso, ao receber um &lt;em&gt;request&lt;/em&gt; neste &lt;em&gt;path&lt;/em&gt;, a responsta será direcionada à renderização dessa página:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#urls.py
+from django.contrib import admin
+from django.urls import path
+from django.views.generic import TemplateView
+
+from map_proj.core.views import fenomeno_geojson
+
+urlpatterns = [
+    path(&amp;quot;admin/&amp;quot;, admin.site.urls),
+    path(&amp;quot;geojson/&amp;quot;, fenomeno_geojson, name=&amp;quot;geojson&amp;quot;),
+    path(&amp;quot;map/&amp;quot;, TemplateView.as_view(template_name=&amp;quot;map.html&amp;quot;), name=&amp;quot;map&amp;quot;),
+]
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Isso já o suficiente para termos nosso &lt;em&gt;webmap&lt;/em&gt; apresentado:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./img/leaflet_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Imagino que não seja o que esperava, né? Fique calmo. O leaflet buscou as configurações do mapa e, como não encontrou, retornou o mesmo com as configurações padrão. Veremos em breve como alterar as configurações do mapa.&lt;/p&gt;
+&lt;p&gt;Antes disso, vamos &amp;ldquo;linkar&amp;rdquo; a view que nos serve o &lt;code&gt;geojson&lt;/code&gt; com os dados salvos no banco com o &lt;em&gt;webmap&lt;/em&gt; em questão, para que os dados sejam apresentados.&lt;/p&gt;
+&lt;h3 id=&#34;renderizando-o-geojson-no-mapa&#34;&gt;Renderizando o &lt;code&gt;geojson&lt;/code&gt; no mapa&lt;/h3&gt;
+&lt;p&gt;Lembra que temos uma view que serializa os dados armazenados no banco e nos serve como uma &lt;code&gt;FeatureCollection&lt;/code&gt; e que podemos acessar tais dados pelo &lt;em&gt;path&lt;/em&gt; &lt;em&gt;geojson/&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;Então, iremos adicionar um &lt;em&gt;script&lt;/em&gt; à nossa página no qual uma variável &lt;code&gt;dataurl&lt;/code&gt; receberá os dados dessa &lt;em&gt;url&lt;/em&gt; adicionando tais dados ao mapa, assim que o mesmo for inicializado, desencadeando o processo de construção da &lt;em&gt;popup&lt;/em&gt; de cada feição apresentada com sua posterior inserção ao mapa:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% load leaflet_tags %}
+
+    &amp;lt;script&amp;gt;
+      var dataurl = &#39;{% url &amp;quot;geojson&amp;quot; %}&#39;;
+
+      window.addEventListener(&amp;quot;map:init&amp;quot;, function (event) {
+        var map = event.detail.map;
+        // Download GeoJSON data with Ajax
+        fetch(dataurl)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = &amp;quot;&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;span&amp;gt;Nome: &amp;lt;/span&amp;gt; &amp;quot; + feature.properties.popup_content + &amp;quot;&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;;
+                layer.bindPopup(props);
+            }}).addTo(map);
+          });
+      });
+
+    &amp;lt;/script&amp;gt;
+
+
+
+&amp;lt;head&amp;gt;
+    {% leaflet_js %}
+    {% leaflet_css %}
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+
+{% leaflet_map &amp;quot;yourmap&amp;quot; %}
+
+&amp;lt;/body&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Veja que, para a criação da variável &lt;code&gt;dataurl&lt;/code&gt;, estamos usando a &lt;code&gt;template_tag&lt;/code&gt; do django:
+&lt;code&gt;var dataurl = &#39;{% url &amp;quot;geojson&amp;quot; %}&#39;;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Veja mais sobre ela &lt;a href=&#34;https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#url&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aqui&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Repare também que, neste processo, a cada &lt;code&gt;Feature&lt;/code&gt;, será carregada as suas propriedades a serem apresentadas no &lt;em&gt;popup&lt;/em&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = &amp;quot;&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;span&amp;gt;Nome: &amp;lt;/span&amp;gt; &amp;quot; + feature.properties.popup_content + &amp;quot;&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;;
+                layer.bindPopup(props);
+            }}).addTo(map);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com o &lt;code&gt;runserver&lt;/code&gt; em execução, já poderemos ver o nosso mapa com o dado carregado e as propriedades que definimos no &lt;em&gt;popup&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./img/leaflet_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;⚠️ Garanta que você já tenha inserido algum dado ao seu projeto ;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mudando o tamanho do &lt;em&gt;webmap&lt;/em&gt;:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Antes de passarmos às configurações do &lt;code&gt;leaflet&lt;/code&gt;, podemos alterar as dimensões do mapa definindo um &lt;code&gt;style&lt;/code&gt;. Por exemplo, para que o mapa ocupe toda a área possível do navegador, basta adicionarmos:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;style&amp;gt;
+    #yourmap {
+        width: 100%;
+        height: 100%;
+    }
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./img/leaflet_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;configurações-do-leaflet&#34;&gt;Configurações do leaflet&lt;/h3&gt;
+&lt;p&gt;Bom, além das &lt;code&gt;template_tags&lt;/code&gt; do leaflet, o uso do &lt;code&gt;django-leaflet&lt;/code&gt; nos permite definirmos as suas configurações no &lt;code&gt;settings.py&lt;/code&gt; da &lt;code&gt;app&lt;/code&gt;, a partir da seção &lt;code&gt;LEAFLET_CONFIG&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Dentre as &lt;a href=&#34;https://django-leaflet.readthedocs.io/en/latest/templates.html#configuration&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;configurações possíveis&lt;/a&gt;
+, vou usar apenas o par de coordenadas ao qual o mapa deverá estar centralizado por padrão (&lt;code&gt;DEFAULT_CENTER&lt;/code&gt;) e o zoom padrão (&lt;code&gt;DEFAULT_ZOOM&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;LEAFLET_CONFIG = {
+    &#39;DEFAULT_CENTER&#39;: (-22, -42),
+    &#39;DEFAULT_ZOOM&#39;: 7,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Com isso nosso mapa sempre será apresentado centralizado nas coordenadas (-22, -42) e com o zoom 7:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;map_proj/img/leaflet_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Pronto: com esses três artigos, já temos um sistema com formulário de inserção de dados, com as devidas validações dos dados preenchidos no mesmo, assim como um &lt;em&gt;webmap&lt;/em&gt; apresentando-os ao mundo :-).&lt;/p&gt;
+&lt;p&gt;Na próxima publicação vamos ver como fazer o &lt;em&gt;deploy&lt;/em&gt; desse sistema no &lt;a href=&#34;https://www.heroku.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;heroku&lt;/a&gt; 🚀.&lt;/p&gt;
+&lt;p&gt;Até lá!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Nossa carreira profissional sob a ótima do xadrez</title>
       <link>/post/carreira-e-xadrez/</link>
       <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
