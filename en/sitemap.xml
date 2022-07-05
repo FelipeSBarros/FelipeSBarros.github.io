@@ -243,6 +243,21 @@
   </url>
   
   <url>
+    <loc>/post/carreira-e-xadrez/</loc>
+    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/carreira-e-xadrez/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/carreira-e-xadrez/"
+                />
+  </url>
+  
+  <url>
     <loc>/tag/autoconhecimento/</loc>
     <lastmod>2022-05-02T09:29:01-03:00</lastmod>
     <xhtml:link
@@ -269,21 +284,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/tag/autonomia/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/carreira-e-xadrez/</loc>
-    <lastmod>2022-05-02T09:29:01-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/carreira-e-xadrez/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/carreira-e-xadrez/"
                 />
   </url>
   
