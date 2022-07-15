@@ -138,6 +138,81 @@
   </url>
   
   <url>
+    <loc>/pt/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/</loc>
+    <lastmod>2022-07-15T00:19:08-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/post/</loc>
+    <lastmod>2022-07-15T00:19:08-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/tag/pt-br/</loc>
+    <lastmod>2022-07-15T00:19:08-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/pt-br/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/pt-br/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/tag/python/</loc>
+    <lastmod>2022-07-15T00:19:08-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/pt/tags/</loc>
+    <lastmod>2022-07-15T00:19:08-03:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tags/"
+                />
+  </url>
+  
+  <url>
     <loc>/pt/categories/</loc>
     <lastmod>2022-06-04T06:43:55-03:00</lastmod>
     <xhtml:link
@@ -168,51 +243,6 @@
   </url>
   
   <url>
-    <loc>/pt/post/</loc>
-    <lastmod>2022-06-04T06:43:55-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/pt/tag/pt-br/</loc>
-    <lastmod>2022-06-04T06:43:55-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/pt-br/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/pt-br/"
-                />
-  </url>
-  
-  <url>
-    <loc>/pt/tag/python/</loc>
-    <lastmod>2022-06-04T06:43:55-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tag/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tag/python/"
-                />
-  </url>
-  
-  <url>
     <loc>/pt/category/python/</loc>
     <lastmod>2022-06-04T06:43:55-03:00</lastmod>
     <xhtml:link
@@ -224,21 +254,6 @@
                 rel="alternate"
                 hreflang="pt"
                 href="/pt/category/python/"
-                />
-  </url>
-  
-  <url>
-    <loc>/pt/tags/</loc>
-    <lastmod>2022-06-04T06:43:55-03:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/tags/"
                 />
   </url>
   

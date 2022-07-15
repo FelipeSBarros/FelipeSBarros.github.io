@@ -1,0 +1,1720 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Felipe Sodré Mendes Barros">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Há algum tempo comecei a perceber um &ldquo;comportamento estranho&rdquo; (ainda que tenha colocado o termo bug no título, acho que não é o caso. Foi para atrir mais atenção, mesmo:) relacionado aos dados de data e hora num sistema que estava desenvolvendo.">
+
+  
+  <link rel="alternate" hreflang="pt" href="/pt/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">
+  
+  <link rel="alternate" hreflang="en-us" href="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9763f5be8493c9d07b95458db93fbb03.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Felipe Sodré M. Barros">
+  <meta property="og:url" content="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">
+  <meta property="og:title" content="Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs | Felipe Sodré M. Barros">
+  <meta property="og:description" content="Há algum tempo comecei a perceber um &ldquo;comportamento estranho&rdquo; (ainda que tenha colocado o termo bug no título, acho que não é o caso. Foi para atrir mais atenção, mesmo:) relacionado aos dados de data e hora num sistema que estava desenvolvendo."><meta property="og:image" content="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2022-07-15T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2022-07-15T00:19:08-03:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/"
+  },
+  "headline": "Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs",
+  
+  "datePublished": "2022-07-15T00:00:00Z",
+  "dateModified": "2022-07-15T00:19:08-03:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Felipe Sodré Mendes Barros"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Felipe Sodré M. Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Há algum tempo comecei a perceber um \u0026ldquo;comportamento estranho\u0026rdquo; (ainda que tenha colocado o termo bug no título, acho que não é o caso. Foi para atrir mais atenção, mesmo:) relacionado aos dados de data e hora num sistema que estava desenvolvendo."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs | Felipe Sodré M. Barros</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About me</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#accomplishments"><span>Awards</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Professional experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Post</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">English</span></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>English</span>
+          </div>
+          
+          <a class="dropdown-item" href="/pt/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">
+            <span>Português</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Jul 15, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    16 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Há algum tempo comecei a perceber um &ldquo;comportamento estranho&rdquo; (ainda que tenha colocado o termo bug no título, acho que não é o caso. Foi para atrir mais atenção, mesmo:) relacionado aos dados de data e hora num sistema que estava desenvolvendo. Minha reação inicial, praticamente um instinto de sobrevivência, foi simplesmente resolver a situação contornando o problema. Mas chegou um momento que precisei entender a origem do mesmo. Mais uma vez tive que fazer um exercício de seguir/isolar o problema que me assombrava (<a href="felipesbarros.github.io">veja outros artigos que produzi sobre bugs/comportamentos estranhos</a>) para tentar compreender o motivo da sua existência. Esse processo tomou-me alguns dias e, claro, proporcionou alguns aprendizados.</p>
+<p>Ainda que agora, tendo resolvido e entendido as causas e origens desse comportamento, tudo parece óbvio, decidi compartilhar um pouco deste processo, pois nessa busca por soluções não encontrei nada que me ajudasse de forma objetiva.</p>
+<p>Criei um ambiente para reproduzir esses &ldquo;comportamentos estranhos&rdquo; (<a href="#Preparando-ambiente-de-desenvolvimento">há uma seção sobre como preparar um ambiente para poder reproduzir esses códigos</a>) e deixarei os trechos de códigos usados para vocês poderem reproduzir os passos dados. Irei trabalhar em todos os exemplos com um mesmo objeto de data e hora (instância <code>datetime</code>) mudando apenas o uso de fuso horário, para torná-los conscientes (<em>aware</em>) ou não (<em>naive</em>, ingênuo) (leia um pouco sobre isso <a href="https://docs.python.org/3/library/datetime.html#aware-and-naive-objects" target="_blank" rel="noopener">aqui</a>). Na seção final, &ldquo;resumo&rdquo;, deixo os principais aprendizados deste processo.</p>
+<h2 id="contextualizando-o-sistema">Contextualizando o sistema</h2>
+<p>Antes de tudo, lhes resumo a parte que importa do sistema:</p>
+<p>O mesmo estava em um servidor com fuso horário UTC, e nele eu manipulava um dado de data e hora, usando o módulo python <a href="https://docs.python.org/3/library/datetime.html" target="_blank" rel="noopener"><code>datetime</code></a>, com <em>time zone</em> consciente (<code>aware</code>), transformando-os ao <em>time zone</em> de Brasília (-0300). Esse dado era, então, persistido no banco de dados <a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL</a>, que estava em outro servidor, também com fuso horário UTC. Os dados eram persistidos em duas colunas diferentes: uma coluna <a href="https://www.PostgreSQL.org/docs/current/datatype-datetime.html" target="_blank" rel="noopener">DateTime com <em>time zone</em> consciente</a> e numa coluna de texto onde, além da data e hora em formato <a href="https://docs.python.org/3/library/datetime.html#datetime.date.isoformat" target="_blank" rel="noopener">iso</a>, uma observação textual era adicionada (que não vem ao caso, agora). Mas é importante saber que tínhamos o mesmo dado de data e hora persistido como tal e como texto.</p>
+<p>Um detalhe não menos importante é o fato de eu estar usando o módulo <a href="https://pythonhosted.org/pytz/" target="_blank" rel="noopener"><code>pytz</code></a> para definir o fuso <code>America/Sao_Paulo</code>, e o <a href="https://www.sqlalchemy.org/" target="_blank" rel="noopener">SQLAlchemy</a>, para fazer a conexão com o banco de dados, commit e etc. Pensando em facilitar a minha vida, estive usando o <a href="https://dbeaver.io/" target="_blank" rel="noopener">DBeaver</a>, uma interface gráfica para gestão de banco de dados. Ou seja, usava o DBeaver para conectar ao banco de dados e observar o que estava sendo persistido sem precisar fazê-lo pelo <a href="https://www.postgresql.org/docs/current/app-psql.html" target="_blank" rel="noopener"><code>psql</code></a>.</p>
+<h2 id="reproduzindo-comportamentos-estranhos">Reproduzindo comportamentos estranhos</h2>
+<p>Basicamente criei uma instância <code>datetime</code> ingênua (<em>naive</em>) em relação ao <em>time zone</em> e outra com <em>time zone</em> declarado ( consciente, <em>aware</em>). Criei uma instância da tabela persistindo cada dado nas suas respectivas colunas (consciente na coluna consciente e ingênuo na coluna ingênua) (<a href="#Preparando-ambiente-de-desenvolvimento">veja aqui sobre a criação do ambiente para reproduzir esses códigos</a>).</p>
+<pre><code class="language-python">import pytz
+from datetime import datetime
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine(
+        f&quot;postgresql+psycopg2://postgres:password@localhost:5432/postgres&quot;)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+
+BR_TIME_ZONE = pytz.timezone(&quot;America/Sao_Paulo&quot;)
+
+naive = datetime(2022, 5, 27, 12, 30, 0, 0)
+aware = naive.replace(tzinfo=BR_TIME_ZONE)
+
+record = DateTimeTable(
+    date_time_tz_aware=aware,
+    isoformat_tz_aware=f&quot;{aware.isoformat()}&quot;,
+    date_time_naive=naive,
+    isoformat_naive=f&quot;{naive.isoformat()}&quot;
+)
+
+session.add(record)
+session.commit()
+session.close()
+</code></pre>
+<p>Ao fazer o commit e consultar a base de dados, começa o terror e pânico:</p>
+<p>Usando o DBeaver para acessar o registro criado (seja pela interface gráfica como pela query da GUI), observei que:</p>
+<ul>
+<li>O valor persistido na coluna consciente foi alterado em seis minutos (acrescidos). <strong>Deveria ser 12:30 e passou a ser 12:36</strong>, ao passo que a informação de <em>time zone</em> é apresentada de forma correta: <code>-0300</code>;</li>
+<li>O dado da coluna <code>iso_format_tz_aware</code> possui a informação sem qualquer alteração. Ao passo que a <em>time zone</em> informada não é a esperada (<code>-0300</code>), mas <code>-03:06</code>. Lembrem-se que o <em>time zone</em> da coluna <code>date_time_aware</code> é informado apenas <code>-0300</code>;</li>
+<li>Os dados persistidos nos campos <em>time zone</em> ingênuos não apresentaram qualquer alteração.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2022-05-27 12:36:00.000 -0300</td>
+<td>2022-05-27T12:30:00-03:06</td>
+<td>2022-05-27 12:30:00.000</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<p>Contudo, ao acessar esses dados usando o SQLAlchemy, a confusão aumenta:</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2022-05-27 15:36:00+00:00</td>
+<td>2022-05-27T12:30:00-03:06</td>
+<td>2022-05-27 12:30:00</td>
+<td>2022-05-27T12:30:00</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Reparem que agora temos:</p>
+<ul>
+<li>Na coluna <code>date_time_tz_aware</code>, o objeto tem três horas e seis minutos acrescidos e o <em>time zone</em> informado como UTC (<code>+00:00</code>).</li>
+<li>Os dados das colunas <code>iso_format</code>, <code>date_time_naive</code> e <code>isoformat_naive</code> apresentam os dados assim como estão no banco de dados.</li>
+</ul>
+<p>Comportamentos estranhos a serem resolvidos:</p>
+<ul>
+<li>O <em>time zone</em> deveria ser de <code>-0300</code>. <strong>De onde veio os seis minutos a mais?</strong></li>
+<li>Afinal, o dado é persistido no banco de dados em UTC (como retornado pelo SQLAlchemy) ou no fuso horário informado no objeto <em>datetime</em> (como retornado pelo DBeaver)?</li>
+</ul>
+<h3 id="resolvendo-problema-de-definição-de-time-zone">Resolvendo problema de definição de <em>time zone</em></h3>
+<p>Ao apresentar esses problemas aos amigos que tenho como referência na área, um deles, o <a href="https://twitter.com/georgersilva" target="_blank" rel="noopener">@georgersilva</a>, me alertou que a forma como eu estava definido o <em>time zone</em> estava equivocado. A única direção dada por ele foi <a href="https://stackoverflow.com/questions/1379740/pytz-localize-vs-datetime-replace" target="_blank" rel="noopener">essa pergunta no Stack Overflow</a>.</p>
+<p>Um comentário me chamou a atenção:</p>
+<blockquote>
+<p>@MichaelWaterfall: pytz.timezone() may correspond to several tzinfo objects (same place, different UTC offsets, <em>time zone</em> abbreviations). tz.localize(d) tries to find the correct tzinfo for the given d local time (some local time is ambiguous or doesn&rsquo;t exist). replace() just sets whatever (random) info pytz <em>time zone</em> provides by default without regard for the given date (LMT in recent versions). tz.normalize() may adjust the time if d is a non-existent local time e.g., the time during DST transition in Spring (northern hemisphere) otherwise it does nothing in this case.</p>
+</blockquote>
+<p>Em tradução livre:</p>
+<blockquote>
+<p>pytz.timezone() pode corresponder a objetos com diferentes tzinfo (mesmo local, diferentes <em>offset</em> em relação ao UTC). tz.localize(d) tenta encontrar o tzinfo correto para um dada hora local (algumas horas locais são ambíguas ou inexistentes). replace() apenas define qualquer informação de <em>time zone</em> por padrão sem se preocupar com a data. tz.normalize() deve ajustar a informação de tempo se o objeto d não possuir informação de hora local.</p>
+</blockquote>
+<p>Como estou usando o <code>pytz</code> para definir um objeto de data com fuso horário, o <a href="https://docs.python.org/3/library/datetime.html#datetime.datetime.replace" target="_blank" rel="noopener"><code>replace</code></a> não seria a forma correta, mas sim, o método <a href="http://pytz.sourceforge.net/index.html?highlight=localize" target="_blank" rel="noopener"><code>localize</code></a> da própria instância <code>pytz.timezone</code>.</p>
+<p>Vamos testar, então:</p>
+<pre><code class="language-python">BR_TIME_ZONE = pytz.timezone(&quot;America/Sao_Paulo&quot;)
+naive = datetime(2022, 5, 27, 12, 30, 0, 0)
+naive.replace(tzinfo=BR_TIME_ZONE)
+# datetime.datetime(2022, 5, 27, 12, 30, tzinfo=&lt;DstTzInfo 'America/Sao_Paulo' LMT-1 day, 20:54:00 STD&gt;)
+BR_TIME_ZONE.localize(naive)
+# datetime.datetime(2022, 5, 27, 12, 30, tzinfo=&lt;DstTzInfo 'America/Sao_Paulo' -03-1 day, 21:00:00 STD&gt;)
+</code></pre>
+<p>Reparem a diferença que isso fez no parâmetro <code>tzinfo</code> da instância: há uma diferença de seis minutos no objeto ao qual usei o método <code>replace()</code>. Ao usar o <code>localize()</code>, a informação de fuso horário &ldquo;-03&rdquo; aparece.</p>
+<p>Fiz mais um teste para entender se o problema é o método <code>replace</code> ou a forma como o <code>pytz</code> define o <em>time zone</em>:</p>
+<pre><code class="language-python">datetime(2022, 5, 27, 12, 30, 0, 0, tzinfo=BR_TIME_ZONE)
+# datetime.datetime(2022, 5, 27, 12, 30, tzinfo=&lt;DstTzInfo 'America/Sao_Paulo' LMT-1 day, 20:54:00 STD&gt;)
+</code></pre>
+<p>Mesmo passando o <em>time zone</em> do <code>pytz</code> como parâmetro <code>tzinfo</code>, a diferença de seis minutos segue (20:54). Ou seja, também não seria a forma correta.</p>
+<p>Na documentação do <code>localize</code>, há apenas a menção:</p>
+<blockquote>
+<p>Unfortunately using the tzinfo argument of the standard datetime constructors ‘’does not work’’ with pytz for many timezones.</p>
+</blockquote>
+<p>Ao salvar no banco de dados o objeto <code>aware</code> criado usando o <code>localize</code>, os dados foram, enfim, salvos de forma correta:</p>
+<table>
+<thead>
+<tr>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2022-05-27 12:30:00.000 -0300</td>
+<td>2022-05-27T12:30:00-03:00</td>
+<td>2022-05-27 12:30:00.000</td>
+<td>2022-05-27T12:30:00</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<p>✔️ OK, um problema resolvido. Gracias, <a href="https://twitter.com/georgersilva" target="_blank" rel="noopener">@georgersilva</a>!<br>
+❓ Mas ainda fica o mistério das conversões entre o dado acessado pelo DBeaver daquele acessado pelo SQLAlchemy.</p>
+<p>Enquanto estava tentando resolver esse segundo problema, o <a href="https://twitter.com/dunossauro" target="_blank" rel="noopener">@dunossauro</a> fez uma <a href="https://youtu.be/BImF-dZYass?t=3948" target="_blank" rel="noopener"> live de python sobre <code>datetime</code></a>. Fui assistir e vi que ele indicou usarmos a definição de <em>time zone</em> usando <a href="https://docs.python.org/3/library/datetime.html#timedelta-objects" target="_blank" rel="noopener"><code>timedelta</code></a>. Me pareceu sensato.</p>
+<p>Vamos testar, então:</p>
+<h3 id="resolvendo-problema-de-definição-de-time-zone-com-timedelta">Resolvendo problema de definição de <em>time zone</em> com <code>timedelta</code></h3>
+<pre><code class="language-python">from datetime import timezone, timedelta
+
+# BR_TIME_ZONE = pytz.timezone(&quot;America/Sao_Paulo&quot;)
+BR_TIME_ZONE = timezone(timedelta(hours=-3))
+datetime(2022, 5, 27, 12, 30, 0, 0, tzinfo=BR_TIME_ZONE)
+# datetime.datetime(2022, 5, 27, 12, 30, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=75600)))
+datetime(2022, 5, 27, 12, 30, 0, 0).replace(tzinfo=BR_TIME_ZONE)
+# datetime.datetime(2022, 5, 27, 12, 30, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=75600)))
+</code></pre>
+<p>Reparem que agora não estamos mais usando uma instância <a href="http://pytz.sourceforge.net/#tzinfo-api" target="_blank" rel="noopener"><code>timezone</code></a> do <code>pytz</code> e por isso não podemos usar o método <code>localize()</code>. Com o timedelta, obtivemos os resultados esperados tanto passando o objeto no parâmetro <code>tzinfo</code>, na criação da instância <code>datetime</code>, como ao usar o método <code>replace</code>.</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>2022-05-27 12:30:00.000 -0300</td>
+<td>2022-05-27T12:30:00-03:00</td>
+<td>2022-05-27 12:30:00.000</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<p>Dessa forma também temos os dados persistidos corretamente e ainda nos poupa de usar o <code>pytz</code>. Gracias, <a href="https://twitter.com/dunossauro" target="_blank" rel="noopener">@dunossauro</a>!</p>
+<h3 id="o-mistério-das-consultas-sendo-retornadas-em-utc-e--0300">O mistério das consultas sendo retornadas em UTC e <code>-0300</code></h3>
+<p>Só para refrescar a memória: Ao acessar os dados persistidos no banco de dados usando o DBeaver, os recebia com o <em>time zone</em> -0300, enquanto ao acessar pelo SQLAlchemy, os mesmos dados eram retornados em UTC +00:00.</p>
+<p>Decidi acessar o banco e fazer as consultas apresentadas anteriormente pelo <a href="https://www.PostgreSQLql.org/docs/current/app-psql.html" target="_blank" rel="noopener">psql</a> e pelo DBeaver para confirmar:</p>
+<ol>
+<li>o fuso horário da instância do banco de dados, e;</li>
+<li>o fuso horário dos dados persistidos;</li>
+</ol>
+<h4 id="confirmando-o-fuso-horário-da-instância-do-banco-de-dados">Confirmando o fuso horário da instância do banco de dados</h4>
+<p>Executando o mesmo comando no <code>psql</code> e DBeaver para uma mesma instância de banco dados tive diferentes retornos:</p>
+<pre><code class="language-commandline">psql -h localhost -U postgres -p 5432 postgres
+
+show timezone;
+</code></pre>
+<p><img src="img/show_timezone_psql.png" alt=""></p>
+<p><img src="img/show_timezone_dbeaver.png" alt=""></p>
+<p>Eis, então, que fica evidente: A ferramenta usada para conexão e consulta ao banco de dados é que foram as responsáveis pelas diferenas observadas no <em>time zone</em>.</p>
+<p>Isso me fez lembrar da documentação do PostgreSQL que já havia lido, mas não tinha dado a devida atenção:</p>
+<blockquote>
+<p>For timestamp with time zone, the internally stored value is always in UTC (Universal Coordinated Time, traditionally known as Greenwich Mean Time, GMT). An input value that has an explicit time zone specified is converted to UTC using the appropriate offset for that time zone. If no time zone is stated in the input string, then it is assumed to be in the time zone indicated by the system&rsquo;s <em>time zone</em> parameter, and is converted to UTC using the offset for the <em>time zone</em> zone.
+<a href="https://www.postgresql.org/docs/current/datatype-datetime.html" target="_blank" rel="noopener">fonte</a></p>
+</blockquote>
+<p>Em tradução livre:</p>
+<blockquote>
+<p>Para dados com informação de <em>time zone</em>, o valor armazenado estará sempre em UTC (também conhecido como GMT). Um valor de entrada que não tenha <em>time zone</em> declarado explicitamente será convertido a UTC usando o <em>time zone</em> indicado pelo sistema.</p>
+</blockquote>
+<p>A partir disso, várias constatações:</p>
+<ul>
+<li>Os dados que possuem a informação de <em>time zone</em>, são convertidos a UTC. Os dados sem essa definição é entendido como já estando em UTC, logo não é convertido.</li>
+<li>O DBeaver identificou o <em>time zone</em> da minha máquina e ao retornar uma consulta já convertia todos os dados considerando o <em>time zone</em> da minha maquina.</li>
+<li>Não é o SQLAlchemy que define como os dados serão resgatados, mas o PostgreSQL. Na verdade, essa definição é feita pela seção de conexão com o banco de dados.</li>
+</ul>
+<p>Vejam:</p>
+<pre><code class="language-python">psql -h localhost -U postgres -p 5432 postgres
+
+PostgreSQL= show time zone;
+#  time zone
+# ----------
+#  Etc/UTC
+# (1 row)
+
+select * from datetime;
+</code></pre>
+<p>Com uma seção (conexão) recém iniciada, o <em>time zone</em> é configurado para UTC (padrão), com os dados sendo retornados em UTC.</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>isoformat_tz_aware</th>
+<th>datetime_naive</th>
+<th>isoformat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2022-05-27 15:36:00+00</td>
+<td>2022-05-27T12:30:00-03:06</td>
+<td>2022-05-27 15:36:00</td>
+<td>2022-05-27T12:30:00-03:06</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2022-05-27 12:30:00+00</td>
+<td>2022-05-27T12:30:00</td>
+<td>2022-05-27 12:30:00</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<p>Se, na mesma conexão, eu configuro o <em>time zone</em> para <code>America/Sao_Paulo</code>, e executo a mesma query, os dados na coluna com <em>time zone</em> consciente serão apresentados convertidos ao <em>time zone</em> definido na conexão (<code>-0300</code>).</p>
+<pre><code class="language-python">postgres=set timezone = 'America/Sao_Paulo';
+#SET
+postgres=show timezone;
+#      timezone      
+# -------------------
+#  America/Sao_Paulo
+# (1 row)
+
+
+select * from datetime;
+</code></pre>
+<p>Eis que todos os dados são retornados em <code>-0300</code>:</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>isoformat_tz_aware</th>
+<th>datetime_naive</th>
+<th>isoformat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2022-05-27 12:36:00-03</td>
+<td>2022-05-27T12:30:00-03:06</td>
+<td>2022-05-27 12:30:00</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2022-05-27 09:30:00-03</td>
+<td>2022-05-27T12:30:00</td>
+<td>2022-05-27 12:30:00</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<p>Tudo parece bem óbvio, não? Mas uma coisa que foi fundamental para a minha confusão mental sobre esse comportamento: o fato de estar usando o DBeaver os dados eram apresentados já convertidos para a <em>time zone</em> do meu sistema e, com isso, eu acreditava que os mesmos estavam sendo persistidos como tal no banco de dados. Ao acessar os dados pelo SQLAlchemy (que usa uma seção padrão, sem configuração de <em>time zone</em>, logo em UTC) recebia os dados em UTC. Ficando sem entender o que, de fato, estava sendo persistido.</p>
+<p>:heavy_checkmark: Fica o aprendizado: O PostgreSQL irá retornar os dados de data e hora no <em>time zone</em> da seção de conexão, que por padrão é UTC. Caso vc queira receber-los em outro <em>time zone</em>, basta definir usando o <a href="https://www.postgresql.org/docs/current/sql-set.html" target="_blank" rel="noopener"><code>SET timezone</code></a>, ou, se for usando o SQLAlchemy, você poderá fazê-lo usando o parâmetro <a href="https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine.params.connect_args" target="_blank" rel="noopener">connect_args</a>:</p>
+<pre><code>engine = create_engine(..., connect_args={&quot;options&quot;: &quot;-c timezone=-3&quot;})`
+</code></pre>
+<h3 id="coluna-naive-e-aware">coluna naive e aware</h3>
+<p>Ainda que tenha tomado um tempo considerável resolução de todas essas dúvidas, não chegou a esgotar a minha paciência. Por isso, fiz mais alguns testes, para tentar entender, de vez, a diferença entre usar ou não coluna com <em>time zone</em> consciente e ingênua no PostgreSQL.</p>
+<p>Ainda que já esteja superada a dúvida sobre as diferenças entre DBeaver e SQLAlchemy, seguirei apresentando as consultas usando ambas ferramentas, pois isso nos ajudará a entender as consequências ao usar campo consciente ou ingênuo.</p>
+<h4 id="primeiro-teste">Primeiro teste:</h4>
+<p>Inseri em ambos campos de <code>datetime</code> (consciente e ingênuo), um objeto com <em>time zone</em> consciente:</p>
+<pre><code class="language-python">record = DateTimeTable(
+    date_time_tz_aware=aware,
+    isoformat_tz_aware=f&quot;{aware.isoformat()}&quot;,
+    date_time_naive=aware,
+    isoformat_naive=f&quot;{aware.isoformat()}&quot;
+)
+session.add(record)
+session.commit()
+</code></pre>
+<p>Ao fazê-lo, o PosgreSQL entenderá o <em>time zone</em> do dado e, como dito anteriormente, os persitirá em UTC (logo, acrescentando três horas). <strong>Isso tanto para o campo consciente como para o campo ingênuo</strong>. A diferença, contudo estará no resgate da informação por uma seção em UTC ou em outro <em>time zone</em>:</p>
+<p>Acessando esse dado pelo DBeaver (seção com <em>time zone</em> configurado em -0300), tenho o valor do campo <code>aware</code> convertido ao <em>time zone</em> da seção (-0300) e indicando o mesmo, ao passo que o valor persistido no campo <code>naive</code> se mantêm em formato UTC <strong>e sem a indicação do <em>time zone</em>:</strong></p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>2022-05-27 12:30:00.000 -0300</td>
+<td>2022-05-27T12:30:00-03:00</td>
+<td>2022-05-27 15:30:00.000</td>
+<td>2022-05-27T12:30:00-03:00</td>
+</tr>
+</tbody>
+</table>
+<p>Já pelo SQLAlchemy a informação persistida no campo <em>time zone</em> consciente é retornada respeitando o <em>time zone</em> da seção (logo, <em>time zone</em> UTC) e no campo ingênuo, não há alteração.</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>2022-05-27 15:30:00+00:00</td>
+<td>2022-05-27T12:30:00-03:00</td>
+<td>2022-05-27 15:30:00</td>
+<td>2022-05-27T12:30:00-03:00</td>
+</tr>
+</tbody>
+</table>
+<h4 id="segundo-teste">Segundo teste:</h4>
+<p>Ao inserir em ambos campos, um objeto ingênuo, o PostgreSQL entende que os mesmos já estão em UTC. Logo, ao acessá-los pelo DBeaver (seção com <em>time zone</em> -0300), o valor no campo consciente apresenta o desconto de três horas e apresenta a informação de <em>time zone</em> -0300, e na coluna <code>naive</code>, os valores não são alterados.</p>
+<pre><code class="language-python"># terceiro registro inserindo datetime naive sempre
+record = DateTimeTable(
+    date_time_tz_aware=naive,
+    isoformat_tz_aware=f&quot;{naive.isoformat()}&quot;,
+    date_time_naive=naive,
+    isoformat_naive=f&quot;{naive.isoformat()}&quot;
+)
+session.add(record)
+session.commit()
+
+session.close()
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>2022-05-27 09:30:00.000 -0300</td>
+<td>2022-05-27T12:30:00</td>
+<td>2022-05-27 12:30:00.000</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<p>Acessando so dados pelo SQLAlchemy, tanto a coluna consciente como a ingênua apresentam o mesmo valor. Contudo, no campo consciente, a informação do <em>time zone</em> é existente (+00:00:00).</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>date_time_tz_aware</th>
+<th>iso_format_tz_aware</th>
+<th>date_time_naive</th>
+<th>isofomat_naive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>2022-05-27 12:30:00+00:00</td>
+<td>2022-05-27T12:30:00</td>
+<td>2022-05-27 12:30:00</td>
+<td>2022-05-27T12:30:00</td>
+</tr>
+</tbody>
+</table>
+<h2 id="preparando-ambiente-de-desenvolvimento">Preparando ambiente de desenvolvimento</h2>
+<p>Para isolar e reproduzir os comportamentos apresentados segui os seguintes passos:</p>
+<ol>
+<li>Criação de um ambiente virtual;</li>
+<li>Activação do ambiente virtual;</li>
+<li>Atualização do pip;</li>
+<li>INstalação dos pacotes listados em <a href="requirements.txt"><code>requirements.txt</code></a>;</li>
+<li>Criei uma instância do banco de dados <a href="#Docker-com-PostgreSQL">PostgreSQL usando docker</a>;</li>
+<li>Criei os <a href="#Modelo-de-dados-e-conex%c3%a3o-com-SQLAlchemy">modelos as tabelas usando SQLAlchemy</a>;</li>
+</ol>
+<pre><code>mkdir datetime
+cd datetime
+python -m venv .venv
+source .venv/bin/activate
+pip intall --upgrade pip
+pip install -r requirements.txt
+</code></pre>
+<h3 id="docker-com-postgresql">Docker com PostgreSQL</h3>
+<p>Para facilitar, criei uma instância Docker com a imagem original do PostgreSQLQL. Caso já o tenha instalado em sua máquina, desconsidere.</p>
+<pre><code class="language-commandline">docker pull PostgreSQL
+
+docker run --name teste_datetime -e PostgreSQL_PASSWORD=password -d PostgreSQL
+
+# confirmando existencia
+docker container ps
+#CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS                    NAMES
+#c77150c506a8   PostgreSQL   &quot;docker-entrypoint.s…&quot;   6 seconds ago   Up 5 seconds
+</code></pre>
+<h3 id="modelo-de-dados-e-conexão-com-sqlalchemy">Modelo de dados e conexão com SQLAlchemy</h3>
+<p>Crio, em um arquivo <code>models.py</code>, a classe que representará a tabela <code>datetime</code> do banco de dados. Nela teremos os campos <code>date_time_tz_aware</code>, <code>date_time_aive</code> que são, ambos, <a href="https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.DateTime" target="_blank" rel="noopener"><code>DateTime()</code></a>, com o parâmetro <a href="https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.DateTime.params.timezone" target="_blank" rel="noopener"><code>*time zone*=True</code></a> <strong>verdadeiro</strong> e <strong>falso</strong>, respectivamente. Os campos <code>isoformat_tz_aware</code> e <code>isoformat_naive</code> serão os campos textuais que persistirão os dados de data e hora em formato <a href="https://docs.python.org/3/library/datetime.html#datetime.datetime.isoformat" target="_blank" rel="noopener"><code>isoformat()</code></a>.</p>
+<pre><code class="language-python"># models.py
+import json
+
+from sqlalchemy import Integer, DateTime, Text
+from sqlalchemy import create_engine, Column
+from sqlalchemy.ext.declarative import declarative_base
+
+
+Base = declarative_base()
+
+
+BD_USERNAME = &quot;PostgreSQL&quot;
+BD_PASSWORD = &quot;password&quot;
+BD_HOST = &quot;localhost&quot;
+BD_PORT = &quot;5433&quot;
+BD_NAME = &quot;PostgreSQL&quot;
+
+
+def db_connect():
+    return create_engine(
+        f&quot;PostgreSQLql+psycopg2://{BD_USERNAME}:{BD_PASSWORD}@{BD_HOST}:{BD_PORT}/{BD_NAME}&quot;
+    )
+
+
+def create_table(engine):
+    Base.metadata.create_all(engine)
+
+
+class DateTimeTable(Base):
+    __tablename__ = &quot;datetime&quot;
+
+    id = Column(Integer, primary_key=True)
+    date_time_tz_aware = Column(DateTime(timezone=True))
+    isoformat_tz_aware = Column(Text)
+    date_time_naive = Column(&quot;datetime_naive&quot;, DateTime(timezone=False))
+    isoformat_naive = Column(Text)
+
+
+engine = db_connect()
+create_table(engine)
+
+</code></pre>
+<h3 id="identificando-time-zone-das-instâncias-de-trabalho">Identificando <em>time zone</em> das instâncias de trabalho</h3>
+<p>Para confirmar que estamos reproduzindo as mesmas situações, vamos confirmar o <em>time zone</em> da base de dados.</p>
+<p><strong>Docker PostgreSQL</strong></p>
+<pre><code class="language-commandline">psql -h localhost -U PostgreSQL -p 5433
+show timezone;
+# timezone 
+#----------
+# Etc/UTC
+#(1 row)
+
+</code></pre>
+<p>Ao executar a consulta <code>select now()</code>, ele me dá a data e hora com a info de <em>time zone</em> utc (+00):</p>
+<pre><code class="language-commandline">select now();
+#              now              
+#-------------------------------
+# 2022-05-27 15:36:59.903336+00
+#(1 row)
+
+
+</code></pre>
+<p>E o mesmo com python:</p>
+<p><strong>python</strong></p>
+<pre><code class="language-python">from datetime import datetime
+datetime.now().astimezone().tzinfo
+#datetime.timezone(datetime.timedelta(days=-1, seconds=75600), '-03')
+</code></pre>
+<p>Ou seja, o sistema no qual está rodando o python, está com o <em>time zone</em> -03 em relação ao UTC.</p>
+<blockquote>
+<p>⚠️ Atenção, dependendo de como estiver configurado seu sistema, esse resultado poderá ser diferente do meu.</p>
+</blockquote>
+<h2 id="resumindo">Resumindo</h2>
+<ul>
+<li>
+<p>É possível usar tanto o <code>timedelta</code> como <code>TimeZone</code>, do <code>pytz</code>, para definir o <code>tzinfo</code> de uma instância <code>datetime</code>. Contudo, <strong>é preciso cuidado com relação ao método usado na atribuição do <code>tzinfo</code>:</strong></p>
+<ul>
+<li>Caso se esteja usando uma instância <code>TimeZone</code> do <code>pytz</code>, é indicado usar o método <code>localize</code>;</li>
+</ul>
+<pre><code class="language-python">BR_TIME_ZONE = pytz.timezone(&quot;America/Sao_Paulo&quot;)
+date_time_ibject = datetime(2022, 5, 27, 12, 30, 0, 0)
+BR_TIME_ZONE.localize(date_time_ibject)
+</code></pre>
+<ul>
+<li>Já usando o <code>timedelta</code>, pode-se fazê-lo tanto na criação da instância <code>datetime</code>, quanto usando o método <code>replace</code> do objeto <code>datetime</code> já instanciado;</li>
+</ul>
+<pre><code class="language-python">BR_TIME_ZONE = timezone(timedelta(hours=-3))
+date_time_object = datetime(2022, 5, 27, 12, 30, 0, 0, tzinfo=BR_TIME_ZONE)
+# OU
+date_time_object = datetime(2022, 5, 27, 12, 30, 0, 0)
+date_time_object.replace(tzinfo=BR_TIME_ZONE)
+</code></pre>
+</li>
+<li>
+<p>Os dados de data e hora são sempre armazenados em UTC no PostgreSQL, independente de estarmos ou não usando campos com <em>time zone</em> conscientes. Logo, ao persistir um dado consciente, o mesmo será convertido e persistido em UTC, mesmo em campos ingênuos. Objetos sem informação de <em>time zone</em>, serão persistido como tais por se entender já estarem em UTC. A diferença em relação a esses tipos de campos se dá pelo fato do primeiro armazenar a informação do <em>time zone</em> e o último, não.</p>
+</li>
+<li>
+<p>Outra diferença entre campo consciente e ingênuo se dá nas consultas: Os campos conscientes, ao serem consultados por uma seção com <em>time zone</em> diferente do padrão (UTC), retornará os dados convertidos ao <em>time zone</em> da seção;</p>
+<ul>
+<li>Para definir o <em>time zone</em> de uma seção, pode-se usar:</li>
+</ul>
+<pre><code># psql
+set timezone = 'America/Sao_Paulo';
+</code></pre>
+<p>ou</p>
+<pre><code class="language-python"># SQLAlchemy
+engine = create_engine(..., connect_args={&quot;options&quot;: &quot;-c timezone=-3&quot;})
+</code></pre>
+</li>
+</ul>
+<p>Não poderia deixar de agradecer ao <a href="">@cuducos</a> pelo incentivo em resolver os problemas encontrados e ajuda na revisão do texto. Eu acabei encontrando essas soluções antes de ter tempo de seguir a sugestão dele: &ldquo;tentar identificar o como o SQLAlchemy estava fazendo o <code>insert</code> dos dados e o resgate dos mesmos&rdquo;. Vejo que, de alguma forma, foi o direcionamento que acabei tomando para entender a diferença nos fuso horários retornados pelas consultas.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/pt-br/">pt-br</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/author/felipe-sodre-mendes-barros/avatar_hu44392504df2335dcc3eaaf2f7e4811a3_211552_270x270_fill_q75_lanczos_center.jpg" alt="Felipe Sodré Mendes Barros">
+    
+
+    <div class="media-body">
+      <h5 class="card-title">Felipe Sodré Mendes Barros</h5>
+      <h6 class="card-subtitle">Geographic Data Scientist</h6>
+      <p class="card-text">Geographer interested in technology and statistics to overcome environmental problems</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/FelipeSBarros" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/felipesodre/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://lattes.cnpq.br/8403301812573195" target="_blank" rel="noopener">
+        <i class="ai ai-lattes"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=022IGOcAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/FelipeSMBarros" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/sistema-dados-geograficos-iii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta III</a></li>
+      
+      <li><a href="/post/bug-buster/">Bug buster</a></li>
+      
+      <li><a href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta II</a></li>
+      
+      <li><a href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">Criando um sistema para gestão de dados geográficos de forma simples e robusta</a></li>
+      
+      <li><a href="/post/carreira-e-xadrez/">A carreira profissional sob a ótica de um tabuleiro de xadrez</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
