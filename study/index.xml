@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Studies | Felipe Sodré M. Barros</title>
+    <link>/study/</link>
+      <atom:link href="/study/index.xml" rel="self" type="application/rss+xml" />
+    <description>Studies</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_512x512_fill_lanczos_center_2.png</url>
+      <title>Studies</title>
+      <link>/study/</link>
+    </image>
+    
+    <item>
+      <title>Estudando Scrapy &#39;like a pro&#39;</title>
+      <link>/study/scrapy/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/study/scrapy/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
