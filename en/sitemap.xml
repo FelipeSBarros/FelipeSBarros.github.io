@@ -708,6 +708,36 @@
   </url>
   
   <url>
+    <loc>/study/scrapy/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/study/scrapy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/study/scrapy/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/logging/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/logging/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/logging/"
+                />
+  </url>
+  
+  <url>
     <loc>/tag/pet-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -753,6 +783,21 @@
   </url>
   
   <url>
+    <loc>/tag/scrapy/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/scrapy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/scrapy/"
+                />
+  </url>
+  
+  <url>
     <loc>/project/restoration-priorization/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -764,6 +809,36 @@
                 rel="alternate"
                 hreflang="en"
                 href="/project/restoration-priorization/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tag/sqlalchemy/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/tag/sqlalchemy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tag/sqlalchemy/"
+                />
+  </url>
+  
+  <url>
+    <loc>/study/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="/pt/study/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/study/"
                 />
   </url>
   
