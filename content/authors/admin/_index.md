@@ -107,13 +107,13 @@ social:
   - icon: ai-lattes
     icon_pack: ai
     link: http://lattes.cnpq.br/8403301812573195
-  - icon: ai-google-scholar # Alternatively, use `google-scholar` icon from `ai` icon pack
+  - icon: google-scholar # Alternatively, use `google-scholar` icon from `ai` icon pack
     icon_pack: ai
     link: https://scholar.google.com/citations?user=022IGOcAAAAJ
   - icon: twitter
     icon_pack: fab
     link: https://twitter.com/FelipeSMBarros
-  - icon: fa-mastodon
+  - icon: mastodon
     icon_pack: fa
     link: https://twitter.com/FelipeSMBarros
 
