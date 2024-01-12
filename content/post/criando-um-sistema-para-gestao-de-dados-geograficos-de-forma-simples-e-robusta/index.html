@@ -1,0 +1,1450 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Felipe Sodré Mendes Barros">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin.
+Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django.">
+
+  
+  <link rel="alternate" hreflang="pt" href="/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">
+  
+  <link rel="alternate" hreflang="en-us" href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9763f5be8493c9d07b95458db93fbb03.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Felipe Sodré M. Barros">
+  <meta property="og:url" content="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">
+  <meta property="og:title" content="Criando um sistema para gestão de dados geográficos de forma simples e robusta | Felipe Sodré M. Barros">
+  <meta property="og:description" content="Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin.
+Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django."><meta property="og:image" content="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/featured.png">
+  <meta property="twitter:image" content="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-05-07T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-07-11T22:25:12-03:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/"
+  },
+  "headline": "Criando um sistema para gestão de dados geográficos de forma simples e robusta",
+  
+  "image": [
+    "/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/featured.png"
+  ],
+  
+  "datePublished": "2021-05-07T00:00:00Z",
+  "dateModified": "2021-07-11T22:25:12-03:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Felipe Sodré Mendes Barros"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Felipe Sodré M. Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin.\nHá algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta | Felipe Sodré M. Barros</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About me</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#accomplishments"><span>Awards</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Professional experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Post</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#study"><span>Studies</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">English</span></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>English</span>
+          </div>
+          
+          <a class="dropdown-item" href="/pt/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">
+            <span>Português</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Criando um sistema para gestão de dados geográficos de forma simples e robusta</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Jul 11, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/python/">Python</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 349px;">
+  <div style="position: relative">
+    <img src="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/featured_hu2acf7e13a77067bddc905a66d160ea8c_541804_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="criando-um-sistema-para-gestão-de-dados-geográficos-de-forma-simples-e-robusta">Criando um sistema para gestão de dados geográficos de forma simples e robusta</h1>
+<p><em>Artigo publicado também no <a href="https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/" target="_blank" rel="noopener"><strong>linkedin</strong></a></em>.</p>
+<p>Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django. Decidi expor alguns aprendizados em uma serie de artigos. A ideia é que esses textos me ajudem na consolidação do conhecimento e, ao tê-los publicado, ajudar a outros que tenham interesse na área.</p>
+<p>Aproveito para deixar meu agradecimento ao Cuducos que, tanto neste artigo, como em todos meus estudos tem sido um grande mentor. Vamos ao que interessa:</p>
+<p>Por simples, entende-se:</p>
+<ul>
+<li>Um sistema sem a necessidade da instalação e configuração de base de dados PostgreSQL/GIS, Geoserver, etc;</li>
+<li>Um sistema clássico tipo <em>Create</em>, <em>Retrieve</em>, <em>Update</em>, <em>Delete</em> (CRUD) para dados geográficos;</li>
+<li>Um sistema que não demande operações e consultas espaciais;</li>
+<li>Mas um sistema que garanta a qualidade na gestão dos dados geográficos;</li>
+</ul>
+<h3 id="visão-geral-da-proposta">Visão geral da proposta:</h3>
+<p>Vamos criar um ambiente virtual Python e instalar a framework Django, para criar o sistema, assim como alguns módulos como <a href="https://pypi.org/project/jsonfield/" target="_blank" rel="noopener"><code>jsonfield</code></a>, que nos vai habilitar a criação de campos <code>JSON</code> em nossa base de dados; <a href="https://pypi.org/project/django-geojson/" target="_blank" rel="noopener"><code>django-geojson</code></a>, que depende do <code>jsonfield</code> e será responsável por habilitar instâncias de dados geográficos, baseando-se em <code>JSON</code>; <a href="https://pypi.org/project/geojson/" target="_blank" rel="noopener"><code>geojson</code></a>, que possui todas as regras <em>básicas</em> de validação de dados geográficos, usando a estrutura homônima, <a href="https://geojson.org/" target="_blank" rel="noopener"><code>geojson</code></a>.</p>
+<p>O uso desses três módulos nos permitirá o desenvolvimento de um sistema de gestão de dados geográficos sem a necessidade de termos instalado um sistema de gerenciamento de dados geográficos, como o PostGIS. Sim, nosso sistema será bem limitado a algumas tarefas. Mas em contrapartida, poderemos desenvolvê-lo e implementar soluções &ldquo;corriqueiras&rdquo; de forma facilitada.</p>
+<p>No presente exemplo estarei usando <a href="https://www.sqlite.org/index.html" target="_blank" rel="noopener">SQLite</a>, como base de dados.</p>
+<p>Nosso projeto se chamará de <em>map_proj</em>. E nele vou criar uma app, dentro da pasta do meu projeto <code>Django</code>, chamada <code>core</code>. Essa organização e nomenclatura usada, vem das sugestões do <a href="https://github.com/okfn-brasil/jarbas/issues/28#issuecomment-256117262" target="_blank" rel="noopener">Henrique Bastos</a>. Afinal, o sistema está nascendo. Ainda que eu tenha uma ideia do que ele será, é interessante iniciar com uma aplicação &ldquo;genérica&rdquo; e a partir do momento que o sistema se torne complexo, poderemos desacoplá-la em diferentes aplicações.</p>
+<h3 id="criando-ambiente-de-desenvolvimento-projeto-e-nossa-app">Criando ambiente de desenvolvimento, projeto e nossa app:</h3>
+<pre><code class="language-python">python -m venv .djleaflet # cria ambiente virtual python
+# ativando o ambiente virtual:
+source ./venv/bin/activate
+
+# atualizando o pip
+pip install --upgrade pip
+
+# intalando os módulos a serem usados
+pip install django jsonfield django-geojson geojson
+
+# criando projeto
+django-admin startproject map_proj .
+
+# criando app dentro do projeto
+cd map_proj
+python manage.py startapp core
+
+# criando a base de dados inicial
+python manage.py migrate 
+
+# criando superusuário
+python manage.py createsuperuser 
+</code></pre>
+<h4 id="adicionando-os-módulos-e-a-app-ao-projeto">Adicionando os módulos e a app ao projeto</h4>
+<p>Agora é adicionar ao <code>map_proj/settings.py</code>, a app criada e os módulos que usaremos.</p>
+<pre><code class="language-python"># setting.py
+INSTALLED_APPS = [
+    ...
+    'djgeojson',
+    'map_proj.core',
+]
+</code></pre>
+<p>Perceba que para poder acessar as classes de alto nível criadas pelo pacote <code>djgeojson</code>, teremos que adicioná-lo ao <code>INSTALLED_APPS</code> do <code>settings.py</code>.</p>
+<h3 id="criando-a-base-de-dados">Criando a base de dados</h3>
+<p>Ainda que eu concorde com o Henrique Bastos, que a visão de começar os projetos Django pelo <code>models.py</code> é um tanto &ldquo;perigosa&rdquo;, por colocar ênfase em uma parte da app e, em muitos casos, negligenciar vários outros atributos e ferramentas que o Django nos oferece, irei desconsiderar sua abordagem. Afinal, o objetivo deste artigo não é explorar todo o potencial do Django, mas sim apresentar uma solução simples no desenvolvimento e implementação de um sistema de gestão de dados geográficos para servir como ferramenta de estudo e projeto prático.</p>
+<p>Em <code>models.py</code> usaremos instâncias de alto nível que o Django nos brinda para criar e configurar os campos e as tabelas que teremos em nosso sistema, bem como alguns comportamentos do sistema.</p>
+<p>Como estou desenvolvendo um sistema multi propósito, vou tentar mantê-lo bem genérico. A ideia é que vocês possam imaginar o que adequar para um sistema especialista na sua área de interesse. Vou criar, então, uma tabela para mapear &ldquo;fenômenos&rdquo; (quaisquer). Esse modelo terá os campos <em>nome</em>, <em>data</em>, <em>hora</em> e <em>geometria</em>, a qual será uma instância de <code>PointField</code>.</p>
+<p>O <code>PointField</code> é uma classe criada pelo <code>djgeojson</code> que nos permite usar um campo para dados geográficos sem ter toda a infraestrutura do PostGIS, instalada, por exemplo. Nesse caso, estou simulando um campo de ponto, mas, de acordo com a documentação do pacote, todas as geometrias usadas em dados espaciais são suportadas:</p>
+<blockquote>
+<p>All geometry types are supported and respectively validated : GeometryField, PointField, MultiPointField, LineStringField, MultiLineStringField, PolygonField, MultiPolygonField, GeometryCollectionField. ( <a href="https://django-geojson.readthedocs.io/en/latest/models.html" target="_blank" rel="noopener"><code>djgeojson</code></a> )</p>
+</blockquote>
+<pre><code class="language-python"># models.py
+from django.db import models
+from djgeojson.fields import PointField
+
+
+class Fenomeno(models.Model):
+    nome = models.CharField(max_length=100,
+                            verbose_name='Fenomeno mapeado')
+    data = models.DateField(verbose_name='Data da observação')
+    hora = models.TimeField()
+    geom = PointField(blank=True)
+
+    def __str__(self):
+        return self.nome
+
+</code></pre>
+<p>Percebam que eu importo de <code>djgeojson</code> a classe <code>PointField</code>. O que o <code>django-geojson</code> fez foi criar uma classe [com estrutura de dados geográfico] de alto nível, mas que no banco de dados será armazenado em um campo <code>JSON</code>. Vale a pena deixar claro: não espero que o usuário do meu sistema saiba preencher o campo <code>geom</code> em formato <code>JSON</code>. Por isso, criarei no <code>forms.py</code>, os campos <em>latitude</em> e <em>longitude</em> e a partir deles, o campo geom será preenchido. Detalharei esse processo mais adiante.</p>
+<p>Pronto, já temos o modelo da &lsquo;tabela de dados &ldquo;geográficos&rdquo;&rsquo;, mas esse modelo ainda não foi registrado em nossa base. Para isso:</p>
+<pre><code class="language-python">python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+<p>O <code>makemigrations</code> analisa o <code>models.py</code> e o compara com a versão anterior identificando as alterações e criando um arquivo que será executado pelo <code>migrate</code>, aplicando tais alterações ao banco de dados. Aprendi com o Henrique Bastos e <a href="https://twitter.com/cuducos" target="_blank" rel="noopener">Cuducos</a> que o migrate é um sistema de versionamento da estrutura do banco de dados, permitindo retroceder, quando necessário, a outras versões.</p>
+<h3 id="criando-o-formulário">Criando o formulário</h3>
+<p>Vou aproveitar algumas &ldquo;pilhas já incluídas&rdquo; do Django, ao usar o <code>ModelForm</code> para criar o formulário para o carregamento de dados. O <code>ModelForm</code> facilita esse processo.</p>
+<p>Aliás, é importante pensar que os formulários do Django vão muito além da &ldquo;carga de dados&rdquo;, já que são os responsáveis por cuidar da interação com o usuário e o(s) processo(s) de validação e limpeza dos dados preenchidos.</p>
+<p>Digo isso, pois ao meu <code>FenomenosForm</code>, eu sobreescrevo o método <code>clean()</code>, que cuida da validação e limpeza do formulário e incluo nele:</p>
+<ol>
+<li>a construção dos dados do campo <code>geom</code> a partir dos valores dos campos de <em>latitude</em> e <em>longitude</em> (criados exclusivamente para a gerção do campo geom);</li>
+<li>a validação do campo geom;</li>
+</ol>
+<pre><code class="language-python"># forms.py
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm, FloatField
+from map_proj.core.models import Fenomeno
+from geojson import Point
+
+
+class FenomenoForm(ModelForm):
+    longitude = FloatField()
+    latitude = FloatField()
+    class Meta:
+        model = Fenomeno
+        fields = ('nome', 'data', 'hora', 'latitude', 'longitude')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        lon = cleaned_data.get('longitude')
+        lat = cleaned_data.get('latitude')
+        cleaned_data['geom'] = Point((lon, lat))
+
+        if not cleaned_data['geom'].is_valid:
+            raise ValidationError('Geometria inválida')
+        return cleaned_data
+
+</code></pre>
+<p>Ainda que pareça simples, não foi fácil chegar a essa estratégia de estruturação dos <code>models</code> e <code>forms</code>. Contei com a ajuda e paciencia do <a href="https://twitter.com/cuducos" target="_blank" rel="noopener">Cuducos</a>. Inicialmente eu mantinha latitude e longitude no meu <code>models</code>. Mas fazendo assim, além de ter uma redundância de dados e uma abertura a erros potenciais, estaria armazenando dados que não devo usar depois de contruir o campo geom. Uma alternativa, discutida com o Cuducos foi de ter tanto <em>latitude</em> como <em>longitude</em> no <code>models</code>, mas o atributo <code>geom</code> como <a href="https://docs.python.org/3/howto/descriptor.html#properties" target="_blank" rel="noopener">propriedade</a>. Ainda que seja uma estratégia consistente, a redundância se mantém.</p>
+<p>O processo de validação do campo <code>geom</code> também foi fruto de muita discussão. De forma resumida, percebi que o <code>djgeojson</code> apenas valida o tipo de geometria do campo e não a sua consistência. Ao conversar com os desenvolvedores, me disseram que toda a lógica de validação de objetos <code>geojson</code> estavam sendo centralizados no módulo homônimo.</p>
+<p>Por isso eu carrego a classe <code>Point</code> do módulo <code>geojson</code> e designo o campo <code>geom</code> como instância dessa classe. Assim, passo a poder contar com um processo de validação mais consistente, como o método <code>is_valid</code>, usado anteriormente.</p>
+<h4 id="mas-e-o-teste">Mas e o teste?</h4>
+<p>Pois é, eu adoraria apresentar isso usando a abordagem <em>Test Driven Development (TDD)</em>. Mas, talvez pela falta de prática, conhecimento e etc, vou apenas apontar onde e como eu testaria esse sistema. Faço isso como uma forma de estudo, mesmo. Também me pareceu complicado apresentar a abordagem TDD em um artigo, já que a mesma se faz de forma incremental.</p>
+<h5 id="sobre-tdd">Sobre TDD</h5>
+<p>Com o Henrique Bastos e toda a comunidade do <a href="https://medium.com/welcome-to-the-django/o-wttd-%C3%A9-tudo-que-eu-ensinaria-sobre-prop%C3%B3sito-de-vida-para-mim-mesmo-se-pudesse-voltar-no-tempo-d73e516f911c" target="_blank" rel="noopener"><em>Welcome to The Django</em></a> vi que essa abordagem é tanto filosófica quanto técnica. É praticamente &ldquo;Chora agora, ri depois&rdquo;, mas sem a parte de chorar. Pois com o tempo as coisas ficam mais claras&hellip; Alguns pontos:</p>
+<ul>
+<li>O erro não é para ser evitado no processo de desenvolvimento, mas sim quando estive em produção. Logo,</li>
+<li>Entenda o que você quer do sistema, crie um teste antes de implementar e deixe o erro te guiar até ter o que deseja;</li>
+<li>Teste o comportamento esperado e não cada elemento do sistema;</li>
+</ul>
+<p>Sem mais delongas:</p>
+<h5 id="o-que-testar">O que testar?</h5>
+<p>Vamos usar o arquivo <code>tests.py</code> e  criar nossos testes lá.
+Ao abrir vocês vão ver que já está o comando importando o <code>TestCase</code>.</p>
+<blockquote>
+<p>Mas o que vamos testar?</p>
+</blockquote>
+<p>Como pretendo testar tanto a estrutura da minha base de dados, quanto o formulário e, de quebra, a validação do meu campo <code>geom</code>, faço o <code>import</code> do modelo <code>Fenomenos</code> e do form <code>FenomenosForm</code>.</p>
+<p>⚠️ Essa não é uma boa prática. O ideal é criar uma pasta para os testes e separá-los em arquivos distintos. Um para cada elemento do sistema (model, form, view, etc).</p>
+<p>O primeiro teste será a carga de dados. Então, vou instanciar um objeto com o resultado da criação de um elemento do meu <code>model</code> <code>Fenomeno</code>. Faço isso no <code>setUp</code>, para não ter que criá-lo sempre que for fazer um teste relacionado à carga de dados.</p>
+<p>O teste seguinte será relacionado ao formulário e por isso instancio um formulário com os dados carregados e testo a sua validez. Ao fazer isso o formulário passa pelo processo de limpeza, onde está a construção e validação do campo <code>geom</code>. Se qualquer campo for preenchido com dados errados ou inadequados, o django retornará <code>False</code> ao método <code>is_valid</code>. Ou seja, se eu tiver construido o campo <code>geom</code> de forma equivocada, passando mais ou menos parâmetros que o esperado o nosso teste irá avisar, evitando surpresas.</p>
+<pre><code class="language-python"># tests.py
+from django.test import TestCase
+from geojson import Point
+
+from map_proj.core.models import Fenomeno
+from map_proj.core.forms import FenomenoForm
+
+
+class ModelGeomTest(TestCase):
+    def setUp(self):
+        self.fenomeno = Fenomeno.objects.create(
+            nome='Arvore',
+            data='2020-11-06',
+            hora='09:30:00'
+        )
+
+    def test_create(self):
+        self.assertTrue(Fenomeno.objects.exists())
+
+
+class FenomenoFormTest(TestCase):
+    def setUp(self):
+        self.form = FenomenoForm({
+            'nome': 'Teste',
+            'data': '2020-01-01',
+            'hora': '09:12:12',
+            'longitude': -45,
+            'latitude': -22})
+        self.validation = self.form.is_valid()
+
+    def test_form_is_valid(self):
+        &quot;&quot;&quot;&quot;form must be valid&quot;&quot;&quot;
+        self.assertTrue(self.validation)
+
+    def test_geom_coordinates(self):
+        &quot;&quot;&quot;after validating, geom have same values of longitude and latitude&quot;&quot;&quot;
+        self.assertEqual(self.form.cleaned_data['geom'], Point(
+            (self.form.cleaned_data['longitude'],
+        self.form.cleaned_data['latitude'])))
+
+    def test_geom_is_valid(self):
+        &quot;&quot;&quot;geom must be valid&quot;&quot;&quot;
+        self.assertTrue(self.form.cleaned_data['geom'].is_valid)
+
+</code></pre>
+<p>⚠️ Reparem que:</p>
+<ol>
+<li>No <code>test_create()</code> eu testo se existem objetos inseridos no model <code>Fenomeno</code>. Logo, testo se o dado criado no <code>setUp</code> foi corretamente incorporado no banco de dados.</li>
+<li>Na classe <code>FenomenosFormTest</code> eu crio uma instância do meu modelForm e realizo três testes:
+<ul>
+<li><code>test_form_is_valid()</code> estou testando se os dados carregados são condizentes com o informado no model e, pelo fato desse método usar o método <code>clean()</code>, posso dizer que estou testando indiretamente a validez do campo <code>geom</code>. Caso ele não fosse válido, o form também não seria válido.</li>
+<li>Em <code>test_geom_coordinates()</code> testo se após a validação o campo geom foi criado como esperado (como uma instância de Point com os dalores de longitude e latitude).</li>
+<li>O teste <code>test_geom_is_valid()</code> serve para garantir que a contrução do campo geom é valido. Ainda que ao testar se o formulário é valido eu estaria implicitamente testando a validez do campo geom, esse teste serve para garantir a criação válida do campo. Afinal, por algum motivo (como por exemplo, refatoração), pode ser que façamos alguma alteração no método <code>clean()</code> que mantenha o formulário como válido mas deixe de garantir a validez do campo geom.</li>
+</ul>
+</li>
+</ol>
+<p>A diferença entre as classes de teste criadas está no fato de ao inserir os dados usando o método <code>create()</code> - e aconteceria o mesmo se estivesse usando o <code>save()</code> -, apenas será validado se o elemento a ser inserido é condizente com o tipo de coluna no banco de dados. Vale deixar claro: Dessa forma, eu não estou validando a consistência do campo <code>geom</code>, já que o mesmo, caso seja informado, será salvo com sucesso sempre que represente um <code>JSON</code>.</p>
+<p>Esse fato é importante para reforçar o entendimento de que o <code>djgeojson</code> implementa classes de alto nível a serem trabalhados em <code>views</code> e <code>models</code>. No banco, mesmo, temos um campo de <code>JSON</code>.
+Enquanto que, para poder validar a consistência do campo <code>geom</code>, preciso passar os dados pelo formulário onde, no processo de limpeza do mesmo, o campo será criado e validado usando o módulo <code>geojson</code>. Por isso a classe com os testes relacionados ao comportamento do formulário.</p>
+<h3 id="registrando-modelo-no-admin">Registrando modelo no admin</h3>
+<p>Para facilitar, vou usar o django-admin. Trata-se de uma aplicação já criada onde basta registrar os modelos e views que estamos trabalhando para termos uma interface &ldquo;frontend&rdquo; genérica.</p>
+<pre><code class="language-python">#admin.py
+from django.contrib import admin
+from map_proj.core.models import Fenomeno
+from map_proj.core.forms import FenomenoForm
+
+class FenomenoAdmin(admin.ModelAdmin):
+    model = Fenomeno
+    form = FenomenoForm
+
+admin.site.register(Fenomeno, FenomenoAdmin)
+
+</code></pre>
+<h3 id="to-be-continued">To be continued&hellip;</h3>
+<p>Até o momento já temos algo bastante interessante: um sistema de CRUD que nos permite adicionar, editar e remover dados geográficos. Talvez você esteja pensando consigo mesmo:</p>
+<blockquote>
+<p>&ldquo;OK. Mas o que foi feito até agora, poderia ter sido feito basicamente com uma base de dados que possuam as colunas latitude e longitude&rdquo;.</p>
+</blockquote>
+<p>Eu diria que sim, até certo ponto. Uma grande diferença, eu diria, da forma como foi implementada é o uso das ferramentas de validação dos dados com o módulo <code>geojson</code>.</p>
+<p>A ideia é, a seguir (e seja lá quando isso for), extender a funcionalidade do sistema ao implementar um webmap para visualizar os dados mapeados.</p>
+<p><em>Artigo publicado também no <a href="https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/" target="_blank" rel="noopener"><strong>linkedin</strong></a></em>.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/django/">Django</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/pt-br/">pt-br</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/author/felipe-sodre-mendes-barros/avatar_hu44392504df2335dcc3eaaf2f7e4811a3_211552_270x270_fill_q75_lanczos_center.jpg" alt="Felipe Sodré Mendes Barros">
+    
+
+    <div class="media-body">
+      <h5 class="card-title">Felipe Sodré Mendes Barros</h5>
+      <h6 class="card-subtitle">Geographic Data Scientist</h6>
+      <p class="card-text">Geographer interested in technology and statistics to overcome environmental problems</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/FelipeSBarros" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/felipesodre/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://lattes.cnpq.br/8403301812573195" target="_blank" rel="noopener">
+        <i class="ai ai-lattes"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=022IGOcAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/FelipeSMBarros" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta II</a></li>
+      
+      <li><a href="/post/sistema-dados-geograficos-iii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta III</a></li>
+      
+      <li><a href="/post/bug-buster/">Bug buster</a></li>
+      
+      <li><a href="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs</a></li>
+      
+      <li><a href="/post/carreira-e-xadrez/">A carreira profissional sob a ótica de um tabuleiro de xadrez</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

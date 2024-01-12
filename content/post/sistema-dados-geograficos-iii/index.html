@@ -1,0 +1,1528 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Felipe Sodré Mendes Barros">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Caso não tenha visto as publicações anteriores, deixo aqui o link e os temas abordados:
+ Na primeira publicação falo sobre o django-geojson para simular um campo geográfico no models; o geojson para criar um objeto da classe geojson e realizar as validações necessárias para garantir robustez do sistema, e a criação do formulário de registro de dados usando o ModelForm; Na segunda publicação apresento os validadores de campo do Django como uma ferramenta fundamental na qualidade dos dados espaciais, sem depender de infraestrutura SIG (GIS).">
+
+  
+  <link rel="alternate" hreflang="pt" href="/pt/post/sistema-dados-geograficos-iii/">
+  
+  <link rel="alternate" hreflang="en-us" href="/post/sistema-dados-geograficos-iii/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9763f5be8493c9d07b95458db93fbb03.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/sistema-dados-geograficos-iii/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Felipe Sodré M. Barros">
+  <meta property="og:url" content="/post/sistema-dados-geograficos-iii/">
+  <meta property="og:title" content="Criando um sistema para gestão de dados geográficos de forma simples e robusta III | Felipe Sodré M. Barros">
+  <meta property="og:description" content="Caso não tenha visto as publicações anteriores, deixo aqui o link e os temas abordados:
+ Na primeira publicação falo sobre o django-geojson para simular um campo geográfico no models; o geojson para criar um objeto da classe geojson e realizar as validações necessárias para garantir robustez do sistema, e a criação do formulário de registro de dados usando o ModelForm; Na segunda publicação apresento os validadores de campo do Django como uma ferramenta fundamental na qualidade dos dados espaciais, sem depender de infraestrutura SIG (GIS)."><meta property="og:image" content="/post/sistema-dados-geograficos-iii/featured.png">
+  <meta property="twitter:image" content="/post/sistema-dados-geograficos-iii/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2022-06-04T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2022-06-04T06:43:55-03:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/sistema-dados-geograficos-iii/"
+  },
+  "headline": "Criando um sistema para gestão de dados geográficos de forma simples e robusta III",
+  
+  "image": [
+    "/post/sistema-dados-geograficos-iii/featured.png"
+  ],
+  
+  "datePublished": "2022-06-04T00:00:00Z",
+  "dateModified": "2022-06-04T06:43:55-03:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Felipe Sodré Mendes Barros"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Felipe Sodré M. Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Caso não tenha visto as publicações anteriores, deixo aqui o link e os temas abordados:\n Na primeira publicação falo sobre o django-geojson para simular um campo geográfico no models; o geojson para criar um objeto da classe geojson e realizar as validações necessárias para garantir robustez do sistema, e a criação do formulário de registro de dados usando o ModelForm; Na segunda publicação apresento os validadores de campo do Django como uma ferramenta fundamental na qualidade dos dados espaciais, sem depender de infraestrutura SIG (GIS)."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Criando um sistema para gestão de dados geográficos de forma simples e robusta III | Felipe Sodré M. Barros</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About me</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#accomplishments"><span>Awards</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Professional experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Post</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#study"><span>Studies</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">English</span></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>English</span>
+          </div>
+          
+          <a class="dropdown-item" href="/pt/post/sistema-dados-geograficos-iii/">
+            <span>Português</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Criando um sistema para gestão de dados geográficos de forma simples e robusta III</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Jun 4, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/python/">Python</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 349px;">
+  <div style="position: relative">
+    <img src="/post/sistema-dados-geograficos-iii/featured_hu2acf7e13a77067bddc905a66d160ea8c_541804_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Caso não tenha visto as publicações anteriores, deixo aqui o <em>link</em> e os temas abordados:</p>
+<ol>
+<li><a href="https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/" target="_blank" rel="noopener">Na primeira publicação</a> falo sobre o <a href="https://django-geojson.readthedocs.io/en/latest/" target="_blank" rel="noopener"><code>django-geojson</code></a> para simular um campo geográfico no models; o <a href="https://geojson.readthedocs.io/en/latest/" target="_blank" rel="noopener"><code>geojson</code></a> para criar um objeto da classe <em>geojson</em> e realizar as validações necessárias para garantir robustez do sistema, e a criação do formulário de registro de dados usando o <a href="https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/#modelform" target="_blank" rel="noopener"><code>ModelForm</code></a>;</li>
+<li><a href="https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe--1e/" target="_blank" rel="noopener">Na segunda publicação</a> apresento os validadores de campo do <code>Django</code> como uma ferramenta fundamental na qualidade dos dados espaciais, <strong>sem depender de infraestrutura SIG (GIS)</strong>.</li>
+</ol>
+<p>Agora a ideia é implementar um <em>webmap</em> usando o módulo <a href="https://django-leaflet.readthedocs.io/en/latest/" target="_blank" rel="noopener"><code>django-leaflet</code></a> para apresentar os fenômenos mapeados com algumas informações no <em>popup</em> do mapa. Para isso iremos:</p>
+<ul>
+<li>usar o <code>GeoJSONLayerView</code>, do <a href="https://django-geojson.readthedocs.io/en/latest/" target="_blank" rel="noopener"><code>django-geojson</code></a> para retornar os dados salvos no formato apropriado para exibição no <em>webmap</em>;</li>
+<li>usar o <a href="https://django-leaflet.readthedocs.io/en/latest/" target="_blank" rel="noopener"><code>django-leaflet</code></a> para, além de implementar o <em>webmap</em>, podermos usar várias outras ferramentas (<code>widget</code>);</li>
+</ul>
+<p>Vamos lá!</p>
+<h2 id="view-geojsonlayerview">View GeoJSONLayerView</h2>
+<p>A serialização ou, em inglês <code>serialization</code>, é o processo/mecanismo de tradução dos objetos armazenados na base de dados em outros formatos (em geral, baseado em texto como, por exemplo, XML ou JSON), para serem enviados e/ou consumidos no processo de <em>request/response</em>.</p>
+<p>No nosso caso isso será importante, pois para apresentar os dados salvos em um <em>webmap</em>, precisaremos servi-los no formato <code>geojson</code>. E é aí que o <code>django-geojson</code> entra. Nós o utilizaremos para fazer a mágica acontecer ao usar a classe <a href="https://django-geojson.readthedocs.io/en/latest/views.html#geojson-layer-view" target="_blank" rel="noopener"><code>GeoJSONLayerView</code></a>.</p>
+<p>A classe <code>GeoJSONLayerView</code> é um <a href="https://docs.djangoproject.com/en/3.2/topics/class-based-views/mixins/" target="_blank" rel="noopener"><code>mixin</code></a> que, em base ao modelo informado do nosso projeto, serializa os dados transformando-os em <code>geojson</code> e os servindo em uma <code>view</code>. Acredite, é bastante coisa para apenas algumas linhas de código.</p>
+<p>Para entender a serialização, segue um exemplo&hellip;</p>
+<p>Ao acessar os dados do banco de dados do nosso projeto, temos uma <code>QuerySet</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; Fenomeno.objects.all()
+&lt;QuerySet [&lt;Fenomeno: fenomeno_teste&gt;]&gt;
+</code></pre>
+<p>Ao acessar a geometria de um objeto do banco de dados do nosso projeto, temos um <code>geojson</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; Fenomeno.objects.get(pk=3).geom
+{'type': 'Point', 'coordinates': [-42.0, -22.0]}
+</code></pre>
+<p>Ao serializá-lo com o <code>GeoJSONSerializer</code>, temos como retorno uma <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.3" target="_blank" rel="noopener"><code>FeatureCollection</code></a> seguindo o formato <code>geojson</code>, tendo como propriedades os campos do <code>model</code>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from djgeojson.serializers import Serializer as GeoJSONSerializer
+&gt;&gt;&gt; GeoJSONSerializer().serialize(Fenomeno.objects.all(), use_natural_keys=True, with_modelname=False)
+'{'crs': {'properties': {'href': 'http://spatialreference.org/ref/epsg/4326/',
+                        'type': 'proj4'},
+         'type': 'link'},
+ 'features': [{'geometry': {'coordinates': [-42.0, -22.0], 'type': 'Point'},
+               'id': 3,
+               'properties': {'data': '2021-06-22',
+                              'hora': '02:07:57',
+                              'nome': 'teste'},
+               'type': 'Feature'}],
+ 'type': 'FeatureCollection'}'
+</code></pre>
+<p>Mais sobre serialização pode ser encontrado <a href="https://django-portuguese.readthedocs.io/en/1.0/topics/serialization.html" target="_blank" rel="noopener">aqui</a> ou <a href="https://docs.djangoproject.com/en/3.2/ref/contrib/gis/serializers/" target="_blank" rel="noopener">aqui, com outro exemplo relacionado a dado geográfico usando o GeoDjango</a>.</p>
+<p>Então, ciente de toda a mágica por trás do <code>GeoJSONLayerView</code> e o seu resultado, vamos criar os testes para essa <code>view</code>.</p>
+<h3 id="criando-os-testes-da-view">Criando os testes da <code>view</code></h3>
+<p>Como estou testando justamente uma <code>view</code> que serializa o objeto do meu modelo em formato <code>geojson</code>, precisarei desses dados salvos no banco de dados. Para tanto, vou adicionar ao <code>setUp</code> do meu <code>TestCase</code> valores válidos ao banco de dados do teste. Sem isso, não poderemos confirmar se a serialização está ocorrendo de forma correta. E, uma vez salvo, realizo um conjunto básico de testes:</p>
+<ul>
+<li>
+<p>Confirmo se o <em>status code</em> do request (método &ldquo;get&rdquo;) ao <em>path</em> que pretendo usar para essa views (no caso, &ldquo;/geojson/&quot;), retorna 200, código que indica sucesso no processo de <em>request/response</em>. <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank" rel="noopener">Veja mais sobre os códigos aqui</a>.</p>
+</li>
+<li>
+<p>Em seguida, confirmo se a resposta recebida é uma <code>FetureCollection</code> com os dados da instância criada anteriormente.</p>
+</li>
+</ul>
+<pre><code class="language-python"># testes.py
+class FenomenoGeoJsonTest(TestCase):
+    def setUp(self):
+        Fenomeno.objects.create(
+            nome=&quot;Teste&quot;,
+            data=&quot;2020-01-01&quot;,
+            hora=&quot;09:12:12&quot;,
+            geom={&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [-42, -22]},
+        )
+
+    def teste_geojson_status_code(self):
+        self.resp = self.client.get(r(&quot;geojson&quot;))
+        self.assertEqual(200, self.resp.status_code)
+
+    def teste_path_geojson_returns_valid_feature_collection(self):
+        self.resp = self.client.get(r(&quot;geojson&quot;))
+        self.assertEqual(
+            self.resp.json(),
+            {
+                &quot;type&quot;: &quot;FeatureCollection&quot;,
+                &quot;features&quot;: [
+                    {
+                        &quot;type&quot;: &quot;Feature&quot;,
+                        &quot;properties&quot;: {
+                            &quot;popup_content&quot;: &quot;&lt;p&gt;&lt;strong&gt;&lt;span&gt;Nome: &lt;/span&gt;Teste&lt;/strong&gt;&lt;/p&gt;&quot;,
+                            &quot;model&quot;: &quot;core.fenomeno&quot;,
+                        },
+                        &quot;id&quot;: 1,
+                        &quot;geometry&quot;: {&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [-42.0, -22.0]},
+                    }
+                ],
+                &quot;crs&quot;: {&quot;type&quot;: &quot;name&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;EPSG:4326&quot;}},
+            },
+        )
+
+</code></pre>
+<p>Obviamente, ambos testes falharão, pois, ainda não criamos a view e nem a designamos a um <em>path</em> do nosso sistema.</p>
+<p>Para fazê-los passar, vamos primeiro criar a view: Em <code>views.py</code> criaremos uma classe nova, herdando da classe <code>GeoJSONLayerView</code>. Ela será a view responsável por resgatar os dados e servir-nos como uma <code>FeatureCollection</code> seguindo a estrutura de um <code>geojson</code>.</p>
+<p>Um último detalhe é que, como estamos usando um <code>Class Based-View</code>, ao final a convertemos em view, com o método <code>as_view()</code>.</p>
+<pre><code class="language-python"># views.py
+from djgeojson.views import GeoJSONLayerView
+
+from map_proj.core.models import Fenomeno
+
+
+class FenomenoGeoJson(GeoJSONLayerView):
+    model = Fenomeno
+    properties = (&quot;popup_content&quot;,)
+
+
+fenomeno_geojson = FenomenoGeoJson.as_view()
+
+</code></pre>
+<h3 id="adicionando-propriedade-para-popup">Adicionando propriedade para <em>popup</em></h3>
+<p>Percebam que no <code>teste_geojson_FeatureCollection</code> eu já estou considerando que o <code>geojson</code> virá com <code>properties</code> com o nome de <code>popup-content</code>. Essa <code>property</code> ainda deverá ser criada no model em questão e poderá ter quantas informações acharmos pertinentes. Se tratam das informações do model a serem apresentadas no <em>popup</em> do mapa.</p>
+<p>Por agora estou apenas informando o nome do fenômeno mapeado mas, mais à frente, podemos incrementar, adicionando um <a href="https://docs.djangoproject.com/en/3.2/ref/models/instances/#get-absolute-url" target="_blank" rel="noopener"><code>get_absolute_url</code></a> por exemplo, para poder acessar aos detalhes do fenômeno diretamente a partir do <em>popup</em> do mapa.</p>
+<pre><code class="language-python">#models.py
+...
+    @property
+    def popup_content(self):
+        return self.nome
+</code></pre>
+<h3 id="adicionando-um-path-a-view">Adicionando um <em>path</em> a <code>view</code></h3>
+<p>Para poder acessar essa view, precisamos incorporá-la na nossa <code>urls.py</code>:</p>
+<pre><code class="language-python"># urls.py
+from django.contrib import admin
+from django.urls import path
+
+from map_proj.core.views import fenomeno_geojson # novo!
+
+urlpatterns = [
+    path(&quot;admin/&quot;, admin.site.urls),
+    path(&quot;geojson/&quot;, fenomeno_geojson, name=&quot;geojson&quot;), # novo!
+]
+
+</code></pre>
+<p>Com isso teremos os nossos últimos testes passando. Se ainda assim você tiver curiosidade, pode executar o <code>runserver</code> e acessar os dados pela <em>url</em> <code>http://127.0.0.1:8000/geojson/</code>. O resultado esperado são os dados servidos em <code>geojson</code>:</p>
+<pre><code>{
+                &quot;type&quot;: &quot;FeatureCollection&quot;,
+                &quot;features&quot;: [
+                    {
+                        &quot;type&quot;: &quot;Feature&quot;,
+                        &quot;properties&quot;: {
+                            &quot;popup_content&quot;: &quot;&lt;p&gt;&lt;strong&gt;&lt;span&gt;Nome: &lt;/span&gt;Teste&lt;/strong&gt;&lt;/p&gt;&quot;,
+                            &quot;model&quot;: &quot;core.fenomeno&quot;,
+                        },
+                        &quot;id&quot;: 1,
+                        &quot;geometry&quot;: {&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [-42.0, -22.0]},
+                    }
+                ],
+                &quot;crs&quot;: {&quot;type&quot;: &quot;name&quot;, &quot;properties&quot;: {&quot;name&quot;: &quot;EPSG:4326&quot;}},
+            }
+</code></pre>
+<p>⚠️ Garanta que você já tenha inserido algum dado ao seu projeto ;)</p>
+<p>Pronto, já temos uma <code>view</code> nos servindo os dados em formato <code>geojson</code>. Vamos ao <code>Django-leaflet</code>, para entender como montar um <em>webmap</em>.</p>
+<h2 id="django-leaflet">Django-leaflet</h2>
+<p>Para saber mais sobre o <code>django-leaflet</code>, recomendo dar uma olhada na página <a href="https://pypi.org/project/django-leaflet/" target="_blank" rel="noopener">pypi</a> e na <a href="https://django-leaflet.readthedocs.io/en/latest/installation.html" target="_blank" rel="noopener">documentação</a>.</p>
+<p>Você deve estar se perguntando: &ldquo;por quê usar o <code>django-leaflet</code> se eu posso usar o <a href="https://leafletjs.com/" target="_blank" rel="noopener"><code>leaflet</code></a> &ldquo;puro&rdquo;, já que se trata de uma biblioteca JavaScript para produção do mapa no <em>frontend</em>?&rdquo;.</p>
+<p>Os autores do projeto <code>django-leaflet</code> deixam alguns pontos que justificam sua adoção na página da documentação. Das quais eu destaco:</p>
+<ul>
+<li>Possibilidade de uso das ferramentas de edição de geometría usando os <code>widget</code>;</li>
+<li>Fácil integração dos <code>widgets</code> na página <code>admin</code> do Django;</li>
+<li>Controle da aparência dos mapas a partir do Django <code>settings.py</code>;</li>
+</ul>
+<p>⚠️ E por último, mas não menos importante:</p>
+<blockquote>
+<p><code>django-leaflet</code> é compatível com os campos  <code>django-geojson</code>, o que permite o uso de dados geográficos sem a necessidade de uma base de dados espaciais. O motivo de toda essa série que tenho produzido :)</p>
+</blockquote>
+<p>Bem legal! Eles criaram um pacote já compatível com o pacote <code>django-geojson</code>, que nos permite simular campos geográficos sem a necessidade de toda a infraestrutura de uma base de dados de SIG (PostGIS, por exemplo).</p>
+<p>⚠️ Porém, atenção ao seguinte detalhe:+</p>
+<blockquote>
+<p>O <code>django-leaflet</code> depende da biblioteca <a href="https://pypi.org/project/GDAL/" target="_blank" rel="noopener">GDAL</a>, não se esqueça de instalá-la antes.</p>
+</blockquote>
+<h3 id="instalando-django-leaflet">Instalando <code>django-leaflet</code></h3>
+<pre><code class="language-python">pip install django-leaflet
+</code></pre>
+<p>Após a sua instalação é necessário incluí-lo no <code>settings.py</code> como <em>INSTALLED_APPS</em>.</p>
+<p>⚠️ Não esqueça de adicioná-lo ao <code>requirements.txt</code> do projeto, também.</p>
+<pre><code class="language-python"># settings.py
+INSTALLED_APPS = [
+    ...
+    'djgeojson',
+    'leaflet', # novo
+    ...
+]
+</code></pre>
+<h3 id="usando-o-leaflet">Usando o leaflet</h3>
+<p>Com <code>leaflet</code> instalado, devemos então:</p>
+<ol>
+<li>Na pasta da nossa <em>app</em>, vamos criar uma pasta chamada &ldquo;templates&rdquo;;</li>
+<li>E nessa pasta, criar um arquivo HTML (neste caso vou chamar de &ldquo;map.html&rdquo;;</li>
+<li>Nessa página vamos carregar as <a href="https://www.geeksforgeeks.org/django-template-tags/" target="_blank" rel="noopener"><code>template_tags</code></a> do <code>leaflet</code> para poder usar <code>leaflet_js</code>, <code>leaflet_css</code> e o <code>leaflet_map</code>:</li>
+</ol>
+<p>Nosso <code>map.html</code>:</p>
+<pre><code class="language-html">{% load leaflet_tags %}
+
+&lt;head&gt;
+    ...
+    {% leaflet_js %}
+    {% leaflet_css %}
+&lt;/head&gt;
+...
+&lt;body&gt;
+    ...
+    {% leaflet_map &quot;yourmap&quot; %}
+    ...
+&lt;/body&gt;
+
+</code></pre>
+<p>Essas <a href="https://github.com/makinacorpus/django-leaflet/blob/master/leaflet/templatetags/leaflet_tags.py" target="_blank" rel="noopener"><code>template_tags</code></a> irão tentar acessar as configurações do <code>leaflet</code> presentes no <code>settings.py</code> da app, caso existam. Do contrário, serão usados valores padrão de configuração. O interessante dessas <code>template_tags</code> é que com elas podemos customizar tais configurações a cada <em>template</em>;</p>
+<ol start="5">
+<li>Como a ideia é apenas renderizar essa página, vou adicionar ao <code>urls.py</code> um <em>path</em> a ela, usando o <a href="https://docs.djangoproject.com/en/4.0/topics/class-based-views/#basic-examples" target="_blank" rel="noopener"><code>TemplateView</code></a>. Com isso, ao receber um <em>request</em> neste <em>path</em>, a responsta será direcionada à renderização dessa página:</li>
+</ol>
+<pre><code class="language-python">#urls.py
+from django.contrib import admin
+from django.urls import path
+from django.views.generic import TemplateView
+
+from map_proj.core.views import fenomeno_geojson
+
+urlpatterns = [
+    path(&quot;admin/&quot;, admin.site.urls),
+    path(&quot;geojson/&quot;, fenomeno_geojson, name=&quot;geojson&quot;),
+    path(&quot;map/&quot;, TemplateView.as_view(template_name=&quot;map.html&quot;), name=&quot;map&quot;),
+]
+
+</code></pre>
+<p>Isso já o suficiente para termos nosso <em>webmap</em> apresentado:</p>
+<p><img src="./img/leaflet_1.png" alt=""></p>
+<p>Imagino que não seja o que esperava, né? Fique calmo. O leaflet buscou as configurações do mapa e, como não encontrou, retornou o mesmo com as configurações padrão. Veremos em breve como alterar as configurações do mapa.</p>
+<p>Antes disso, vamos &ldquo;linkar&rdquo; a view que nos serve o <code>geojson</code> com os dados salvos no banco com o <em>webmap</em> em questão, para que os dados sejam apresentados.</p>
+<h3 id="renderizando-o-geojson-no-mapa">Renderizando o <code>geojson</code> no mapa</h3>
+<p>Lembra que temos uma view que serializa os dados armazenados no banco e nos serve como uma <code>FeatureCollection</code> e que podemos acessar tais dados pelo <em>path</em> <em>geojson/</em>?</p>
+<p>Então, iremos adicionar um <em>script</em> à nossa página no qual uma variável <code>dataurl</code> receberá os dados dessa <em>url</em> adicionando tais dados ao mapa, assim que o mesmo for inicializado, desencadeando o processo de construção da <em>popup</em> de cada feição apresentada com sua posterior inserção ao mapa:</p>
+<pre><code class="language-html">{% load leaflet_tags %}
+
+    &lt;script&gt;
+      var dataurl = '{% url &quot;geojson&quot; %}';
+
+      window.addEventListener(&quot;map:init&quot;, function (event) {
+        var map = event.detail.map;
+        // Download GeoJSON data with Ajax
+        fetch(dataurl)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = &quot;&lt;p&gt;&lt;strong&gt;&lt;span&gt;Nome: &lt;/span&gt; &quot; + feature.properties.popup_content + &quot;&lt;/strong&gt;&lt;/p&gt;&quot;;
+                layer.bindPopup(props);
+            }}).addTo(map);
+          });
+      });
+
+    &lt;/script&gt;
+
+
+
+&lt;head&gt;
+    {% leaflet_js %}
+    {% leaflet_css %}
+&lt;/head&gt;
+&lt;body&gt;
+
+{% leaflet_map &quot;yourmap&quot; %}
+
+&lt;/body&gt;
+
+</code></pre>
+<p>Veja que, para a criação da variável <code>dataurl</code>, estamos usando a <code>template_tag</code> do django:
+<code>var dataurl = '{% url &quot;geojson&quot; %}';</code></p>
+<p>Veja mais sobre ela <a href="https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#url" target="_blank" rel="noopener">aqui</a>.</p>
+<p>Repare também que, neste processo, a cada <code>Feature</code>, será carregada as suas propriedades a serem apresentadas no <em>popup</em>:</p>
+<pre><code class="language-python">L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = &quot;&lt;p&gt;&lt;strong&gt;&lt;span&gt;Nome: &lt;/span&gt; &quot; + feature.properties.popup_content + &quot;&lt;/strong&gt;&lt;/p&gt;&quot;;
+                layer.bindPopup(props);
+            }}).addTo(map);
+</code></pre>
+<p>Com o <code>runserver</code> em execução, já poderemos ver o nosso mapa com o dado carregado e as propriedades que definimos no <em>popup</em>:</p>
+<p><img src="./img/leaflet_2.png" alt=""></p>
+<p>⚠️ Garanta que você já tenha inserido algum dado ao seu projeto ;)</p>
+<p><strong>Mudando o tamanho do <em>webmap</em>:</strong></p>
+<p>Antes de passarmos às configurações do <code>leaflet</code>, podemos alterar as dimensões do mapa definindo um <code>style</code>. Por exemplo, para que o mapa ocupe toda a área possível do navegador, basta adicionarmos:</p>
+<pre><code class="language-html">&lt;style&gt;
+    #yourmap {
+        width: 100%;
+        height: 100%;
+    }
+&lt;/style&gt;
+</code></pre>
+<p><img src="./img/leaflet_3.png" alt=""></p>
+<h3 id="configurações-do-leaflet">Configurações do leaflet</h3>
+<p>Bom, além das <code>template_tags</code> do leaflet, o uso do <code>django-leaflet</code> nos permite definirmos as suas configurações no <code>settings.py</code> da <code>app</code>, a partir da seção <code>LEAFLET_CONFIG</code>.</p>
+<p>Dentre as <a href="https://django-leaflet.readthedocs.io/en/latest/templates.html#configuration" target="_blank" rel="noopener">configurações possíveis</a>
+, vou usar apenas o par de coordenadas ao qual o mapa deverá estar centralizado por padrão (<code>DEFAULT_CENTER</code>) e o zoom padrão (<code>DEFAULT_ZOOM</code>):</p>
+<pre><code class="language-python">LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (-22, -42),
+    'DEFAULT_ZOOM': 7,
+}
+</code></pre>
+<p>Com isso nosso mapa sempre será apresentado centralizado nas coordenadas (-22, -42) e com o zoom 7:</p>
+<p><img src="map_proj/img/leaflet_4.png" alt=""></p>
+<p>Pronto: com esses três artigos, já temos um sistema com formulário de inserção de dados, com as devidas validações dos dados preenchidos no mesmo, assim como um <em>webmap</em> apresentando-os ao mundo :-).</p>
+<p>Na próxima publicação vamos ver como fazer o <em>deploy</em> desse sistema no <a href="https://www.heroku.com/" target="_blank" rel="noopener">heroku</a> 🚀.</p>
+<p>Até lá!</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/pt-br/">pt-br</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/author/felipe-sodre-mendes-barros/avatar_hu44392504df2335dcc3eaaf2f7e4811a3_211552_270x270_fill_q75_lanczos_center.jpg" alt="Felipe Sodré Mendes Barros">
+    
+
+    <div class="media-body">
+      <h5 class="card-title">Felipe Sodré Mendes Barros</h5>
+      <h6 class="card-subtitle">Geographic Data Scientist</h6>
+      <p class="card-text">Geographer interested in technology and statistics to overcome environmental problems</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/FelipeSBarros" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/felipesodre/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://lattes.cnpq.br/8403301812573195" target="_blank" rel="noopener">
+        <i class="ai ai-lattes"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=022IGOcAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/FelipeSMBarros" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/bug-buster/">Bug buster</a></li>
+      
+      <li><a href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta/">Criando um sistema para gestão de dados geográficos de forma simples e robusta</a></li>
+      
+      <li><a href="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs</a></li>
+      
+      <li><a href="/post/criando-um-sistema-para-gestao-de-dados-geograficos-de-forma-simples-e-robusta-ii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta II</a></li>
+      
+      <li><a href="/post/carreira-e-xadrez/">A carreira profissional sob a ótica de um tabuleiro de xadrez</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

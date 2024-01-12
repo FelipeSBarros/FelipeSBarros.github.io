@@ -1,0 +1,1289 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Felipe Sodré Mendes Barros">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Entenda o porquê o netCDF é um grande aliado">
+
+  
+  <link rel="alternate" hreflang="pt" href="/pt/post/netcdf/">
+  
+  <link rel="alternate" hreflang="en-us" href="/post/netcdf/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9763f5be8493c9d07b95458db93fbb03.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/netcdf/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Felipe Sodré M. Barros">
+  <meta property="og:url" content="/post/netcdf/">
+  <meta property="og:title" content="Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF. | Felipe Sodré M. Barros">
+  <meta property="og:description" content="Entenda o porquê o netCDF é um grande aliado"><meta property="og:image" content="/post/netcdf/featured.png">
+  <meta property="twitter:image" content="/post/netcdf/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-03-17T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-03-17T23:17:27-03:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/netcdf/"
+  },
+  "headline": "Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.",
+  
+  "image": [
+    "/post/netcdf/featured.png"
+  ],
+  
+  "datePublished": "2021-03-17T00:00:00Z",
+  "dateModified": "2021-03-17T23:17:27-03:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Felipe Sodré Mendes Barros"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Felipe Sodré M. Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_huf522d53bb96c01347942c9c8d4a9566b_18603_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Entenda o porquê o netCDF é um grande aliado"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF. | Felipe Sodré M. Barros</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About me</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#accomplishments"><span>Awards</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Professional experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Post</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#study"><span>Studies</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">English</span></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>English</span>
+          </div>
+          
+          <a class="dropdown-item" href="/pt/post/netcdf/">
+            <span>Português</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Para quem só sabe usar martelo, todo problema é um prego. Até rasters em formato netCDF.</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Mar 17, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<p>Nas últimas semanas estive trabalhando em um projeto com dados atmosféricos. Tem sido de grande aprendizado não apenas por ser uma temática nova, mas também pela demanda de processamento de dados.</p>
+<p>Os aprendizados relacionados ao processamento de dados (sua otimização, claro), serão abordados em artigos ainda em produção. Mas um ponto fundamental e que percebi ser ignorado pela maioria, e neste sentido me incluo, é a estrutura de dados dos arquivos raster em <em>netCDF.</em></p>
+<p>Já vi, e já respodi a muitas pessoas perguntando como carregar dados <em>netCDF</em> no R, com um simples “com o pacote <code>raster</code>, ora bolas”. No pior das hipóteses, teremos apenas que instalar uma dependencia que é o pacote <code>ncdf4</code>.</p>
+<p>Pois é, os dados atmosféricos que tenho trabalhado estão em formato <em>netCDF</em>. E usar o pacote <code>raster</code> para carregá-lo e manipulá-lo, me foi útil enquanto a análise era exploratória. Ao ver o volume de dados crescer de três dias para dois meses e, em seguida para dois anos de dados produzidos a cada três horas do dia, todos os dias, totalizando 731 arquivos, percebi que precisaria deixar de preguiça e entender esse tal de <em>netCDF</em>.</p>
+<p>Lendo sobre o pacote <code>ncdf4</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, o formato <em>netCDF</em> é descrito da seguinte forma:</p>
+<blockquote>
+<p>“binary data files that are portable across platforms and include metadata information in addition to the data sets.”</p>
+</blockquote>
+<p>Acho nesse fragmento já dá para entender a importância do formato, não?</p>
+<p>Vamos entender isso? Vejam a diferença:</p>
+<pre class="r"><code>library(raster)</code></pre>
+<pre><code>## Loading required package: sp</code></pre>
+<pre class="r"><code>(r.ppm25 &lt;- stack(&quot;./rasters/ppm25_2019-06-30.nc&quot;))</code></pre>
+<pre><code>## Loading required namespace: ncdf4</code></pre>
+<pre><code>## class      : RasterStack 
+## dimensions : 59, 75, 4425, 6  (nrow, ncol, ncell, nlayers)
+## resolution : 0.4, 0.4  (x, y)
+## extent     : -74.19, -44.19, -18.24, 5.36  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+## names      : X2019.06.30.12.00.00, X2019.06.30.15.00.00, X2019.06.30.18.00.00, X2019.06.30.21.00.00, X2019.07.01.00.00.00, X2019.07.01.03.00.00</code></pre>
+<p>Aos que já trabalham com o pacote <code>raster</code> e conhecem os dados raster, poderão ver que, sim, ainda que dependendo do <code>ncdf4</code>, o <code>raster</code> carrega os dados, aparentemente, sem grandes problemas. O mínimo esperado está aí. Um raster, com um <code>extent</code>, linhas, colunas, células, layers…</p>
+<p>Mas, se os dados estão em <em>netCDF</em>, e esse tipo de dados permite armazenar metadados também, cadê eles?</p>
+<p>Pois é. Ao ignorar isso, passava por cima desse detalhe como um marreteiro diante de um parafuso.</p>
+<p>Vamos abrir o arquivo com o <code>ncdf4</code> para começar a identificar alguns pontos importantes, que, por sinal não ficam “apenas” no metadados:</p>
+<pre class="r"><code>library(ncdf4)
+(nc.ppm25 &lt;- nc_open(&quot;./rasters/ppm25_2019-06-30.nc&quot;))</code></pre>
+<pre><code>## File ./rasters/ppm25_2019-06-30.nc (NC_FORMAT_64BIT):
+## 
+##      1 variables (excluding dimension variables):
+##         short pm2p5[longitude,latitude,time]   
+##             scale_factor: 9.668789576322e-12
+##             add_offset: 3.16807559257767e-07
+##             _FillValue: -32767
+##             missing_value: -32767
+##             units: kg m**-3
+##             long_name: Particulate matter d &lt; 2.5 um
+##             standard_name: mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+## 
+##      3 dimensions:
+##         longitude  Size:75
+##             units: degrees_east
+##             long_name: longitude
+##         latitude  Size:59
+##             units: degrees_north
+##             long_name: latitude
+##         time  Size:6   *** is unlimited ***
+##             units: hours since 1900-01-01 00:00:00.0
+##             long_name: time
+##             calendar: gregorian
+## 
+##     2 global attributes:
+##         Conventions: CF-1.6
+##         history: 2021-03-17 20:27:56 GMT by grib_to_netcdf-2.20.0: grib_to_netcdf /data/scratch/20210317-2020/8e/_mars-webmars-public-svc-blue-001-6fe5cac1a363ec1525f54343b6cc9fd8-ZAB6WD.grib -o /data/scratch/20210317-2020/b1/_grib2netcdf-webmars-public-svc-blue-000-6fe5cac1a363ec1525f54343b6cc9fd8-VDR6DW.nc -utime</code></pre>
+<p>Antes de comentar toda riqueza e detalhamento de informação que nos brinda o <code>ncdf4</code>, percebam que o comando é <code>nc_open()</code>. Não importa de o dado tem uma ou mais “bandas” ou “camadas”. Isso me chamou atenção pois, como acham que vou saber a quantidade de camadas do dados que vou abrir, se ainda não o conheço? Mas enfim. Vamos ao mais importante, os detalhes:</p>
+<p>Veja a estruturação. No arquivo em questão, eu tenho uma <strong>variável</strong> apenas, que possui vários metadados, garantindo minimamente sua compreensão, como: <em>short_name</em>, no caso “pm2p5”, <em>units</em>, para descrever a unidade do dado, <em>long_name</em> e <em>standart_name</em>, além de vários outros.</p>
+<p>E vejam também que são identificadas três dimensões:
+longitude, latitude e <strong>time</strong>;</p>
+<p>Eis que chegamos ao cubo de dados, não faz sentido?</p>
+<p>Eu tenho uma variável (ppm&lt;2.5) medida para uma mesma área (cena) ao longo do tempo. O <em>netCDF</em>, como está preparado e pensado para esse tipo de situação já entende os dados como informação de dadta e hora (!) e os organiza como uma dimensão do dado e não atributo. O <code>raster</code>, por ter outros objetivos, carrega tudo como um <em>stack</em> (empilhamento de camadas) e adiciona uma string “X” ao nome das camadas, já que as mesmas são numéricas e o pacote em questão restringe o prefixo das camadas a texto, não permitindo valores numéricos. Enfim, nos obriga a digitar mais algumas linhas de código para que o dado fique mais apresentável.</p>
+<div class="figure">
+<img src="imgs/cube1.png" alt="Fonte da imagem: r-spatial.github.io" />
+<p class="caption">Fonte da imagem: <a href="http://r-spatial.github.io">r-spatial.github.io</a></p>
+</div>
+<p>Essa forma de estruturar os dados fará todo o sentido mais à frente quando formos falar um pouco mais do processamento desses dados.</p>
+<p>O pacote <code>ncdf4</code> está desenvolvido para o que se convêm chamar de CRUD, na área de desenvolvimento de sistemas: <em>Create, Update and Delete</em>. Ou, seja, a ideia é fornecer ferramentas para manipular e ter controle total dos dados, criando, abrindo, alterando dimensões ou atributos e por aí vai. Mas não para visualização nem para as análises. Essas, ficarão para os próximos artigos.</p>
+<p>Enquanto isso, fique à vontade em me contactar, dar uma alô lá <a href="http://t.me/GeoCastBrasil">no grupo do GeoCastBrasil</a>, no Telegram ou no nosso <a href="http://youtube.com/GeoCastBrasil">canal do youtube</a>.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Não pretendo explorar muitos detalhes, mas o nome do pacote (<code>ncdf4</code>) faz referência à versão 4 de estratura em questão. Portanto, caso você esteja, por algum motivo, usando um arquivo <em>netCDF</em> com versão anterior, o pacote <code>ncdf</code> segue disponível, ainda que descontinuado.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/pt-br/">pt-br</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/author/felipe-sodre-mendes-barros/avatar_hu44392504df2335dcc3eaaf2f7e4811a3_211552_270x270_fill_q75_lanczos_center.jpg" alt="Felipe Sodré Mendes Barros">
+    
+
+    <div class="media-body">
+      <h5 class="card-title">Felipe Sodré Mendes Barros</h5>
+      <h6 class="card-subtitle">Geographic Data Scientist</h6>
+      <p class="card-text">Geographer interested in technology and statistics to overcome environmental problems</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/FelipeSBarros" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/felipesodre/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://lattes.cnpq.br/8403301812573195" target="_blank" rel="noopener">
+        <i class="ai ai-lattes"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=022IGOcAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/FelipeSMBarros" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/aprendendo-sobre-datetime-sqlalchemy-e-postgresql-a-partir-de-bugs/">Aprendendo sobre `datetime`, SQLAlchemy e PostgreSQL a partir de bugs</a></li>
+      
+      <li><a href="/post/sistema-dados-geograficos-iii/">Criando um sistema para gestão de dados geográficos de forma simples e robusta III</a></li>
+      
+      <li><a href="/post/carreira-e-xadrez/">A carreira profissional sob a ótica de um tabuleiro de xadrez</a></li>
+      
+      <li><a href="/post/bug-buster/">Bug buster</a></li>
+      
+      <li><a href="/post/hacktoberfest-2021/">Hacktoberfest 2021</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
