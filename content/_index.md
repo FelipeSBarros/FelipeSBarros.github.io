@@ -120,7 +120,7 @@ sections:
       #   Leave other parameters empty if not required.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
-          date_end: ''
+        - date_end: ''
           date_start: '2022-06-01'
           description: 'Winner of the “Rey de España” award in environmental category with the project [Engolindo Fumaça](https://infoamazonia.org/project/engolindo-fumaca/)'
           icon:
@@ -129,7 +129,7 @@ sections:
           title: 'Winner of the “Rey de España” award in environmental category'
           url: 'https://agenciaefe.es/premios-rey-espana/'
 
-          - date_end: ''
+        - date_end: ''
           date_start: '2021-11-01'
           description: 'Unanimously nominated by the jury, winner of the Claudio Weber Abramo Award for Data Journalism with the project Engolindo Fumaça'
           icon:
@@ -138,7 +138,7 @@ sections:
           title: '1° 1st place in the Claudio Weber Abramo Award for Data Journalism'
           url: 'https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/'
           
-          - date_end: ''
+        - date_end: ''
           date_start: '2021-06-01'
           description: '2nd place in the MapBiomas Award in the General Category with the article [Achieving cost-effective landscape-scale forest restoration through targeted natural regeneration](https://conbio.onlinelibrary.wiley.com/doi/10.1111/conl.12709)'
           icon:
