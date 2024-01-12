@@ -129,7 +129,7 @@ sections:
           title: 'Winner of the “Rey de España” award in environmental category'
           url: 'https://agenciaefe.es/premios-rey-espana/'
 
-          date_end: ''
+          - date_end: ''
           date_start: '2021-11-01'
           description: 'Unanimously nominated by the jury, winner of the Claudio Weber Abramo Award for Data Journalism with the project Engolindo Fumaça'
           icon:
@@ -137,6 +137,15 @@ sections:
           organization_url: https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/
           title: '1° 1st place in the Claudio Weber Abramo Award for Data Journalism'
           url: 'https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/'
+          
+          - date_end: ''
+          date_start: '2021-06-01'
+          description: '2nd place in the MapBiomas Award in the General Category with the article [Achieving cost-effective landscape-scale forest restoration through targeted natural regeneration](https://conbio.onlinelibrary.wiley.com/doi/10.1111/conl.12709)'
+          icon:
+          organization: 'MapBiomas Brazil'
+          organization_url: https://mapbiomas.org/premio
+          title: '2nd place in the MapBiomas Award'
+          url: 'https://mapbiomas.org/premio'
     design:
       columns: '2'
   - block: collection
