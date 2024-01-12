@@ -69,28 +69,29 @@ skills:
         icon_pack: fas
       - name: SQL
         description: ''
-        percent: 60
+        percent: 70
         icon: database
         icon_pack: fas
   - name: Hobbies
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: Sailing
-        description: ''
-        percent: 90
-        icon: sailing # todo confirmar
-        icon_pack: fas
-      - name: Reading
-        description: ''
-        percent: 100
-        icon: books # todo confirmar
-        icon_pack: fas
       - name: Family
         description: ''
         percent: 100
-        icon: family # todo confirmar
+        icon: users-line
         icon_pack: fas
+      - name: Reading
+        description: ''
+        percent: 80
+        icon: book-open-reader
+        icon_pack: fas
+      - name: Sailing
+        description: ''
+        percent: 70
+        icon: sailboat
+        icon_pack: fas
+      
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
