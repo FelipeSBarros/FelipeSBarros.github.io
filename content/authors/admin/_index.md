@@ -114,8 +114,8 @@ social:
     icon_pack: fab
     link: https://twitter.com/FelipeSMBarros
   - icon: mastodon
-    icon_pack: fa
-    link: https://twitter.com/FelipeSMBarros
+    icon_pack: fab
+    link: https://mastodon.social/@FelipeSMBarros
 
   # Link to a PDF of your resume/CV.
   # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.yaml`,
