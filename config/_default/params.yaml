@@ -18,12 +18,12 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: 'A highly-customizable Hugo academic resume theme powered by Hugo Blox Builder.'
-    twitter: 'GetResearchDev'
+    description: 'A highly-customizable Hugo academic resume theme powered by Hugo Blox Builder.' # todo update
+    twitter: 'GetResearchDev' # todo update
   analytics:
-    google_analytics: ''
+    google_analytics: '' # todo
     baidu_tongji: ''
-    google_tag_manager: ''
+    google_tag_manager: '' # todo
     microsoft_clarity: ''
   verification:
     google: ''
@@ -36,9 +36,9 @@ header:
     enable: true
     align: l
     show_logo: true
-    show_language: false
+    show_language: false # todo enable
     show_day_night: true
-    show_search: true
+    show_search: false
     highlight_active_link: true
 
 # Site footer
@@ -48,7 +48,7 @@ footer:
     notice: '© {year} Me. This work is licensed under {license}'
     license:
       enable: true
-      allow_derivatives: false
+      allow_derivatives: true
       share_alike: true
       allow_commercial: false
 
@@ -66,36 +66,36 @@ features:
     theme_light: github-light
     theme_dark: dracula
   math:
-    enable: false
+    enable: true
   privacy_pack:
     enable: false
   repository:
-    url: 'https://github.com/<username>/<repository>'
+    url: 'https://github.com/felipesbarros/<repository>'
     content_dir: content
     branch: main
   avatar:
-    gravatar: false
+    gravatar: true
     shape: circle
-  comment:
-    provider: ''
-    disqus:
-      shortname: ''
-      show_count: true
-    commento:
-      url: ''
-    giscus:
-      repo: ''
-      repo_id: ''
-      category: ''
-      category_id: ''
-  search:
-    provider: wowchemy
-    algolia:
-      app_id: ''
-      api_key: ''
-      index_name: ''
-      show_logo: false
-  map:
+#  comment:
+#    provider: ''
+#    disqus:
+#      shortname: ''
+#      show_count: true
+#    commento:
+#      url: ''
+#    giscus:
+#      repo: ''
+#      repo_id: ''
+#      category: ''
+#      category_id: ''
+#  search:
+#    provider: wowchemy
+#    algolia:
+#      app_id: ''
+#      api_key: ''
+#      index_name: ''
+#      show_logo: false
+  map: # todo update
     provider: 'mapnik'
     api_key: ''
     zoom: 15
