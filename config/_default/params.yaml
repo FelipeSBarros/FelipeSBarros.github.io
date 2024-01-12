@@ -36,7 +36,7 @@ header:
     enable: true
     align: l
     show_logo: true
-    show_language: false # todo enable
+    show_language: true
     show_day_night: true
     show_search: false
     highlight_active_link: true
