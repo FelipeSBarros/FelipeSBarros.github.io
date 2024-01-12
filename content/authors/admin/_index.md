@@ -104,7 +104,7 @@ social:
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/felipesodre/
-  - icon: ai-lattes
+  - icon: lattes
     icon_pack: ai
     link: http://lattes.cnpq.br/8403301812573195
   - icon: google-scholar # Alternatively, use `google-scholar` icon from `ai` icon pack
