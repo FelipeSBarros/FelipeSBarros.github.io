@@ -131,7 +131,7 @@ sections:
 
         - date_end: ''
           date_start: '2021-11-01'
-          description: 'Unanimously nominated by the jury, winner of the Claudio Weber Abramo Award for Data Journalism with the project Engolindo Fumaça'
+          description: 'Unanimously nominated by the jury, winner of the Claudio Weber Abramo Award for Data Journalism with the project [Engolindo Fumaça](https://infoamazonia.org/project/engolindo-fumaca/)'
           icon:
           organization: 'Conferência de Jornalismo de Dados e Métodos Digitais (Coda.Br)'
           organization_url: https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/
@@ -146,6 +146,34 @@ sections:
           organization_url: https://mapbiomas.org/premio
           title: '2nd place in the MapBiomas Award'
           url: 'https://mapbiomas.org/premio'
+          
+        - date_end: ''
+          date_start: '2017-09-01'
+          description: '3rd place in Hackathon Industry 4.0 held in the city of Posadas, Misiones - Argentina. On this occasion, I worked with the [colmena](http://proyectocolmenar.org/noticias/presentacion-proyecto-colmena-en-camara/itemlist/tag/FuDeCo) group to develop a Minimum Viable Product.'
+          icon:
+          organization: 'Ministry of Industry'
+          organization_url: https://industria.misiones.gob.ar/es/
+          title: '3rd place in Hackathon Industry 4.0'
+          url: 'https://www.industria.misiones.gob.ar/es/noticias/noticias/415-se-realizara-el-reto-industria-4-0-el-primer-hackaton-en-misiones-para-la-industria'
+          
+        - date_end: ''
+          date_start: '2017-05-01'
+          description: '1st place in the Citizen Innovation Hackathon held in the city of Posadas, Misiones - Argentina. In this event, a prototype of a decision-making aid system was developed based on open geographic data using geomarketing concepts.'
+          icon:
+          organization: 'City of Posadas'
+          organization_url: https://www.hackathon.com/event/hackathon-posadas-de-innovacion-ciudadana-34681044939
+          title: '1st place in the Citizen Innovation Hackathon'
+          url: 'http://ampmnoticias.com/index.php/mas-de-170-personas-participaron-de-la-primera-hackathon/'
+          
+        - date_end: ''
+          date_start: '2014-10-01'
+          description: 'Jabuti Literature Award in the Natural Sciences category with Brazilian’s flora Red Book, coordinated by Gustavo Martinelli and Miguel Avila Moraes.'
+          icon:
+          organization: 'Jabuti Award'
+          organization_url: https://www.premiojabuti.com.br/
+          title: 'Jabuti Literature Award in the Natural Sciences category'
+          url: 'http://jbrj.gov.br/node/322'
+          
     design:
       columns: '2'
   - block: collection
