@@ -39,7 +39,7 @@ sections:
   - block: about.biography
     id: about
     content:
-      title: Biography
+      title: About me
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: admin
   - block: skills
@@ -85,6 +85,7 @@ sections:
           description: Taught electronic engineering and researched semiconductor physics.
     design:
       columns: '2'
+
   - block: accomplishments
     content:
       # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
@@ -107,24 +108,36 @@ sections:
           organization_url: https://www.coursera.org
           title: Neural Networks and Deep Learning
           url: ''
-        - certificate_url: https://www.edx.org
+  - block: accomplishments
+    content:
+      # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
+      title: 'Awards'
+      subtitle:
+      date_format: Jan 2006
+      # Accomplishments.
+      #   Add/remove as many `item` blocks below as you like.
+      #   `title`, `organization`, and `date_start` are the required parameters.
+      #   Leave other parameters empty if not required.
+      #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
+      items:
+        - certificate_url: https://agenciaefe.es/premios-rey-espana/
           date_end: ''
-          date_start: '2021-01-01'
-          description: Formulated informed blockchain models, hypotheses, and use cases.
-          icon: edx
-          organization: edX
-          organization_url: https://www.edx.org
-          title: Blockchain Fundamentals
-          url: https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals
-        - certificate_url: https://www.datacamp.com
-          date_end: '2020-12-21'
-          date_start: '2020-07-01'
-          description: ''
-          icon: datacamp
-          organization: DataCamp
-          organization_url: https://www.datacamp.com
-          title: 'Object-Oriented Programming in R'
-          url: ''
+          date_start: '2022-06-01'
+          description: 'Winner of the “Rey de España” award in environmental category with the project [Engolindo Fumaça](https://infoamazonia.org/project/engolindo-fumaca/)'
+          icon:
+          organization: 'Agencia Española de Cooperación Internacional para el Desarrollo (Aecid) y la Agencia EFE'
+          organization_url: https://agenciaefe.es/premios-rey-espana/
+          title: 'Winner of the “Rey de España” award in environmental category'
+          url: 'https://agenciaefe.es/premios-rey-espana/'
+        - certificate_url: https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/
+          date_end: ''
+          date_start: '2021-11-01'
+          description: 'Unanimously nominated by the jury, winner of the Claudio Weber Abramo Award for Data Journalism with the project Engolindo Fumaça'
+          icon:
+          organization: 'Conferência de Jornalismo de Dados e Métodos Digitais (Coda.Br)'
+          organization_url: https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/
+          title: '1° 1st place in the Claudio Weber Abramo Award for Data Journalism'
+          url: 'https://escoladedados.org/coda2021/premio-claudio-weber-abramo-de-jornalismo-de-dados/'
     design:
       columns: '2'
   - block: collection
