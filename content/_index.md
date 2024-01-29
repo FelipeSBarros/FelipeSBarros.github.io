@@ -230,7 +230,7 @@ sections:
           title: Neural Networks and Deep Learning
           url: ''
 
-  - block: collection
+  - block: portfolio
     id: posts
     content:
       title: Recent Posts
@@ -242,15 +242,33 @@ sections:
       filters:
         folders:
           - post
-        author: ""
-        category: ""
-        tag: ""
-        exclude_featured: false
-        exclude_future: false
-        exclude_past: false
-        publication_type: ""
+#        author: ""
+#        category: ""
+#        tag: ""
+#        exclude_featured: false
+#        exclude_future: false
+#        exclude_past: false
+#        publication_type: ""
+      default_button_index: 0
+      buttons:
+        - name: All
+          tag: '*'
+        - name: Python
+          tag: Python
+        - name: R
+          tag: R
+        - name: JS
+          tag: JS
+        - name: PT-Br
+          tag: PT-Br
+      design:
+      # Choose how many columns the section has. Valid values: '1' or '2'.
+        columns: '3'
+        view: card
+      # For Showcase view, flip alternate rows?
+        flip_alt_rows: false
       # Choose how many pages you would like to offset by
-      offset: 0
+#      offset: 0
       # Page order: descending (desc) or ascending (asc) date.
       order: desc
     design:
