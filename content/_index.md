@@ -117,6 +117,7 @@ sections:
       flip_alt_rows: false
       
   - block: experience
+    id: experience
     content:
       title: Professional experience
       # Date format for experience
