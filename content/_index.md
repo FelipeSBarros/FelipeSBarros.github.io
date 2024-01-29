@@ -118,7 +118,7 @@ sections:
       
   - block: experience
     content:
-      title: Experience
+      title: Professional experience
       # Date format for experience
       #   Refer to https://docs.hugoblox.com/customization/#date-format
       date_format: Jan 2006
@@ -128,27 +128,81 @@ sections:
       #   Leave `date_end` empty if it's your current employer.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
-        - title: CEO
-          company: GenCoin
-          company_url: ''
-          company_logo: org-gc
-          location: California
-          date_start: '2021-01-01'
+        - title: Professor
+          company: Faculty Forest Sciences @ National University of Misiones
+          company_url: 'https://www.facfor.unam.edu.ar/'
+          company_logo:
+          location: Eldorado, Misiones - Argentina
+          date_start: '2022-01-01'
           date_end: ''
           description: |2-
-              Responsibilities include:
+              Responsibilities:
 
-              * Analysing
-              * Modelling
-              * Deploying
-        - title: Professor of Semiconductor Physics
-          company: University X
-          company_url: ''
-          company_logo: org-x
-          location: California
-          date_start: '2016-01-01'
-          date_end: '2020-12-31'
-          description: Taught electronic engineering and researched semiconductor physics.
+              - Physical Geography
+              - Digital Image Processing
+              - GIS III (Geographic Information Systems)
+        
+        - title: Geographic data scientist
+          company: Instituto Misionero de Biodiversidad - IMiBio
+          company_url: 'https://felipesbarros.github.io/www.imibio.misiones.gob.ar'
+          company_logo:
+          location: Posadas, Misiones - Argentina
+          date_start: '2020-01-01'
+          date_end: '2022-11-01'
+          description: |2-
+              Specialist responsible for the Institute’s space and environmental solutions. Responsabilidades:
+
+              * Desenvolvimento de sistema de análise de dados (Django)
+              * Remote Sensing (GEE) and GIS (R & Python) data analysis
+              * Scientific writing
+            
+        - title: Web scrapping developer
+          company: Volt Data Lab
+          company_url: 'https://voltdata.info/'
+          company_logo:
+          location: São Paulo - Brasil
+          date_start: '2022-01-01'
+          date_end: '2022-12-31'
+          description: |2-
+              Web scrapping developer responsible creating and maintaining web crawlers using scrapy python framework and spidermon for monitoring the web scrapping process;
+              
+              Tools and framework used:
+            
+              * PostgreSQL (SQLAlchemy);
+              * scrapy;
+              * spaCy (NLP framework);
+            
+        - title: External consultant
+          company: Instituto Internacional para a Sustentabilidade - IIS (Austrália)
+          company_url: 'http://www.iis-rio.org/'
+          company_logo:
+          location: Austrália / Brasil
+          date_start: '2017-01-01'
+          date_end: '2020-06-01'
+          description: |2-
+              Responsibilities:
+
+              * Spatial model for forest restoration;
+              * Spatial analysis;
+              * Scientific writing;
+            
+        - title: External consultant
+          company: International Union for Conservation of Nature - IUCN
+          company_url: 'http://www.iucn.org/'
+          company_logo:
+          location: Austrália / Brasil
+          date_start: '2016-11-01'
+          date_end: '2017-01-01'
+          description: |2-
+              Responsibilities:
+
+              * Spearheaded the consolidation and implementation of the Brazilian biodiversity geographic database.
+              * Conducted spatial prioritization modeling for the GEF project, defining priority areas for species conservation;
+            
+        - title: For more details on my previous experiences, feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/felipesodre/).
+          date_start: '2010-11-01'
+          date_end: '2016-01-01'
+
     design:
       columns: '2'
 
