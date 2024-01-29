@@ -104,18 +104,21 @@ social:
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/felipesodre/
-  - icon: lattes
-    icon_pack: ai
-    link: http://lattes.cnpq.br/8403301812573195
-  - icon: google-scholar # Alternatively, use `google-scholar` icon from `ai` icon pack
-    icon_pack: ai
-    link: https://scholar.google.com/citations?user=022IGOcAAAAJ
   - icon: twitter
     icon_pack: fab
     link: https://twitter.com/FelipeSMBarros
   - icon: mastodon
     icon_pack: fab
     link: https://mastodon.social/@FelipeSMBarros
+  - icon: lattes
+    icon_pack: ai
+    link: http://lattes.cnpq.br/8403301812573195
+  - icon: google-scholar # Alternatively, use `google-scholar` icon from `ai` icon pack
+    icon_pack: ai
+    link: https://scholar.google.com/citations?user=022IGOcAAAAJ
+  - icon: orcid
+    icon_pack: ai
+    link: https://orcid.org/0000-0001-9687-5845
 
   # Link to a PDF of your resume/CV.
   # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.yaml`,
