@@ -10,7 +10,7 @@ date: "2022-05-02T00:00:00Z"
 
 image:
   caption:
-  focal_point: smart
+  focal_point: center
 ---
 
 *Artigo publicado também na revista [HBNetwork](https://sites.google.com/view/revista-hbnetwork).*
