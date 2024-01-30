@@ -1,9 +1,9 @@
 ---
-title: Criando um sistema para gestão de dados geográficos de forma simples e robusta.
-summary: Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin. Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django.
+title: Criando um sistema para gestão de dados geográficos de forma simples e robusta II.
+#summary: Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin. Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django.
 tags:
   - Python
-date: "2021-06-11T00:00:00Z"
+date: "2021-07-11T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 #external_link: https://felipesbarros.github.io/test/post/hacktoberfest-2021/
@@ -13,262 +13,207 @@ image:
   focal_point: center
 ---
 
-*Artigo publicado também no [linkedin](https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/).*
+*Artigo publicado também no [linkedin](https://www.linkedin.com/pulse/criando-um-sistema-para-gest%25C3%25A3o-de-dados-geogr%25C3%25A1ficos-e-felipe--1e).*
 
-Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django. Decidi expor alguns aprendizados em uma serie de artigos. A ideia é que esses textos me ajudem na consolidação do conhecimento e, ao tê-los publicado, ajudar a outros que tenham interesse na área.
+Na [primeira publicação](https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/) onde exploro a possibilidade de implementar um sistema de gestão de dados geoespaciais com Django, sem a necessidade de usar um servidor com PostGIS, vimos sobre:
 
-Aproveito para deixar meu agradecimento ao Cuducos que, tanto neste artigo, como em todos meus estudos tem sido um grande mentor. Vamos ao que interessa:
+* o `django-geojson` para simular um campo geográfico no models;
+* o `geojson` para criar um objeto da classe geojson e realizar as validações necessárias para garantir robustez do sistema;
+* a criação do formulário de registro de dados usando o `ModelForm`;
 
-Por simples, entende-se:
+Agora é hora de evoluir e expandir um pouco o sistema criado. Nessa publicação vamos criar validadores de longitude e latitude para poder restringir a inserção de dados a uma determinada região. Com isso, o próximo passo (e artigo) será criar o webmap no nosso sistema. Mas isso fica para breve.
 
-Um sistema sem a necessidade da instalação e configuração de base de dados PostgreSQL/GIS, Geoserver, etc;
-Um sistema clássico tipo Create, Retrieve, Update, Delete (CRUD) para dados geográficos;
-Um sistema que não demande operações e consultas espaciais;
-Mas um sistema que garanta a qualidade na gestão dos dados geográficos;
+Vamos ao que interessa:
 
-## Visão geral da proposta:
+## Criando validadores de longitude e latitude
 
-Vamos criar um ambiente virtual Python e instalar a framework Django, para criar o sistema, assim como alguns módulos como [`jsonfield`](https://pypi.org/project/jsonfield/), que nos vai habilitar a criação de campos `JSON` em nossa base de dados; [`django-geojson`](https://pypi.org/project/django-geojson/), que depende do `jsonfield` e será responsável por habilitar instâncias de dados geográficos, baseando-se em `JSON`; [`geojson`](https://pypi.org/project/geojson/), que possui todas as regras básicas de validação de dados geográficos, usando a estrutura homônima, [`geojson`](https://geojson.org/).
+### Sobre os validadores:
 
-O uso desses três módulos nos permitirá o desenvolvimento de um sistema de gestão de dados geográficos sem a necessidade de termos instalado um sistema de gerenciamento de dados geográficos, como o PostGIS. Sim, nosso sistema será bem limitado a algumas tarefas. Mas em contrapartida, poderemos desenvolvê-lo e implementar soluções “corriqueiras” de forma facilitada.
+Os validadores ([`validators`](https://docs.djangoproject.com/en/3.2/ref/forms/validation/#validators), em inglês) fazem parte do sistema de validação de formulários e de campos do Django. Ao criarmos campos de uma determinada classe no nosso modelo, como por exemplo integer, o Django cuidará automaticamente da validação do valor passado a este campo pelo formulário, retornando um erro quando o usuário ingressar um valor de texto no campo em questão, por exemplo. O interessante é que além dos validadores já implementados para cada classe, podemos criar outros, conforme a nossa necessidade.
 
-No presente exemplo estarei usando [`SQLite`](https://www.sqlite.org/index.html), como base de dados.
+> Por que necessitamos um validador para os campos de `latitude` e `longitude`?
 
-Nosso projeto se chamará de map_proj. E nele vou criar uma app, dentro da pasta do meu projeto `Django`, chamada `core`. Essa organização e nomenclatura usada, vem das sugestões do [Henrique Bastos](https://github.com/okfn-brasil/jarbas/issues/28#issuecomment-256117262). Afinal, o sistema está nascendo. Ainda que eu tenha uma ideia do que ele será, é interessante iniciar com uma aplicação “genérica” e a partir do momento que o sistema se torne complexo, poderemos desacoplá-la em diferentes aplicações.
+Como estou explorando o desenvolvimento de um sistema de gestão de dados geográficos com recursos limitados, ou seja, sem uma infraestrutura de operações e consultas espaciais, não poderei consultar se o par de coordenadas inserido pelo usuário está contido nos limites de um determinado estado (uma operação clássica com dados geográficos). Não ter essa possibilidade de validação poderá colocar em risco a qualidade do dado inserido.
 
-## Criando ambiente de desenvolvimento, projeto e nossa app:
+E como não se abre mão quando a questão é qualidade, uma saída será a criação de validadores personalizados para os campos de `latitude` e `longitude`, garantindo que esses possuem valores condizentes à nossa área de interesse.
 
-```commandline
-python -m venv .djleaflet # cria ambiente virtual python
-# ativando o ambiente virtual:
-source ./venv/bin/activate
+**O que precisamos saber**: os validators são funções que recebem um valor, apenas (neste caso, o valor inserido pelo usuário no campo a ser validado), que passará por uma lógica de validação retornando um `ValidationError` quando o valor inserido não passar na validação. Com o `ValidationError` podemos customizar uma mensagem de erro, indicando ao usuário o motivo do valor não ter sido considerado válido, para que o mesmo corrija.
 
-# atualizando o pip
-pip install --upgrade pip
+Então, criarei validadores dos campos de `latitude` e `longitude` para sempre que entrarem com valores que não contemplem a área do estado do Rio de Janeiro, um `ValidationError` será retornado.
 
-# intalando os módulos a serem usados
-pip install django jsonfield django-geojson geojson
+> ⚠️ Essa não é uma solução ótima já que, dessa forma, estamos considerando o bounding box do estado em questão, e com isso haverá áreas onde as coordenadas serão válidas, ainda que não estejam internas ao território estadual. Ainda assim, acredito que seja uma solução boa suficiente para alguns casos, principalmente por não depender de toda infraestrutura de GIS.
 
-# criando projeto
-django-admin startproject map_proj .
+**O que é um *bounding box*?**
 
-# criando app dentro do projeto
-cd map_proj
-python manage.py startapp core
+*Bounding box* poderia ser traduzido por “retângulo envolvente” do estado, ou de uma feição espacial. Na imagem abaixo, vemos o território do estado do Rio de Janeiro e o retângulo envolvente que limita as suas coordenadas máximas e mínimas de longitude e latitude.
 
-# criando a base de dados inicial
-python manage.py migrate 
+![](RJ_bbox.png)
 
-# criando superusuário
-python manage.py createsuperuser 
-```
+Percebam que, como mencionado antes, o que conseguimos garantir é que os pares de coordenadas estejam em alguma área interna ao retângulo em questão o que não garante que as mesmas estejam no território do estado do Rio de Janeiro.
 
-### Adicionando os módulos e a app ao projeto
+Por uma questão de organização, criei no `settings.py` do meu projeto as variáveis com os valores máximos e mínimos de latitude e longitude. Essa proposta surgiu do cuducos, e achei que valia a pena implementar. Entendo que é mais organizado e evita possíveis falhas humanas, caso os mesmos valores tenham que ser usados em outras partes do sistema.
 
-Agora é adicionar ao `map_proj/settings.py`, a app criada e os módulos que usaremos.
+Ao fim do meu `settings.py`, adicionei:
 
 ```python
-# setting.py
-INSTALLED_APPS = [
-    ...
-    'djgeojson',
-    'map_proj.core',
-]
+# settings.py
+BOUNDING_BOX_LAT_MAX = -20.764962
+BOUNDING_BOX_LAT_MIN = -23.366868
+BOUNDING_BOX_LON_MAX = -40.95975
+BOUNDING_BOX_LON_MIN = -44.887212
 ```
 
-Perceba que para poder acessar as classes de alto nível criadas pelo pacote `djgeojson`, teremos que adicioná-lo ao `INSTALLED_APPS` do `settings.py`.
+Agora, sim. Vamos criar os testes:
 
-## Criando a base de dados
+> se você não entendeu o motivo pelo qual eu começo criando testes, dá uma olhada [na primeira publicação](https://www.linkedin.com/pulse/criando-um-sistema-para-gest%C3%A3o-de-dados-geogr%C3%A1ficos-e-felipe-/). Nela comento um pouco sobre a abordagem Test Driven Development (TDD).
 
-Ainda que eu concorde com o Henrique Bastos, que a visão de começar os projetos Django pelo `models.py` é um tanto “perigosa”, por colocar ênfase em uma parte da app e, em muitos casos, negligenciar vários outros atributos e ferramentas que o Django nos oferece, irei desconsiderar sua abordagem. Afinal, o objetivo deste artigo não é explorar todo o potencial do Django, mas sim apresentar uma solução simples no desenvolvimento e implementação de um sistema de gestão de dados geográficos para servir como ferramenta de estudo e projeto prático.
+## Criando os testes:
 
-Em `models.py` usaremos instâncias de alto nível que o Django nos brinda para criar e configurar os campos e as tabelas que teremos em nosso sistema, bem como alguns comportamentos do sistema.
+No `tests.py`, criei uma nova classe de teste `TestCase`, com o objetivo de testar os validadores simulando o uso do `FenomenoForm`. Por isso criei staticmethod chamado `create_form` que cria um dicionário com chaves e valores válidos do formulário em questão, que ao receber um conjunto de argumentos nomeados `**kwargs` terá tais argumentos atualizados e usados para instanciar e retornar o `FenomenoForm`.
 
-Como estou desenvolvendo um sistema multi propósito, vou tentar mantê-lo bem genérico. A ideia é que vocês possam imaginar o que adequar para um sistema especialista na sua área de interesse. Vou criar, então, uma tabela para mapear “fenômenos” (quaisquer). Esse modelo terá os campos nome, data, hora e geometria, a qual será uma instância de `PointField`.
-
-O `PointField` é uma classe criada pelo `djgeojson` que nos permite usar um campo para dados geográficos sem ter toda a infraestrutura do PostGIS, instalada, por exemplo. Nesse caso, estou simulando um campo de ponto, mas, de acordo com a documentação do pacote, todas as geometrias usadas em dados espaciais são suportadas:
-
-> All geometry types are supported and respectively validated : GeometryField, PointField, MultiPointField, LineStringField, MultiLineStringField, PolygonField, MultiPolygonField, GeometryCollectionField. ( [djgeojson](https://django-geojson.readthedocs.io/en/latest/models.html) )
+Fiz isso para, a cada teste, ter uma instância do `FenoenoForm` alterando apenas os campos que quero simular valores a serem validados, sem ter que passar sempre todos os valores do `ModelForm`. Assim, eu posso criar diferentes métodos de Test Case, usando o método criado anteriormente alterando o valor inicial a um inválido, testando se de fato um `ValidationError` é retornado.
 
 ```python
-# models.py
-from django.db import models
-from djgeojson.fields import PointField
+# tests.py
+class FenomenoFormValidatorsTest(TestCase):
+    @staticmethod
+    def create_form(**kwargs):
+        valid_form = {
+            'nome': 'Teste',
+            'data': '2020-01-01',
+            'hora': '09:12:12',
+            'longitude': -42,
+            'latitude': -21}
 
-
-class Fenomeno(models.Model):
-    nome = models.CharField(max_length=100,
-                            verbose_name='Fenomeno mapeado')
-    data = models.DateField(verbose_name='Data da observação')
-    hora = models.TimeField()
-    geom = PointField(blank=True)
-
-    def __str__(self):
-        return self.nome
+        valid_form.update(**kwargs)
+        form = FenomenoForm(valid_form)
+        return form
 ```
 
-Percebam que eu importo de `djgeojson` a classe `PointField`. O que o `django-geojson` fez foi criar uma classe [com estrutura de dados geográfico] de alto nível, mas que no banco de dados será armazenado em um campo `JSON`. Vale a pena deixar claro: não espero que o usuário do meu sistema saiba preencher o campo `geom` em formato `JSON`. Por isso, criarei no `forms.py`, os campos latitude e longitude e a partir deles, o campo geom será preenchido. Detalharei esse processo mais adiante.
+Nos métodos de teste uso primeiro o `assertFalse` do método de validação do formulário (`form.is_valid()`) para confirmar que o mesmo não é valido para, em seguida, testar com o `assertEqual` se o texto da mensagem de erro é o que esperamos.
 
-Pronto, já temos o modelo da ‘tabela de dados “geográficos”’, mas esse modelo ainda não foi registrado em nossa base. Para isso:
+```python
+# tests.py
+    def test_max_longitude_raises_error(self):
+        form = self.create_form(longitude='-45')
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors["longitude"][0], 'Coordenada longitude fora do contexto do estado do Rio de Janeiro')
+
+    def test_min_longitude_raises_error(self):
+        form = self.create_form(longitude='-40')
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors["longitude"][0], 'Coordenada longitude fora do contexto do estado do Rio de Janeiro')
+
+    def test_max_latitude_raises_error(self):
+        form = self.create_form(latitude='-24')
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors["latitude"][0], 'Coordenada latitude fora do contexto do estado do Rio de Janeiro')
+
+    def test_min_latitude_raises_error(self):
+        form = self.create_form(latitude='-19')
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors["latitude"][0], 'Coordenada latitude fora do contexto do estado do Rio de Janeiro')
+```
+
+Fazemos rodar os testes e teremos erros como esses:
 
 ```commandline
-python manage.py makemigrations
-python manage.py migrate
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...E.E..
+======================================================================
+ERROR: test_max_latitude (map_proj.core.tests.FenomenoFormValidatorsTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/felipe/DATA/Repos/Django_Leaflet_Test/map_proj/core/tests.py", line 78, in test_max_latitude
+    self.assertEqual(form.errors["latitude"][0], 'Coordenada latitude fora do contexto do estado do Rio de Janeiro')
+KeyError: 'latitude'
+
+======================================================================
+ERROR: test_min_latitude (map_proj.core.tests.FenomenoFormValidatorsTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/felipe/DATA/Repos/Django_Leaflet_Test/map_proj/core/tests.py", line 83, in test_min_latitude
+    self.assertEqual(form.errors["latitude"][0], 'Coordenada latitude fora do contexto do estado do Rio de Janeiro')
+KeyError: 'latitude'
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.012s
+
+FAILED (errors=2)
+Destroying test database for alias 'default'...
 ```
 
-O `makemigrations` analisa o `models.py` e o compara com a versão anterior identificando as alterações e criando um arquivo que será executado pelo migrate, aplicando tais alterações ao banco de dados. Aprendi com o Henrique Bastos e [Cuducos](https://twitter.com/cuducos) que o migrate é um sistema de versionamento da estrutura do banco de dados, permitindo retroceder, quando necessário, a outras versões.
+Ou seja, o `forms` após ser validado deveria conter um atributo errors tendo como chave o nome do campo que apresentou dados inválidos. Como não temos os validadores criados, nenhum erro de validação foi acusado no campo de `latitude`.
 
-## Criando o formulário
+## Criando e usando validadores:
 
-Vou aproveitar algumas “pilhas já incluídas” do Django, ao usar o `ModelForm` para criar o formulário para o carregamento de dados. O `ModelForm` facilita esse processo.
+Para superá-los criamos, enfim, os validadores em um arquivo `validators.py`. Percebam que é nesse ponto que usarei os valores máximos e mínimos de latitude e longitude adicionados no `settings.py`:
 
-Aliás, é importante pensar que os formulários do Django vão muito além da “carga de dados”, já que são os responsáveis por cuidar da interação com o usuário e o(s) processo(s) de validação e limpeza dos dados preenchidos.
+```python
+# validators.py
+from django.core.exceptions import ValidationError
+from django.conf import settings
 
-Digo isso, pois ao meu `FenomenosForm`, eu sobreescrevo o método `clean()`, que cuida da validação e limpeza do formulário e incluo nele:
 
-1. a construção dos dados do campo `geom` a partir dos valores dos campos de latitude e longitude (criados exclusivamente para a gerção do campo geom);
-1. a validação do campo geom;
+def validate_longitude(lon):
+    if lon < settings.BOUNDING_BOX_LON_MIN or lon > settings.BOUNDING_BOX_LON_MAX:
+        raise ValidationError("Coordenada longitude fora do contexto do estado do Rio de Janeiro", "erro longitude")
+
+def validate_latitude(lat):
+    if lat < settings.BOUNDING_BOX_LAT_MIN or lat > settings.BOUNDING_BOX_LAT_MAX:
+        raise ValidationError("Coordenada latitude fora do contexto do estado do Rio de Janeiro", "erro latitude")
+```
+
+Com esses validadores estou garantindo que ambos latitude e longitude estejam na área de interesse e, caso contrário, retorno um erro informando ao usuário.
+
+E é preciso adicioná-los ao `forms.py` para que sejam usados:
 
 ```python
 # forms.py
-from django.core.exceptions import ValidationError
-from django.forms import ModelForm, FloatField
-from map_proj.core.models import Fenomeno
-from geojson import Point
-
+from map_proj.core.validators import validate_longitude, validate_latitude
 
 class FenomenoForm(ModelForm):
-    longitude = FloatField()
-    latitude = FloatField()
-    class Meta:
-        model = Fenomeno
-        fields = ('nome', 'data', 'hora', 'latitude', 'longitude')
+    longitude = FloatField(validators=[validate_longitude])
+    latitude = FloatField(validators=[validate_latitude])
+```
 
+No desenvolvimento dessa solução percebi pelos testes criados que, ao informar uma latitude ou longitude que não passe pela validação, a criação do campo `geom` se tornava inválido por não receber um desses valores, gerando dois erros: o de validação do campo e o de validação do campo `geom`. Lembre-se que é no método `clean` do formulário que o campo `geom` recebe os valores de `longitude` e `latitude` formando uma classe `geojson` para, logo em seguida ser validado.
+
+Para evitar isso, alterei o método `clean` de forma garantir que o campo `geom` só seja criado e validado, quando ambos valores (`longitude` e `latitude`) existirem. Ou seja, tenham passado pelos validadores sem erro.
+
+```python
+#forms.py
     def clean(self):
         cleaned_data = super().clean()
         lon = cleaned_data.get('longitude')
         lat = cleaned_data.get('latitude')
+        if not all((lon, lat)):
+            raise ValidationError('Erro em latitude ou longitude')
+        
         cleaned_data['geom'] = Point((lon, lat))
-
         if not cleaned_data['geom'].is_valid:
-            raise ValidationError('Geometria inválida')
+                raise ValidationError('Geometria inválida')
+        
         return cleaned_data
 ```
 
-Ainda que pareça simples, não foi fácil chegar a essa estratégia de estruturação dos `models` e `forms`. Contei com a ajuda e paciencia do [Cuducos](https://twitter.com/cuducos). Inicialmente eu mantinha `latitude` e `longitude` no meu `models`. Mas fazendo assim, além de ter uma redundância de dados e uma abertura a erros potenciais, estaria armazenando dados que não devo usar depois de contruir o campo geom. Uma alternativa, discutida com o Cuducos foi de ter tanto latitude como longitude no `models`, mas o atributo `geom` como [`propriedade`](https://docs.python.org/3/howto/descriptor.html#properties). Ainda que seja uma estratégia consistente, a redundância se mantém.
+> Outro ponto (na verdade, erro) importante que só percebi a partir dos testes é que no `forms.py` eu não estava considerando o campo `geom` na lista de `fields` a serem usados. Com isso o mesmo não é passado ao banco de dados, mesmo passando pelo método `clean` que o cria.
 
-O processo de validação do campo `geom` também foi fruto de muita discussão. De forma resumida, percebi que o `djgeojson` apenas valida o tipo de geometria do campo e não a sua consistência. Ao conversar com os desenvolvedores, me disseram que toda a lógica de validação de objetos `geojson` estavam sendo centralizados no módulo homônimo.
+Por esse motivo, tive que alterar algumas coisas no `forms.py`:
 
-Por isso eu carrego a classe `Point` do módulo `geojson` e designo o campo `geom` como instância dessa classe. Assim, passo a poder contar com um processo de validação mais consistente, como o método `is_valid`, usado anteriormente.
+* Inseri o campo `geom` à tupla de `fields` do `forms.py`.
+* Inseri o campo `geom` com um widget de `HiddenInput`. Esse último, o fiz por se tratar de um campo que não quero expor ao usuário, já que será criado automaticamente no método `clean`. 
 
-### Mas e o teste?
-
-Pois é, eu adoraria apresentar isso usando a abordagem *Test Driven Development (TDD)*. Mas, talvez pela falta de prática, conhecimento e etc, vou apenas apontar onde e como eu testaria esse sistema. Faço isso como uma forma de estudo, mesmo. Também me pareceu complicado apresentar a abordagem TDD em um artigo, já que a mesma se faz de forma incremental.
-
-#### Sobre TDD
-Com o Henrique Bastos e toda a comunidade do [Welcome to The Django](https://medium.com/welcome-to-the-django/o-wttd-%C3%A9-tudo-que-eu-ensinaria-sobre-prop%C3%B3sito-de-vida-para-mim-mesmo-se-pudesse-voltar-no-tempo-d73e516f911c) vi que essa abordagem é tanto filosófica quanto técnica. É praticamente “Chora agora, ri depois”, mas sem a parte de chorar. Pois com o tempo as coisas ficam mais claras… Alguns pontos:
-
-* O erro não é para ser evitado no processo de desenvolvimento, mas sim quando estive em produção. Logo,
-* Entenda o que você quer do sistema, crie um teste antes de implementar e deixe o erro te guiar até ter o que deseja;
-* Teste o comportamento esperado e não cada elemento do sistema;
-
-Sem mais delongas:
-
-### O que testar?
-
-Vamos usar o arquivo `tests.py` e criar nossos testes lá. Ao abrir vocês vão ver que já está o comando importando o `TestCase`.
-
-> Mas o que vamos testar?
-
-Como pretendo testar tanto a estrutura da minha base de dados, quanto o formulário e, de quebra, a validação do meu campo `geom`, faço o import do modelo `Fenomenos` e do form `FenomenosForm`.
-
-⚠️ Essa não é uma boa prática. O ideal é criar uma pasta para os testes e separá-los em arquivos distintos. Um para cada elemento do sistema (model, form, view, etc).
-
-O primeiro teste será a carga de dados. Então, vou instanciar um objeto com o resultado da criação de um elemento do meu model `Fenomeno`. Faço isso no `setUp`, para não ter que criá-lo sempre que for fazer um teste relacionado à carga de dados.
-
-O teste seguinte será relacionado ao formulário e por isso instancio um formulário com os dados carregados e testo a sua validez. Ao fazer isso o formulário passa pelo processo de limpeza, onde está a construção e validação do campo `geom`. Se qualquer campo for preenchido com dados errados ou inadequados, o django retornará `False` ao método `is_valid`. Ou seja, se eu tiver construido o campo `geom` de forma equivocada, passando mais ou menos parâmetros que o esperado o nosso teste irá avisar, evitando surpresas.
+Finalmente, a classe Meta do `forms.py` ficou da seguinte forma:
 
 ```python
-# tests.py
-from django.test import TestCase
-from geojson import Point
-
-from map_proj.core.models import Fenomeno
-from map_proj.core.forms import FenomenoForm
-
-
-class ModelGeomTest(TestCase):
-    def setUp(self):
-        self.fenomeno = Fenomeno.objects.create(
-            nome='Arvore',
-            data='2020-11-06',
-            hora='09:30:00'
-        )
-
-    def test_create(self):
-        self.assertTrue(Fenomeno.objects.exists())
-
-
-class FenomenoFormTest(TestCase):
-    def setUp(self):
-        self.form = FenomenoForm({
-            'nome': 'Teste',
-            'data': '2020-01-01',
-            'hora': '09:12:12',
-            'longitude': -45,
-            'latitude': -22})
-        self.validation = self.form.is_valid()
-
-    def test_form_is_valid(self):
-        """"form must be valid"""
-        self.assertTrue(self.validation)
-
-    def test_geom_coordinates(self):
-        """after validating, geom have same values of longitude and latitude"""
-        self.assertEqual(self.form.cleaned_data['geom'], Point(
-            (self.form.cleaned_data['longitude'],
-        self.form.cleaned_data['latitude'])))
-
-    def test_geom_is_valid(self):
-        """geom must be valid"""
-        self.assertTrue(self.form.cleaned_data['geom'].is_valid)
+ class Meta:
+        model = Fenomeno
+        fields = ('nome', 'data', 'hora', 'latitude', 'longitude', 'geom')
+        widgets = {'geom': HiddenInput()}
 ```
 
-⚠️ Reparem que:
+Pronto, com tudo isso que fizemos, já temos um sistema que, apesar de não poder fazer consultas espaciais, é capaz de validar os campos de `latitude` e `longitude`.
 
-* No `test_create()` eu testo se existem objetos inseridos no model `Fenomeno`. Logo, testo se o dado criado no `setUp` foi corretamente incorporado no banco de dados.
-* Na classe `FenomenosFormTest` eu crio uma instância do meu `modelForm` e realizo três testes:
-  * `test_form_is_valid()` estou testando se os dados carregados são condizentes com o informado no model e, pelo fato desse método usar o método `clean()`, posso dizer que estou testando indiretamente a validez do campo `geom`. Caso ele não fosse válido, o form também não seria válido.
-  * Em `test_geom_coordinates()` testo se após a validação o campo geom foi criado como esperado (como uma instância de `Point` com os dalores de `longitude` e `latitude`).
-  * O teste `test_geom_is_valid()` serve para garantir que a contrução do campo `geom` é valido. Ainda que ao testar se o formulário é valido eu estaria implicitamente testando a validez do campo `geom`, esse teste serve para garantir a criação válida do campo. Afinal, por algum motivo (como por exemplo, refatoração), pode ser que façamos alguma alteração no método `clean()` que mantenha o formulário como válido mas deixe de garantir a validez do campo `geom`.
-
-A diferença entre as classes de teste criadas está no fato de ao inserir os dados usando o método `create()` - e aconteceria o mesmo se estivesse usando o `save()` -, apenas será validado se o elemento a ser inserido é condizente com o tipo de coluna no banco de dados. Vale deixar claro: Dessa forma, eu não estou validando a consistência do campo `geom`, já que o mesmo, caso seja informado, será salvo com sucesso sempre que represente um `JSON`.
-
-Esse fato é importante para reforçar o entendimento de que o `djgeojson` implementa classes de alto nível a serem trabalhados em `views` e `models`. No banco, mesmo, temos um campo de `JSON`. Enquanto que, para poder validar a consistência do campo `geom`, preciso passar os dados pelo formulário onde, no processo de limpeza do mesmo, o campo será criado e validado usando o módulo `geojson`. Por isso a classe com os testes relacionados ao comportamento do formulário.
-
-## Registrando modelo no admin
-
-Para facilitar, vou usar o django-admin. Trata-se de uma aplicação já criada onde basta registrar os modelos e views que estamos trabalhando para termos uma interface “frontend” genérica.
-
-```python
-#admin.py
-from django.contrib import admin
-from map_proj.core.models import Fenomeno
-from map_proj.core.forms import FenomenoForm
-
-class FenomenoAdmin(admin.ModelAdmin):
-    model = Fenomeno
-    form = FenomenoForm
-
-admin.site.register(Fenomeno, FenomenoAdmin)
-```
-
-## To be continued…
-
-Até o momento já temos algo bastante interessante: um sistema de CRUD que nos permite adicionar, editar e remover dados geográficos. Talvez você esteja pensando consigo mesmo:
-
-> “OK. Mas o que foi feito até agora, poderia ter sido feito basicamente com uma base de dados que possuam as colunas latitude e longitude”.
-
-Eu diria que sim, até certo ponto. Uma grande diferença, eu diria, da forma como foi implementada é o uso das ferramentas de validação dos dados com o módulo `geojson`.
-
-A ideia é, a seguir (e seja lá quando isso for), extender a funcionalidade do sistema ao implementar um webmap para visualizar os dados mapeados.
+No próximo artigo, vou abordar sobre o que está por trás de toda mágica de um webmap, usando o módulo `django-leaflet`. Enquanto isso, dê uma olhada no que [tenho desenvolvido](http://felipesbarros.github.io/).
