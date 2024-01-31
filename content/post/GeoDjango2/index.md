@@ -1,5 +1,5 @@
 ---
-title: Criando um sistema para gestão de dados geográficos de forma simples e robusta.
+title: Criando um sistema para gestão de dados geográficos de forma simples e robusta II.
 summary: Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin. Há algum tempo comecei a estudar sobre desenvolvimento de sistema com Python, usando a framework Django.
 tags:
   - Python
