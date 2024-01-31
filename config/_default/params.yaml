@@ -95,10 +95,10 @@ features:
 #      api_key: ''
 #      index_name: ''
 #      show_logo: false
-  map: # todo update
-    provider: 'mapnik'
-    api_key: ''
-    zoom: 15
+#  map: # todo update
+#    provider: 'mapnik'
+#    api_key: ''
+#    zoom: 15
 
 # Extensions
 

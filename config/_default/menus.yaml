@@ -22,9 +22,6 @@ main:
   - name: Posts
     url: '#posts'
     weight: 50
-  - name: studies
-    url: '#study'
-    weight: 60
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/uploads/resume.pdf` and uncomment the lines below.
