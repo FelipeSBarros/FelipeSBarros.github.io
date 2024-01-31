@@ -3,7 +3,7 @@
 # Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
-title: Felipe Sodré M. Barros # Website name
+title: # Website name
 baseURL: 'https://felipesbarros.github.io' # Website URL
 
 ############################
