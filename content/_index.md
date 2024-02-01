@@ -32,6 +32,15 @@ sections:
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
         - date_end: ''
+          date_start: '2024-01-31'
+          description: 'Anthem Awards Bronze recognition on category "News & Journalism" with the project [Engolindo Fumaça](https://infoamazonia.org/project/engolindo-fumaca/)'
+          icon:
+          organization: 'Anthem Awards'
+          organization_url: https://www.anthemawards.com/
+          title: 'Anthem Awards Bronze recognition'
+          url: 'https://www.anthemawards.com/winners/list/entry/#health/awareness-media-categories/inhaling-smoke-engolindo-fumaa/457279'
+
+        - date_end: ''
           date_start: '2022-06-01'
           description: 'Winner of the “Rey de España” award in environmental category with the project [Engolindo Fumaça](https://infoamazonia.org/project/engolindo-fumaca/)'
           icon:
