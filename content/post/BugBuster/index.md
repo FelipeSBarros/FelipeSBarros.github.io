@@ -3,6 +3,7 @@ title: Bug buster
 #summary: Entenda o porquê o netCDF é um grande aliado.
 tags:
   - Python
+  - PT-Br
 date: "2022-04-15T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).

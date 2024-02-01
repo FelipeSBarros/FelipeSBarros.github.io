@@ -3,6 +3,7 @@ title: "Hacktoberfest: Colaborações e aprendizados."
 #summary: Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin. Este ano pude participar do projeto de jornalismo de dados Engolindo Fumaça, desenvolvido pelo InfoAmazonia.
 tags:
   - Python
+  - PT-Br
 date: "2021-05-21T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).

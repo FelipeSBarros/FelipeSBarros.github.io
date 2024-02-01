@@ -3,6 +3,7 @@ title: Criando um sistema para gestão de dados geográficos de forma simples e 
 #summary: Criando um sistema para gestão de dados geográficos de forma simples e robusta Artigo publicado também no linkedin. Este ano pude participar do projeto de jornalismo de dados Engolindo Fumaça, desenvolvido pelo InfoAmazonia.
 tags:
   - Python
+  - PT-Br
 date: "2022-06-04T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
