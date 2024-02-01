@@ -216,33 +216,33 @@ sections:
     design:
       columns: '2'
 
-  - block: accomplishments
-    content:
-      # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
-      title: 'Accomplish&shy;ments'
-      subtitle:
-      # Date format: https://docs.hugoblox.com/customization/#date-format
-      date_format: Jan 2006
-      # Accomplishments.
-      #   Add/remove as many `item` blocks below as you like.
-      #   `title`, `organization`, and `date_start` are the required parameters.
-      #   Leave other parameters empty if not required.
-      #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
-      items:
-        - certificate_url: https://www.coursera.org
-          date_end: ''
-          date_start: '2021-01-25'
-          description: ''
-          icon: coursera
-          organization: Coursera
-          organization_url: https://www.coursera.org
-          title: Neural Networks and Deep Learning
-          url: ''
+#  - block: accomplishments
+#    content:
+#      # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
+#      title: 'Accomplish&shy;ments'
+#      subtitle:
+#      # Date format: https://docs.hugoblox.com/customization/#date-format
+#      date_format: Jan 2006
+#      # Accomplishments.
+#      #   Add/remove as many `item` blocks below as you like.
+#      #   `title`, `organization`, and `date_start` are the required parameters.
+#      #   Leave other parameters empty if not required.
+#      #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
+#      items:
+#        - certificate_url: https://www.coursera.org
+#          date_end: ''
+#          date_start: '2021-01-25'
+#          description: ''
+#          icon: coursera
+#          organization: Coursera
+#          organization_url: https://www.coursera.org
+#          title: Neural Networks and Deep Learning
+#          url: ''
 
   - block: portfolio
     id: posts
     content:
-      title: Recent Posts
+      title: Posts
       subtitle: ''
       text: ''
       # Choose how many pages you would like to display (0 = all pages)
@@ -251,13 +251,6 @@ sections:
       filters:
         folders:
           - post
-#        author: ""
-#        category: ""
-#        tag: ""
-#        exclude_featured: false
-#        exclude_future: false
-#        exclude_past: false
-#        publication_type: ""
       default_button_index: 0
       buttons:
         - name: All
@@ -271,17 +264,5 @@ sections:
         - name: PT-Br
           tag: PT-Br
       design:
-      # Choose how many columns the section has. Valid values: '1' or '2'.
-        columns: '3'
-        view: card
-      # For Showcase view, flip alternate rows?
-        flip_alt_rows: false
-      # Choose how many pages you would like to offset by
-#      offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
       order: desc
-    design:
-      # Choose a layout view
-      view: card
-      columns: '2'
 ---
