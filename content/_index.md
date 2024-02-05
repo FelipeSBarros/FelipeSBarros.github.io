@@ -265,4 +265,18 @@ sections:
           tag: PT-Br
       design:
       order: desc
+
+  - block: markdown
+    id: fitzroy
+    content:
+      title: "FitzRoy: #DataArt project" 
+      subtitle: 'FitzRoy, widely regarded as a pioneer in meteorology, is credited with coining the term "forecast." Not only was he a skilled navigator, but he also served as the captain of the HMS Beagle—the very vessel that carried Charles Darwin on his historic journey around the world.'
+      text: |-
+        
+        This project revolves around transforming conventional meteorological data into captivating visual art compositions, transcending their ordinary utility. By imbuing these data sets with aesthetic elements, the project seeks to redefine their purpose, rendering them seemingly useless, yet undeniably beautiful. In doing so, it challenges the conventional perception of meteorological information, prompting viewers to reconsider the inherent value and significance of seemingly mundane data in the context of artistic expression.
+        
+        
+        {{< gallery album="fitzroy" >}}
+    design:
+      columns: '1'
 ---

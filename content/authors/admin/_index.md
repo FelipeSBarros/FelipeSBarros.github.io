@@ -60,12 +60,12 @@ skills:
       - name: R
         description: ''
         percent: 80
-        icon: r # todo confirmar
+        icon: r
         icon_pack: fab
       - name: Google Earth Engine
         description: ''
         percent: 80
-        icon: earth # todo confirmar
+        icon: earth
         icon_pack: fas
       - name: SQL
         description: ''
