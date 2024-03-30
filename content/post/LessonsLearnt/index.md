@@ -4,7 +4,7 @@ summary: Few thoughts and notes about the lessons I learned while being mentored
 tags:
   - Python
   - En
-date: "2023-03-04T00:00:00Z"
+date: "2024-03-30T00:00:00Z"
 
 image:
   caption:
