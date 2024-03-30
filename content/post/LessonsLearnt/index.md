@@ -10,11 +10,19 @@ image:
   caption:
   focal_point: center
 ---
+The [crossfire](https://pypi.org/project/crossfire/) package was first developed in 2021, during the [#Hacktoberfest](https://felipesbarros.github.io/post/hacktoberfest21/). Since this first version I have recieved support from [@cuducos](https://cuducos.me/). 
+Last year, the crossfire API was updated, and thus the package should be updated as well. Again, I asked for Cuducos' help, and he kindly accepted to mentor me during the development of the new version of the package. This time, I can see that I have learned a lot of things that I would like to share here, in a not so structured form.... My idea here is to write down some thoughts, notes, and comments about the process of developing the package.
 
 ## Debuging in test
-I already knew about the importance of debugging. Althought I never used it. But something that I didn't know is that I could debug the test, also.
-This can be done by importing `pytest` to the source code, and adding `pytest.set_trace()` before the line that I want to debug. Then, I can run the test with the `-k` parameter, which will run only the test that I want to debug. 
-tHE `set_trace` makes the test stop and leave the terminal so we can call the objects and functions to confirm it they are as expected.
+I already knew about the importance of debugging, althought I never used it. But something that I didn't know is that I could debug the test, also.
+This can be done by importing `pytest` to the source code, and adding `pytest.set_trace()` before the line that I want to debug. Then, we can run the test with the `-k` parameter, which will run only the test that I want to debug.
+
+```python
+poetry run pytest -k test_client_load_states
+```
+
+The `set_trace` makes the test stop and leave the terminal so we can call the objects and functions to confirm if they are as expected.
+
 [here (in Pt-Br)](https://github.com/FelipeSBarros/crossfire/pull/74#discussion_r1407879899)
 
 ## TDD is about exploring issues rather than a solution
@@ -22,4 +30,3 @@ At some point during the package development, I was facing an issue when trying 
 
 > Ok, so never add code you don't understand. Never. You can use it to ask: hey, I noticed that when I add that, it works for you. But this is a way to explore the issue rather than a solution. ([@cuducos](cuducos.me))
 [here](https://github.com/FelipeSBarros/crossfire/pull/103#discussion_r1509013934)
-
