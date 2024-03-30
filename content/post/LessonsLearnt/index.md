@@ -1,6 +1,6 @@
 ---
-title: "Lessons Learnt during the developtmen of `corssfire` Python package"
-summary: Few thoughts and notes about the lessons I learnt while being mentored by Cuducos.
+title: "Lessons Learned during the developtmen of `corssfire` Python package"
+summary: Few thoughts and notes about the lessons I learned while being mentored by Cuducos.
 tags:
   - Python
   - En
