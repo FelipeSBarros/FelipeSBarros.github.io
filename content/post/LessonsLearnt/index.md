@@ -36,3 +36,11 @@ At some point during the package development, I was facing an issue when trying 
 
 o [flat path to success](https://www.vinta.com.br/blog/flat-success-path) foi mencionado no processo de [revisão do código](https://github.com/FelipeSBarros/crossfire/pull/103#discussion_r1599016800) e básicamente se refere a: 
 > escrever o código de forma clara e direta, evitando aninhamentos e complexidades, onde o propósito principal do código é facilmente discernível sem mergulhar em estruturas aninhadas.
+
+## Instalando versão pacote Python a partir do GitHub
+
+No processo de desenvolvimento é importante sempre testar o código em um ambiente diferente daquele no qual se está desenvolvendo a solução. Para isso, podemos instalar a versão do pacote diretamente do GitHub, especificando a branch a ser usada, conforme o exemplo abaixo.  
+
+```bash
+pip install git+https://github.com/username/repo.git@branch_name
+```
