@@ -30,3 +30,8 @@ At some point during the package development, I was facing an issue when trying 
 
 > Ok, so never add code you don't understand. Never. You can use it to ask: hey, I noticed that when I add that, it works for you. But this is a way to explore the issue rather than a solution. ([@cuducos](cuducos.me))
 [here](https://github.com/FelipeSBarros/crossfire/pull/103#discussion_r1509013934)
+
+
+## Flat path to success
+
+o [flat path to success](https://www.vinta.com.br/blog/flat-success-path) foi mencionado no processo de [revisão do código](https://github.com/FelipeSBarros/crossfire/pull/103#discussion_r1599016800) e básicamente se refere a: escrever o código de forma clara e direta, evitando aninhamentos e complexidades, onde o propósito principal do código é facilmente discernível sem mergulhar em estruturas aninhadas.
