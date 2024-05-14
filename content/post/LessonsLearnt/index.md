@@ -34,4 +34,5 @@ At some point during the package development, I was facing an issue when trying 
 
 ## Flat path to success
 
-o [flat path to success](https://www.vinta.com.br/blog/flat-success-path) foi mencionado no processo de [revisão do código](https://github.com/FelipeSBarros/crossfire/pull/103#discussion_r1599016800) e básicamente se refere a: escrever o código de forma clara e direta, evitando aninhamentos e complexidades, onde o propósito principal do código é facilmente discernível sem mergulhar em estruturas aninhadas.
+o [flat path to success](https://www.vinta.com.br/blog/flat-success-path) foi mencionado no processo de [revisão do código](https://github.com/FelipeSBarros/crossfire/pull/103#discussion_r1599016800) e básicamente se refere a: 
+> escrever o código de forma clara e direta, evitando aninhamentos e complexidades, onde o propósito principal do código é facilmente discernível sem mergulhar em estruturas aninhadas.
