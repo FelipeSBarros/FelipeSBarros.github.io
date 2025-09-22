@@ -3,10 +3,8 @@ name: Updater (WIP)
 on:
   schedule:
     - cron: 0 0 * * 0
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
-# Provide permission to clone the repo and deploy it to GitHub Pages
 permissions:
   contents: write
 
@@ -15,7 +13,11 @@ jobs:
     if: github.repository_owner == 'HugoBlox'
     runs-on: ubuntu-latest
     steps:
-      - uses: HugoBlox/gh-action-updater@v1
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Run updater
+        uses: HugoBlox/gh-action-updater@v1
         with:
           feed-url: https://hugoblox.com/rss.xml
           readme-section: news
