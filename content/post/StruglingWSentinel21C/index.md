@@ -13,6 +13,16 @@ image:
   focal_point: center
 ---
 
+## TL;DR ✅
+
+> I initially struggled to download the full Sentinel-2 Level 1C `.SAFE` package (with metadata) for ACOLITE atmospheric correction.
+> The solution, kindly shared by my friend **Luis Sadeck**, was to configure **S3 access keys directly in my Copernicus Data Space account**.  
+>👉 You don’t need an AWS account for this — just generate your **access_key** and **secret_key** inside your **Data Space profile**, then use them when accessing the S3 bucket.
+> Docs: [Copernicus Data Space S3 API](https://documentation.dataspace.copernicus.eu/APIs/S3.html)  
+> Now the entire process works smoothly with a single Python library. 🎉  
+> Big thanks to everyone who reached out with suggestions and support!  
+
+---
 I’ve been trying to download Sentinel-2 Level 1C data programmatically with Python, instead of manually going to the Sentinel Hub
  website.
 The goal is to get the entire `.SAFE` package, including metadata, so I can later run atmospheric correction with ACOLITE.
